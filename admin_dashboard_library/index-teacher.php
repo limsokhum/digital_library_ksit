@@ -20,6 +20,54 @@ if($email != false && $password != false){
 }else{
     header('Location: login-teacher.php');
 }
+
+
+?>
+<?php
+ if(isset($_POST['submit'])){
+    $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+    $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+    $teacher_mail = mysqli_real_escape_string($conn, $_POST['teacher_mail']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
+    
+    $totalFiles = count($_FILES['fileImg']['name']);
+    $filesArray = array();
+
+    for($i = 0; $i < $totalFiles; $i++){
+    $imageName = $_FILES["fileImg"]["name"][$i];
+    $tmpName = $_FILES["fileImg"]["tmp_name"][$i];
+
+    $imageExtension = explode('.', $imageName);
+    $imageExtension = strtolower(end($imageExtension));
+
+    $newImageName = uniqid() . '.' . $imageExtension;
+
+    move_uploaded_file($tmpName, 'uploads/' . $newImageName);
+    $filesArray[] = $newImageName;
+    }
+
+    $filesArray = json_encode($filesArray);
+    
+    $teacher_code = 0;
+    
+    $teacher_status = "verified";
+    
+    if($password==NULL && $cpassword==NULL && $filesArray==NULL){
+        $update_pass = "UPDATE teacher_tb SET 	firstname ='$firstname', lastname ='$lastname', teacher_mail='$teacher_mail',teacher_code='$teacher_code',	teacher_status='$teacher_status' WHERE teacher_mail = '$email'";
+    }elseif($password==NULL && $cpassword==NULL && $filesArray!==NULL){
+        
+        $update_pass = "UPDATE teacher_tb SET firstname ='$firstname', lastname ='$lastname', teacher_mail='$teacher_mail', image='$filesArray',teacher_code='$teacher_code',	teacher_status='$teacher_status' WHERE teacher_mail = '$email'";
+    }else{
+        
+            $encpass = password_hash($password, PASSWORD_BCRYPT);
+            $update_pass = "UPDATE teacher_tb SET firstname ='$firstname', lastname ='$lastname', teacher_mail='$teacher_mail', teacher_password = '$encpass',  image='$filesArray',teacher_code='$teacher_code',	teacher_status='$teacher_status'  WHERE teacher_mail = '$email'";
+    }
+    $result_editprofile =$conn ->query($update_pass);
+    if($result_editprofile==true){
+        $_SESSION['status'] = "<Type Your success message here>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -196,7 +244,7 @@ if($email != false && $password != false){
                                     <div class="col-sm-6">
                                         <label class="label-control mb-1" for=""
                                             style="font-family:'Koulen', sans-serif;">នាមត្រកូល
-                                            <spatn class=" text-danger">:*
+                                            <spatn class="text-danger">:*
                                             </spatn>
                                         </label>
                                         <input type="text" name="firstname" class="form-control" id=""
@@ -222,7 +270,7 @@ if($email != false && $password != false){
                                     <spatn class=" text-danger">:*
                                     </spatn>
                                 </label>
-                                <input type="text" name="email" class="form-control" id=""
+                                <input type="email" name="teacher_mail" class="form-control" id=""
                                     value="<?php echo $row_teacher_representative['teacher_mail']?>"
                                     style="font-family: 'Noto Serif Khmer', serif;">
                             </div>
@@ -248,7 +296,6 @@ if($email != false && $password != false){
                                         </spatn>
                                     </label>
                                     <input type="password" name="password" class="text-input form-control" id="">
-
                                 </div>
                                 <div class="form-group my-2">
                                     <label class="label-control" for=""
