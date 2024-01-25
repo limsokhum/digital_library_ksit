@@ -164,8 +164,53 @@ if(isset($_GET['id'])){
     
 }
 
+?>
 
+<?php
+ if(isset($_POST['submit'])){
+    $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+    $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+    $teacher_mail = mysqli_real_escape_string($conn, $_POST['teacher_mail']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
+    
+    $totalFiles = count($_FILES['fileImg']['name']);
+    $filesArray = array();
 
+    for($i = 0; $i < $totalFiles; $i++){
+    $imageName = $_FILES["fileImg"]["name"][$i];
+    $tmpName = $_FILES["fileImg"]["tmp_name"][$i];
+
+    $imageExtension = explode('.', $imageName);
+    $imageExtension = strtolower(end($imageExtension));
+
+    $newImageName = uniqid() . '.' . $imageExtension;
+
+    move_uploaded_file($tmpName, 'uploads/' . $newImageName);
+    $filesArray[] = $newImageName;
+    }
+
+    $filesArray = json_encode($filesArray);
+    
+    $teacher_code = 0;
+    
+    $teacher_status = "verified";
+    
+    if($password==NULL && $cpassword==NULL && $filesArray==NULL){
+        $update_pass = "UPDATE teacher_tb SET 	firstname ='$firstname', lastname ='$lastname', teacher_mail='$teacher_mail',teacher_code='$teacher_code',	teacher_status='$teacher_status' WHERE teacher_mail = '$email'";
+    }elseif($password==NULL && $cpassword==NULL && $filesArray!==NULL){
+        
+        $update_pass = "UPDATE teacher_tb SET firstname ='$firstname', lastname ='$lastname', teacher_mail='$teacher_mail', image='$filesArray',teacher_code='$teacher_code',	teacher_status='$teacher_status' WHERE teacher_mail = '$email'";
+    }else{
+        
+            $encpass = password_hash($password, PASSWORD_BCRYPT);
+            $update_pass = "UPDATE teacher_tb SET firstname ='$firstname', lastname ='$lastname', teacher_mail='$teacher_mail', teacher_password = '$encpass',  image='$filesArray',teacher_code='$teacher_code',	teacher_status='$teacher_status'  WHERE teacher_mail = '$email'";
+    }
+    $result_editprofile =$conn ->query($update_pass);
+    if($result_editprofile==true){
+        $_SESSION['status'] = "<Type Your success message here>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -470,13 +515,145 @@ if(isset($_GET['id'])){
     </div>
     <!-- End of Page Wrapper -->
 
+    <?php
+    $query_teacher_representative = "SELECT * FROM teacher_tb WHERE teacher_mail = '$email'";
+    $result_teacher_representative = $conn->query($query_teacher_representative);
+    if($result_teacher_representative->num_rows>0){
+        while($row_teacher_representative = $result_teacher_representative->fetch_assoc()){
+            ?>
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"
+                                style="font-family:'Koulen', sans-serif; color: #336666;">
+                                Chang Profile</h5>
+                            <button class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                                    class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group my-2">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label class="label-control mb-1" for=""
+                                            style="font-family:'Koulen', sans-serif;">នាមត្រកូល
+                                            <spatn class="text-danger">:*
+                                            </spatn>
+                                        </label>
+                                        <input type="text" name="firstname" class="form-control" id=""
+                                            value="<?php echo $row_teacher_representative['firstname']?>"
+                                            style="font-family: 'Noto Serif Khmer', serif;">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="label-control mb-1" for=""
+                                            style="font-family:'Koulen', sans-serif;">នាមខ្លួន
+                                            <spatn class=" text-danger">:*
+                                            </spatn>
+                                        </label>
+                                        <input type="text" name="lastname" class="form-control" id=""
+                                            value="<?php echo $row_teacher_representative['lastname']?>"
+                                            style="font-family: 'Noto Serif Khmer', serif;">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group my-2">
+                                <label class="label-control mb-1" for=""
+                                    style="font-family:'Koulen', sans-serif;">អ៊ីម៉ែល
+                                    <spatn class=" text-danger">:*
+                                    </spatn>
+                                </label>
+                                <input type="email" name="teacher_mail" class="form-control" id=""
+                                    value="<?php echo $row_teacher_representative['teacher_mail']?>"
+                                    style="font-family: 'Noto Serif Khmer', serif;">
+                            </div>
+                            <div class="form-group my-2">
+                                <label class="label-control" for=""
+                                    style="font-family:'Koulen', sans-serif;">តើអ្នកចង់ប្ដូលេខសម្ងាត់ឬ ?
+
+                                </label>
+                                <div class="form-check d-flex">
+                                    <input onclick="onclickShow()" class="form-check-input" type="radio"
+                                        name="select_role" value="">
+                                    <label class="form-check-label mx-1" style="font-family:Khmer OS System;">
+                                        ប្ដូលេខសម្ងាត់
+                                    </label>
+
+                                </div>
+                            </div>
+                            <div id="passwords" class="hidden-changpassword">
+                                <div class="form-group">
+                                    <label class="label-control my-1" for=""
+                                        style="font-family:'Koulen', sans-serif;">លេខសម្ងាត់
+                                        <spatn class=" text-danger">:*
+                                        </spatn>
+                                    </label>
+                                    <input type="password" name="password" class="text-input form-control" id="">
+                                </div>
+                                <div class="form-group my-2">
+                                    <label class="label-control" for=""
+                                        style="font-family:'Koulen', sans-serif;">បញ្ជាក់
+                                        <spatn class=" text-danger">:*
+                                        </spatn>
+                                    </label>
+                                    <input type="password" name="cpassword" class="form-control form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-12">
+                                    <label class="label-control my-1" for=""
+                                        style="font-family:'Koulen', sans-serif;">រូប
+                                        profile
+                                        <spatn class=" text-danger">:*
+                                        </spatn>
+                                    </label>
+                                    <div class="file-input">
+                                        <input type="file" class="btn btn-secondary text-input" name="fileImg[]"
+                                            accept=".jpg, .jpeg, .png" multiple>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <button type="submit" name="submit" class=" btn btn-primary"><i
+                                    class="fa-solid fa-circle-check"></i>
+                                Submit</button>
+                        </div>
+                </div>
+
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+    <?php
+        }
+    }
+    ?>
+
+
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <?php include('logout-modal.php');?>
+    <script>
+    function onclickShow() {
+        document.getElementById('passwords').style.display = "block";
+    }
+
+    function onclickRemove() {
+        document.getElementById('passwords').style.display = "none";
+    }
+    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
