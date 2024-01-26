@@ -29,6 +29,7 @@ if(isset($_POST['submit'])){
     $select_major = $_POST['select_major'];
     $digital_book =$_POST['digital_book'];
     $abstract = $_POST['abstract'];
+    $keyword = $_POST['keyword'];
     $status = 0;
     
     // start upload image one
@@ -81,7 +82,7 @@ if(isset($_POST['submit'])){
     $size = $_FILES['myfile']['size'];
 
     if($file==NULL && $imageName_one==NULL && $imageName_two==NULL){
-        $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$status')";
+        $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,keyword,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$keyword','$status')";
     }
     elseif($file!=NULL && $imageName_one==NULL && $imageName_two==NULL){
             if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
@@ -93,15 +94,15 @@ if(isset($_POST['submit'])){
                 
             //-- move the uploaded (temporary) file to the specified destination --//
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$filename','$size',0,0,'$status')";
+                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,keyword,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$keyword','$filename','$size',0,0,'$status')";
                     }
             }
         }elseif($file==NULL && $imageName_one!=NULL && $imageName_two==NULL){
-            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,image_one,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$filesArray_one','$status')";
+            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,keyword,image_one,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$keyword','$filesArray_one','$status')";
         }elseif($file==NULL && $imageName_one==NULL && $imageName_two!=NULL){
-            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,image_two,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$filesArray_two','$status')";
+            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,keyword,image_two,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$keyword','$filesArray_two','$status')";
         }elseif($file==NULL && $imageName_one!=NULL && $imageName_two!=NULL){
-            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,image_one,image_two,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$filesArray_one','$filesArray_two','$status')";
+            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,keyword,image_one,image_two,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$keyword','$filesArray_one','$filesArray_two','$status')";
             
         }elseif($file!=NULL && $imageName_one!=NULL && $imageName_two==NULL){
             if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
@@ -113,7 +114,7 @@ if(isset($_POST['submit'])){
             //-- move the uploaded (temporary) file to the specified destination --//
                 
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,image_one,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$filesArray_one','$filename','$size',0,0,'$status')";
+                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,keyword,image_one,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$keyword','$filesArray_one','$filename','$size',0,0,'$status')";
                     }
             }
         }elseif($file!=NULL && $imageName_one==NULL && $imageName_two!=NULL){
@@ -127,7 +128,7 @@ if(isset($_POST['submit'])){
             //-- move the uploaded (temporary) file to the specified destination --//
                 
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,image_two,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$filesArray_two','$filename','$size',0,0,'$status')";
+                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,keyword,image_two,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$keyword','$filesArray_two','$filename','$size',0,0,'$status')";
                     }
             }
         }else{
@@ -141,7 +142,7 @@ if(isset($_POST['submit'])){
             //-- move the uploaded (temporary) file to the specified destination --//
                 
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,image_one,image_two,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$filesArray_one','$filesArray_two','$filename','$size',0,0,'$status')";
+                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,select_major,digital_book,abstract,keyword,image_one,image_two,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$select_major','$digital_book','$abstract','$keyword','$filesArray_one','$filesArray_two','$filename','$size',0,0,'$status')";
 
                     }
             }
@@ -366,6 +367,15 @@ if(isset($_POST['submit'])){
                                             <textarea name="abstract" id="" cols="30" rows="10"
                                                 class="summernote form-control">
                                         </textarea>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <label class="label-control" for=""
+                                                style="font-family:'Koulen', sans-serif;">ពាក្យគន្លឺះ
+                                                <spatn class=" text-danger">:*
+                                                </spatn>
+                                            </label>
+                                            <input type="text" name="keyword" class="form-control form-control">
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-4">

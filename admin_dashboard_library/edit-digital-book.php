@@ -38,6 +38,7 @@ if(isset($_GET['id'])){
         $select_major = $_POST['select_major'];
         $digital_book =$_POST['digital_book'];
         $abstract = $_POST['abstract'];
+        $keyword = $_POST['keyword'];
         $status = $_POST['status'];
         
         // start upload image one
@@ -90,7 +91,7 @@ if(isset($_GET['id'])){
         $size = $_FILES['myfile']['size'];
 
         if($file==NULL && $imageName_one==NULL && $imageName_two==NULL){
-            $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',status='$status' WHERE id = $query_edit_digital_book_id";
+            $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',status='$status' WHERE id = $query_edit_digital_book_id";
         }
         elseif($file!=NULL && $imageName_one==NULL && $imageName_two==NULL){
                 if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
@@ -102,16 +103,16 @@ if(isset($_GET['id'])){
                     
                 //-- move the uploaded (temporary) file to the specified destination --//
                     if (move_uploaded_file($file, $destination)) {
-                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',name='$filename',status='$status' WHERE id = $query_edit_digital_book_id";
+                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',name='$filename',status='$status' WHERE id = $query_edit_digital_book_id";
                         }
                 }
             }elseif($file==NULL && $imageName_one!=NULL && $imageName_two==NULL){
-                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',image_one='$filesArray_one',status='$status' WHERE id = $query_edit_digital_book_id";
+                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_one='$filesArray_one',status='$status' WHERE id = $query_edit_digital_book_id";
             }elseif($file==NULL && $imageName_one==NULL && $imageName_two!=NULL){
-                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',image_two='$filesArray_two',status='$status' WHERE id = $query_edit_digital_book_id";
+                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_two='$filesArray_two',status='$status' WHERE id = $query_edit_digital_book_id";
                 
             }elseif($file==NULL && $imageName_one!=NULL && $imageName_two!=NULL){
-                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',image_one='$filesArray_one',image_two='$filesArray_two',status='$status' WHERE id = $query_edit_digital_book_id";
+                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_one='$filesArray_one',image_two='$filesArray_two',status='$status' WHERE id = $query_edit_digital_book_id";
                 
             }elseif($file!=NULL && $imageName_one!=NULL && $imageName_two==NULL){
                 if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
@@ -123,7 +124,7 @@ if(isset($_GET['id'])){
                 //-- move the uploaded (temporary) file to the specified destination --//
                     
                     if (move_uploaded_file($file, $destination)) {
-                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',image_one='$filesArray_one',name='$filename',status='$status' WHERE id = $query_edit_digital_book_id";
+                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_one='$filesArray_one',name='$filename',status='$status' WHERE id = $query_edit_digital_book_id";
                         }
                 }
             }elseif($file!=NULL && $imageName_one==NULL && $imageName_two!=NULL){
@@ -137,7 +138,7 @@ if(isset($_GET['id'])){
                 //-- move the uploaded (temporary) file to the specified destination --//
                     
                     if (move_uploaded_file($file, $destination)) {
-                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',image_two='$filesArray_two',name='$filename',status='$status' WHERE id = $query_edit_digital_book_id";
+                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_two='$filesArray_two',name='$filename',status='$status' WHERE id = $query_edit_digital_book_id";
                         }
                 }
             }else{
@@ -151,7 +152,7 @@ if(isset($_GET['id'])){
                 //-- move the uploaded (temporary) file to the specified destination --//
                     
                     if (move_uploaded_file($file, $destination)) {
-                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',image_one='$filesArray_one',image_two='$filesArray_two',name='$filename',status='$status' WHERE id = $query_edit_digital_book_id";
+                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_one='$filesArray_one',image_two='$filesArray_two',name='$filename',status='$status' WHERE id = $query_edit_digital_book_id";
                         }
                 }
             }
@@ -404,6 +405,16 @@ if(isset($_GET['id'])){
                                             <textarea name="abstract" id="" cols="30" rows="10"
                                                 class="summernote form-control"><?php echo $details; ?>
                                         </textarea>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <label class="label-control" for=""
+                                                style="font-family:'Koulen', sans-serif;">ពាក្យគន្លឺះ
+                                                <spatn class=" text-danger">:*
+                                                </spatn>
+                                            </label>
+                                            <input type="text" name="keyword" class="form-control form-control"
+                                                value="<?php echo $row_select_digital_book['keyword']?>">
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-4">
