@@ -1,6 +1,27 @@
 <?php
 include ('../config/conn_db.php');
-
+require_once "ControlAdmin.php";
+$email = $_SESSION['email'];
+$password = $_SESSION['password'];
+if($email != false && $password != false){
+    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $run_Sql = mysqli_query($conn, $sql);
+    if($run_Sql){
+        
+        $fetch_info = mysqli_fetch_assoc($run_Sql);
+        $status = $fetch_info['status']; 
+        $code = $fetch_info['code'];
+        if($status == "verified"){
+            if($code != 0){
+                header('Location: reset-code.php');
+            }
+        }else{
+            header('Location: admin-otp.php');
+        }
+    }
+}else{
+    header('Location: login.php');
+}
 
     //chang password admin
     if(isset($_GET['id'])){
@@ -215,9 +236,6 @@ include ('../config/conn_db.php');
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    <?php include("logout-modal.php");?>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

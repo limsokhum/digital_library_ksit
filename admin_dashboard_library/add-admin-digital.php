@@ -278,8 +278,6 @@ if(isset($_POST['submit'])){
                                                 </label>
                                                 <input type="date" name="date" class="form-control form-control" id=""
                                                     aria-describedby="">
-
-
                                             </div>
                                             <div class="col-sm-4">
                                                 <label class="label-control" for=""
