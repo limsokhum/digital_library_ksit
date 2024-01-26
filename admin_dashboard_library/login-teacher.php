@@ -25,21 +25,64 @@
 
 </head>
 
-<body class="bg-gradient-success">
+<body>
+    <!-- class="bg-gradient-success" -->
 
     <div class="container">
 
         <!-- Outer Row -->
         <div class="row d-flex vh-100 align-items-center justify-content-center">
 
-            <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="col-xl-6 col-lg-8 col-md-8">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
+                        <div class="p-4">
+
+                            <img src="img/logo-login.png" alt="state" style="width: 24rem">
+
+                            <form method="POST" class="user mt-3">
+                                <?php
+if(count($errors) > 0){
+?>
+                                <div class="alert alert-danger text-center">
+                                    <?php
+foreach($errors as $showerror){
+echo $showerror;
+}
+?>
+                                </div>
+                                <?php
+}
+?>
+                                <div class="form-group">
+                                    <input type="email" name="email" class="form-control form-control-user"
+                                        id="exampleInputEmail" aria-describedby="emailHelp"
+                                        placeholder="Enter Email Address..." value="<?php echo $email ?>" require>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" class="form-control form-control-user"
+                                        id="exampleInputPassword" placeholder="Password" require>
+                                </div>
+
+                                <input class="form-control btn btn-success" type="submit" name="login"
+                                    value="Representative Login">
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small text-dark" href="login.php">Admin
+                                    Login</a>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small text-dark" href="teacher-forgot-password.php">Representative
+                                    Forgot
+                                    Password?</a>
+                            </div>
+                        </div>
                         <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block"
-                                style="background-image: url('img/banner-journal.png');"></div>
+                        <!-- <div class="row">
+
                             <div class="col-lg-6">
                                 <div class="p-4">
 
@@ -87,7 +130,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-lg-6 d-none d-lg-block"
+                                style="background-image: url('img/banner-journal.png');"></div>
+                        </div> -->
                     </div>
                 </div>
 

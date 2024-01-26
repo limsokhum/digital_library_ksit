@@ -29,62 +29,56 @@
 
 </head>
 
-<body class="bg-gradient-success">
+<body>
 
     <div class="container">
 
         <!-- Outer Row -->
         <div class="row justify-content-center vh-100 align-items-center">
 
-            <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="col-xl-6 col-lg-8 col-md-8">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block"
-                                style="background-image: url('img/banner-journal.png');"></div>
-                            <div class="col-lg-6">
-                                <div class="p-4">
+                        <div class="p-4">
 
-                                    <img src="img/logo-login.png" alt="state" style="width: 24rem">
+                            <img src="img/logo-login.png" alt="state" style="width: 24rem">
 
-                                    <?php
-                                        if(count($errors) > 0){
-                                            ?>
-                                    <div class="alert alert-danger text-center">
-                                        <?php 
-                                                    foreach($errors as $error){
-                                                        echo $error;
-                                                    }
-                                                ?>
-                                    </div>
-                                    <?php
-                                        }
-                                    ?>
-                                    <form action="teacher-forgot-password.php" method="POST" autocomplete="">
-                                        <div class="form-group">
-                                            <input class="form-control" type="email" name="email"
-                                                placeholder="Enter email address" required value="<?php echo $email ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <input class="form-control btn btn-success" type="submit" name="check-email"
-                                                value="Continue">
-                                        </div>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="login-teacher.php">Already have an account? Login!</a>
-                                    </div>
+                            <?php
+        if(count($errors) > 0){
+            ?>
+                            <div class="alert alert-danger text-center">
+                                <?php 
+                    foreach($errors as $error){
+                        echo $error;
+                    }
+                ?>
+                            </div>
+                            <?php
+        }
+    ?>
+                            <form action="teacher-forgot-password.php" method="POST" autocomplete="">
+                                <div class="form-group">
+                                    <input class="form-control" type="email" name="email"
+                                        placeholder="Enter email address" required value="<?php echo $email ?>">
                                 </div>
+                                <div class="form-group">
+                                    <input class="form-control btn btn-success" type="submit" name="check-email"
+                                        value="Continue">
+                                </div>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="login-teacher.php">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
+
+    </div>
 
     </div>
 

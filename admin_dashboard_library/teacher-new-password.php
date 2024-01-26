@@ -36,66 +36,59 @@ if($email == false){
     <link rel="stylesheet" href="css/style-admin.css">
 </head>
 
-<body class="bg-gradient-success">
+<body>
 
     <div class="container">
 
         <!-- Outer Row -->
         <div class="row justify-content-center vh-100 align-items-center">
 
-            <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="col-xl-6 col-lg-8 col-md-8">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block"
-                                style="background-image: url('img/banner-journal.png');"></div>
-                            <div class="col-lg-6">
-                                <div class="p-4">
+                        <div class="p-4">
 
-                                    <img src="img/logo-login.png" alt="state" style="width: 24rem">
-                                    <?php 
-                                        if(isset($_SESSION['info'])){
-                                        ?>
-                                    <div class="alert alert-success text-center">
-                                        <?php echo $_SESSION['info']; ?>
-                                    </div>
-                                    <?php
-                                    }
-                                    ?>
-                                    <?php
-                                    if(count($errors) > 0){
-                                        ?>
-                                    <div class="alert alert-danger text-center">
-                                        <?php
-                                            foreach($errors as $showerror){
-                                                echo $showerror;
-                                            }
-                                            ?>
-                                    </div>
-                                    <?php
-                                    }
-                                    ?>
-                                    <form method="POST" active="login-teacher.php">
-                                        <div class="form-group">
-                                            <input class="form-control" type="password" name="password"
-                                                placeholder="Create new password" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input class="form-control" type="password" name="cpassword"
-                                                placeholder="Confirm your password" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input class="form-control btn btn-success" type="submit"
-                                                name="change-password" value="Change">
-                                        </div>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="login-teacher.php">Already have an account? Login!</a>
-                                    </div>
+                            <img src="img/logo-login.png" alt="state" style="width: 24rem">
+                            <?php 
+    if(isset($_SESSION['info'])){
+    ?>
+                            <div class="alert alert-success text-center">
+                                <?php echo $_SESSION['info']; ?>
+                            </div>
+                            <?php
+}
+?>
+                            <?php
+if(count($errors) > 0){
+    ?>
+                            <div class="alert alert-danger text-center">
+                                <?php
+        foreach($errors as $showerror){
+            echo $showerror;
+        }
+        ?>
+                            </div>
+                            <?php
+}
+?>
+                            <form method="POST" active="login-teacher.php">
+                                <div class="form-group">
+                                    <input class="form-control" type="password" name="password"
+                                        placeholder="Create new password" required>
                                 </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="password" name="cpassword"
+                                        placeholder="Confirm your password" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control btn btn-success" type="submit" name="change-password"
+                                        value="Change">
+                                </div>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="login-teacher.php">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
