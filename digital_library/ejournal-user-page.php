@@ -22,6 +22,123 @@ if($email != false && $password != false){
     header('Location: index.php');
 }
 ?>
+<?php
+$query_user_prifile="SELECT * FROM usertable WHERE email = '$email'";
+// WHERE email = '$email'
+$result_user_profile = $conn->query($query_user_prifile);
+if($result_user_profile ->num_rows>0){
+    while($row_user_profile = $result_user_profile->fetch_assoc()){
+        ?>
+<!-- Start Modal Bootstrap 5 -->
+<div class="modal fade" id="exampleModal" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"
+                        style="font-family:'Koulen', sans-serif; color: #336666;">
+                        Chang Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="label-control mb-1" for="" style="font-family:'Koulen', sans-serif;">ឈ្មោះ
+                            <spatn class=" text-danger">:*
+                            </spatn>
+                        </label>
+                        <input type="text" name="name" class="form-control" id=""
+                            value="<?php echo $row_user_profile['name']?>"
+                            style="font-family: 'Noto Serif Khmer', serif;">
+                    </div>
+                    <div class="form-group my-2">
+                        <label class="label-control mb-1" for="" style="font-family:'Koulen', sans-serif;">អ៊ីម៉ែល
+                            <spatn class=" text-danger">:*
+                            </spatn>
+                        </label>
+                        <input type="text" name="email" class="form-control" id=""
+                            value="<?php echo $row_user_profile['email']?>"
+                            style="font-family: 'Noto Serif Khmer', serif;">
+                    </div>
+                    <div class="form-group my-2">
+                        <label class="label-control" for=""
+                            style="font-family:'Koulen', sans-serif;">តើអ្នកចង់ប្ដូលេខសម្ងាត់ឬ ?
+
+                        </label>
+                        <div class="form-check d-flex">
+                            <input onclick="onclickShow()" class="form-check-input" type="radio" name="select_role"
+                                value="">
+                            <label class="form-check-label mx-1" style="font-family:Khmer OS System;"> ប្ដូលេខសម្ងាត់
+                            </label>
+
+                        </div>
+                    </div>
+                    <div id="passwords" class="hidden-changpassword">
+                        <div class="form-group">
+                            <label class="label-control my-1" for=""
+                                style="font-family:'Koulen', sans-serif;">លេខសម្ងាត់
+                                <spatn class=" text-danger">:*
+                                </spatn>
+                            </label>
+                            <input type="password" name="password" class="text-input form-control" id="">
+
+                        </div>
+                        <div class="form-group my-2">
+                            <label class="label-control" for="" style="font-family:'Koulen', sans-serif;">បញ្ជាក់
+                                <spatn class=" text-danger">:*
+                                </spatn>
+                            </label>
+                            <input type="password" name="cpassword" class="form-control form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <label class="label-control my-1" for="" style="font-family:'Koulen', sans-serif;">រូប
+                                profile
+                                <spatn class=" text-danger">:*
+                                </spatn>
+                            </label>
+                            <div class="file-input">
+                                <input type="file" class="btn btn-secondary text-input" name="fileImg[]"
+                                    accept=".jpg, .jpeg, .png" multiple>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="view-profile">
+
+                        <?php
+                        if($row_user_profile['image']==NULL){
+                            ?>
+                        <img class="w-100" src="assets/images/user-profile.png" alt="">
+                        <?php
+                        }else{
+                            foreach (json_decode($row_user_profile["image"]) as $image) : ?>
+                        <img class="w-100" src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
+                        <?php endforeach; 
+                        }
+                         ?>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        style="font-family:'Koulen', sans-serif;">Close</button>
+
+                    <button type="submit" name="submit" class="btn text-light"
+                        style=" background-color: #336666; font-family:'Koulen', sans-serif;">Save
+                        changes</button>
+                </div>
+        </div>
+
+        </form>
+    </div>
+</div>
+<!-- Ent Modal Bootstrap 5 -->
+<?php
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -410,7 +527,15 @@ if($email != false && $password != false){
         document.documentElement.scrollTop = 0;
     }
     </script>
+    <script>
+    function onclickShow() {
+        document.getElementById('passwords').style.display = "block";
+    }
 
+    function onclickRemove() {
+        document.getElementById('passwords').style.display = "none";
+    }
+    </script>
     <!-- Script Js Default Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js">
     </script>

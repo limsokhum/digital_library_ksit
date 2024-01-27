@@ -113,7 +113,7 @@ if($result_user_profile ->num_rows>0){
                         <?php
                         if($row_user_profile['image']==NULL){
                             ?>
-                        <h5>Upload Image</h5>
+                        <img class="w-100" src="assets/images/user-profile.png" alt="">
                         <?php
                         }else{
                             foreach (json_decode($row_user_profile["image"]) as $image) : ?>
@@ -541,7 +541,15 @@ if($result_user_profile ->num_rows>0){
         document.documentElement.scrollTop = 0;
     }
     </script>
+    <script>
+    function onclickShow() {
+        document.getElementById('passwords').style.display = "block";
+    }
 
+    function onclickRemove() {
+        document.getElementById('passwords').style.display = "none";
+    }
+    </script>
     <!-- Script Js Default Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js">
     </script>

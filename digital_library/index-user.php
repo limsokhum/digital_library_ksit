@@ -160,7 +160,7 @@ if($result_user_profile ->num_rows>0){
                         <?php
                         if($row_user_profile['image']==NULL){
                             ?>
-                        <h5>Upload Image</h5>
+                        <img class="w-100" src="assets/images/user-profile.png" alt="">
                         <?php
                         }else{
                             foreach (json_decode($row_user_profile["image"]) as $image) : ?>
@@ -172,7 +172,7 @@ if($result_user_profile ->num_rows>0){
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        style="font-family:'Koulen', sans-serif;">Close</button>
+                        style="font-family:' Koulen', sans-serif;">Close</button>
 
                     <button type="submit" name="submit" class="btn text-light"
                         style=" background-color: #336666; font-family:'Koulen', sans-serif;">Save
@@ -417,10 +417,6 @@ if($result_user_profile ->num_rows>0){
 
                             <?php
 
-
-
-
-
 if(isset($_GET['title']) && isset($_GET['name_auther']) && isset($_GET['digital_book']) && isset($_GET['date']) || isset($_GET['abstract']))
 {
     $title = $_GET['title'];
@@ -446,7 +442,8 @@ if(isset($_GET['title']) && isset($_GET['name_auther']) && isset($_GET['digital_
                                     <h6 class="research-title"><span class="defult-title">ប្រធានបទ </span> ៖
                                         ​<?php echo $row['title']?></h6>
 
-                                    <small class="research-title"><span class="defult-title">អ្នកស្រាវជ្រាវ </span> ៖
+                                    <small class="research-title"><span class="defult-title">អ្នកស្រាវជ្រាវ </span>
+                                        ៖
                                         <?php echo $row['name_auther']?> <span class="defult-title">, ប្រភេទសៀវភៅ
                                         </span> ៖
                                         <?php echo $row['digital_book']?> <span class="defult-title">, បោះពុម្ភ

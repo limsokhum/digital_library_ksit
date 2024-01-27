@@ -65,7 +65,8 @@ if($result_user_profile ->num_rows>0){
                         if($row_user_profile['image']==NULL){?>
 
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false" href="#">ប្រូហ្វាល</a>
+                            aria-expanded="false" href="#"><img src="assets/images/user-profile.png" alt=""
+                                style="width: 3rem; height: 3rem; border-radius: 50%;"></a>
 
 
                         <?php
