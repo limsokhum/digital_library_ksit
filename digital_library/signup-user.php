@@ -57,6 +57,24 @@
                             value="<?php echo $email ?>">
                     </div>
                     <div class="form-group">
+                        <select name="advisor" class="form-control">
+                            <option selected>ជ្រើសរើសគ្រូជំនួយការ</option>
+                            <?php
+                                                $advisor_tb = "SELECT * FROM teacher_tb WHERE select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់'";
+                                                $result_advisor = $conn -> query($advisor_tb);
+                                                if($result_advisor->num_rows > 0){
+                                                    while($row = $result_advisor -> fetch_assoc()){
+                                                        ?>
+                            <option class="text primary form-control" value="<?php echo ($row['teacher_mail'])?>">
+                                <?php echo $row['firstname']. $row['lastname']?>
+                            </option>
+                            <?php
+                                                }
+                                                }
+                                                ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <input class="form-control" type="password" name="password" placeholder="លេខសម្ងាត់" required>
                     </div>
                     <div class="form-group">

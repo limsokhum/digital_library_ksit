@@ -6,6 +6,10 @@ body {
     font-family: 'Noto Serif Khmer', serif;
 }
 
+.primary {
+    color: #336666;
+}
+
 ::selection {
     color: #fff;
     background: #336666;

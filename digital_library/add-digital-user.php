@@ -26,10 +26,14 @@ if(isset($_POST['submit'])){
     $name_auther = $_POST['name_auther']; 
     $date = $_POST['date'];
     $teacher_mail = $_POST['teacher_mail'];
+    $advisor = $_POST['advisor'];
     
     $digital_book =$_POST['digital_book'];
     $abstract = $_POST['abstract'];
     $keyword = $_POST['keyword'];
+    
+    $comment = $_POST['comment'];
+
 
     $status = 0;
     
@@ -83,7 +87,7 @@ if(isset($_POST['submit'])){
     $size = $_FILES['myfile']['size'];
 
     if($file==NULL && $imageName_one==NULL && $imageName_two==NULL){
-        $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$status')";
+        $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$status')";
     }
     elseif($file!=NULL && $imageName_one==NULL && $imageName_two==NULL){
             if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
@@ -95,15 +99,15 @@ if(isset($_POST['submit'])){
                 
             //-- move the uploaded (temporary) file to the specified destination --//
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$filename','$size',0,0,'$status')";
+                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filename','$size',0,0,'$status')";
                     }
             }
         }elseif($file==NULL && $imageName_one!=NULL && $imageName_two==NULL){
-            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,image_one,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$filesArray_one','$status')";
+            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,image_one,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filesArray_one','$status')";
         }elseif($file==NULL && $imageName_one==NULL && $imageName_two!=NULL){
-            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,image_two,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$filesArray_two','$status')";
+            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,image_two,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filesArray_two','$status')";
         }elseif($file==NULL && $imageName_one!=NULL && $imageName_two!=NULL){
-            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,image_one,image_two,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$filesArray_one','$filesArray_two','$status')";
+            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,image_one,image_two,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filesArray_one','$filesArray_two','$status')";
             
         }elseif($file!=NULL && $imageName_one!=NULL && $imageName_two==NULL){
             if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
@@ -115,7 +119,7 @@ if(isset($_POST['submit'])){
             //-- move the uploaded (temporary) file to the specified destination --//
                 
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,image_one,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$filesArray_one','$filename','$size',0,0,'$status')";
+                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,image_one,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filesArray_one','$filename','$size',0,0,'$status')";
                     }
             }
         }elseif($file!=NULL && $imageName_one==NULL && $imageName_two!=NULL){
@@ -129,7 +133,7 @@ if(isset($_POST['submit'])){
             //-- move the uploaded (temporary) file to the specified destination --//
                 
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,image_two,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$filesArray_two','$filename','$size',0,0,'$status')";
+                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,image_two,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filesArray_two','$filename','$size',0,0,'$status')";
                     }
             }
         }else{
@@ -143,7 +147,7 @@ if(isset($_POST['submit'])){
             //-- move the uploaded (temporary) file to the specified destination --//
                 
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,image_one,image_two,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$filesArray_one','$filesArray_two','$filename','$size',0,0,'$status')";
+                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,image_one,image_two,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filesArray_one','$filesArray_two','$filename','$size',0,0,'$status')";
 
                     }
             }
@@ -155,6 +159,205 @@ if(isset($_POST['submit'])){
             $_SESSION['status'] = "<Type Your success message here>";
                     }
 
+}
+?>
+<?php
+ if(isset($_POST['edit_profile'])){
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $advisor = mysqli_real_escape_string($conn, $_POST['advisor']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
+    
+    $totalFiles = count($_FILES['fileImg']['name']);
+    $filesArray = array();
+
+    for($i = 0; $i < $totalFiles; $i++){
+    $imageName = $_FILES["fileImg"]["name"][$i];
+    $tmpName = $_FILES["fileImg"]["tmp_name"][$i];
+
+    $imageExtension = explode('.', $imageName);
+    $imageExtension = strtolower(end($imageExtension));
+
+    $newImageName = uniqid() . '.' . $imageExtension;
+
+    move_uploaded_file($tmpName, '../admin_dashboard_library/uploads/' . $newImageName);
+    $filesArray[] = $newImageName;
+    }
+
+    $filesArray = json_encode($filesArray);
+    
+    $code = 0;
+    
+    $status = "verified";
+    
+    if($password==NULL && $cpassword==NULL && $filesArray==NULL && $advisor=NULL){
+        $update_pass = "UPDATE usertable SET name ='$name', email='$email',code='$code',status='$status' WHERE email = '$email'";
+    }elseif($password==NULL && $cpassword==NULL && $filesArray==NULL && $advisor!=NULL){
+        $update_pass = "UPDATE usertable SET name ='$name', email='$email', advisor='$advisor', code='$code',status='$status' WHERE email = '$email'";
+    }elseif($password==NULL && $cpassword==NULL && $filesArray!==NULL){
+        $update_pass = "UPDATE usertable SET name ='$name', email='$email',image='$filesArray',code='$code',status='$status' WHERE email = '$email'";
+    }else{
+            $encpass = password_hash($password, PASSWORD_BCRYPT);
+            $update_pass = "UPDATE usertable SET name ='$name', email='$email', password = '$encpass',  image='$filesArray',code='$code', status='$status' WHERE email = '$email'";
+    }
+    $result_editprofile =$conn ->query($update_pass);
+    if($result_editprofile==true){
+        $_SESSION['status'] = "<Type Your success message here>";
+    }
+}
+?>
+
+
+
+<?php
+$query_user_prifile="SELECT * FROM usertable WHERE email = '$email'";
+// WHERE email = '$email'
+$result_user_profile = $conn->query($query_user_prifile);
+if($result_user_profile ->num_rows>0){
+    while($row_user_profile = $result_user_profile->fetch_assoc()){
+        ?>
+<!-- Start Modal Bootstrap 5 -->
+<div class="modal fade" id="exampleModal" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"
+                        style="font-family:'Koulen', sans-serif; color: #336666;">
+                        Chang Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="label-control mb-1" for="" style="font-family:'Koulen', sans-serif;">ឈ្មោះ
+                            <spatn class=" text-danger">:*
+                            </spatn>
+                        </label>
+                        <input type="text" name="name" class="form-control" id=""
+                            value="<?php echo $row_user_profile['name']?>"
+                            style="font-family: 'Noto Serif Khmer', serif;">
+                    </div>
+                    <div class="form-group my-2">
+                        <label class="label-control mb-1" for="" style="font-family:'Koulen', sans-serif;">អ៊ីម៉ែល
+                            <spatn class=" text-danger">:*
+                            </spatn>
+                        </label>
+                        <input type="text" name="email" class="form-control" id=""
+                            value="<?php echo $row_user_profile['email']?>"
+                            style="font-family: 'Noto Serif Khmer', serif;">
+                    </div>
+                    <div class="form-group my-2">
+                        <label class="label-control" for=""
+                            style="font-family:'Koulen', sans-serif;">តើអ្នកចង់ប្ដូលេខសម្ងាត់ឬ ?
+
+                        </label>
+                        <div class="form-check d-flex">
+                            <input onclick="onclickShow()" class="form-check-input" type="radio" name="select_role"
+                                value="">
+                            <label class="form-check-label mx-1" style="font-family:Khmer OS System;"> ប្ដូលេខសម្ងាត់
+                            </label>
+
+                        </div>
+                    </div>
+                    <div id="passwords" class="hidden-changpassword">
+                        <div class="form-group">
+                            <label class="label-control my-1" for=""
+                                style="font-family:'Koulen', sans-serif;">លេខសម្ងាត់
+                                <spatn class=" text-danger">:*
+                                </spatn>
+                            </label>
+                            <input type="password" name="password" class="text-input form-control" id="">
+
+                        </div>
+                        <div class="form-group my-2">
+                            <label class="label-control" for="" style="font-family:'Koulen', sans-serif;">បញ្ជាក់
+                                <spatn class=" text-danger">:*
+                                </spatn>
+                            </label>
+                            <input type="password" name="cpassword" class="form-control form-control">
+                        </div>
+                    </div>
+                    <div class="form-group my-2">
+                        <label class="label-control" for=""
+                            style="font-family:'Koulen', sans-serif;">តើអ្នកចង់ប្ដូគ្រូជំនួយការឬ ?
+
+                        </label>
+                        <div class="form-check d-flex">
+                            <input onclick="onclickShowAdvisor()" class="form-check-input" type="radio" name=""
+                                value="">
+                            <label class="form-check-label mx-1" style="font-family:Khmer OS System;"> ប្ដូគ្រូជំនួយការ
+                            </label>
+                        </div>
+                    </div>
+                    <div id="advisor" class="hidden-advisor">
+                        <div class="form-group">
+                            <select name="advisor" class="form-control" style="font-family: 'Noto Serif Khmer', serif;">
+                                <option selected>ជ្រើសរើសគ្រូជំនួយការ</option>
+                                <?php
+                                                $advisor_tb = "SELECT * FROM teacher_tb WHERE select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់'";
+                                                $result_advisor = $conn -> query($advisor_tb);
+                                                if($result_advisor->num_rows > 0){
+                                                    while($row = $result_advisor -> fetch_assoc()){
+                                                        ?>
+                                <option class="text primary form-control" value="<?php echo ($row['teacher_mail'])?>">
+                                    <?php echo $row['firstname']. $row['lastname']?>
+                                </option>
+                                <?php
+                                                }
+                                                }
+                                                ?>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <label class="label-control my-1" for="" style="font-family:'Koulen', sans-serif;">រូប
+                                profile
+                                <spatn class=" text-danger">:*
+                                </spatn>
+                            </label>
+                            <div class="file-input">
+                                <input type="file" class="btn btn-secondary text-input" name="fileImg[]"
+                                    accept=".jpg, .jpeg, .png" multiple>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="view-profile">
+
+                        <?php
+                        if($row_user_profile['image']==NULL){
+                            ?>
+                        <img class="w-100" src="assets/images/user-profile.png" alt="">
+                        <?php
+                        }else{
+                            foreach (json_decode($row_user_profile["image"]) as $image) : ?>
+                        <img class="w-100" src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
+                        <?php endforeach; 
+                        }
+                         ?>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        style="font-family:' Koulen', sans-serif;">Close</button>
+
+                    <button type="submit" name="edit_profile" class="btn text-light"
+                        style=" background-color: #336666; font-family:'Koulen', sans-serif;">Save
+                        changes</button>
+                </div>
+        </div>
+
+        </form>
+    </div>
+</div>
+<!-- Ent Modal Bootstrap 5 -->
+<?php
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -302,6 +505,8 @@ if(isset($_POST['submit'])){
 
                                     <input type="hidden" name="teacher_mail" class="form-control form-control" id=""
                                         value="<?php echo $row_user_add_digital['email']?>">
+                                    <input type="hidden" name="advisor" class="text-input form-control"
+                                        value="<?php echo $row_user_add_digital['advisor']?>" id="">
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="label-control my-1" for=""
@@ -381,6 +586,16 @@ if(isset($_POST['submit'])){
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group visually-hidden">
+                                <label class="label-control my-1" for=""
+                                    style="font-family:'Koulen', sans-serif;">comment
+                                    <spatn class=" text-danger">:*
+                                    </spatn>
+                                </label>
+
+                                <input type="hidden" name="comment" class="form-control">
+                                <!-- <textarea class="form-control" id="" cols="30" rows="10"></textarea> -->
                             </div>
                         </div>
                         <button type="submit" name="submit" class="btn btn-primary mt-2"><i
@@ -491,7 +706,24 @@ if(isset($_POST['submit'])){
         document.documentElement.scrollTop = 0;
     }
     </script>
+    <script>
+    function onclickShow() {
+        document.getElementById('passwords').style.display = "block";
+    }
 
+    function onclickRemove() {
+        document.getElementById('passwords').style.display = "none";
+    }
+    </script>
+    <script>
+    function onclickShowAdvisor() {
+        document.getElementById('advisor').style.display = "block";
+    }
+
+    function onclickRemove() {
+        document.getElementById('advisor').style.display = "none";
+    }
+    </script>
     <!-- Script Js Default Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js">
     </script>
