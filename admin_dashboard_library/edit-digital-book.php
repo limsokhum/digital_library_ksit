@@ -348,7 +348,8 @@ if(isset($_GET['id'])){
 
                                                 <input type="text" name="select_major"
                                                     value='<?php echo $row_select_digital_book["select_major"]?>'
-                                                    class="form-control form-control" id="" aria-describedby="">
+                                                    class="form-control form-control" id="" aria-describedby=""
+                                                    readonly>
                                             </div>
 
                                         </div>

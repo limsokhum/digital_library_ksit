@@ -349,7 +349,7 @@ if($result_user_profile ->num_rows>0){
                                         <?php
                                             if($row['comment']==NULL){
                                                 ?>
-                                        <p style=" font-family: 'Noto Serif Khmer', serif;">
+                                        <p class="text-danger" style=" font-family: 'Noto Serif Khmer', serif;">
                                             <?php echo("មិនទាន់មានមតិយោបល !");?></p>
                                         <?php
                                             }
