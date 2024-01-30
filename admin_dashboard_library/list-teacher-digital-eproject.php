@@ -23,7 +23,7 @@ if($email != false && $password != false){
 
 if(isset($_GET['id'])){
     $delete_teacher_digital_eproject = $_GET['id'];
-    $query_delete_teacher_digital_eproject = "DELETE FROM digitalbook_tb WHERE (((teacher_mail = '$email') AND (digital_book='e-project'))) AND (id='$delete_teacher_digital_eproject')";
+    $query_delete_teacher_digital_eproject = "DELETE FROM digitalbook_tb WHERE (((advisor = '$email') AND (digital_book='e-project'))) AND (id='$delete_teacher_digital_eproject')";
     $result_delte_teacher_digital_eproject = $conn->query($query_delete_teacher_digital_eproject);
     if($result_delte_teacher_digital_eproject==TRUE){
         $_SESSION['status'] = "<Type Your success message here>";
@@ -196,16 +196,16 @@ if (isset($_GET['file_id_view'])) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                       $select_list_ebook_one = "SELECT * FROM digitalbook_tb WHERE ((teacher_mail = '$email') AND (digital_book='e-project') AND (status=0)) ORDER BY id DESC";
+                                       $select_list_ebook_one = "SELECT * FROM digitalbook_tb WHERE ((advisor = '$email') AND (digital_book='e-project') AND (status=0)) ORDER BY id DESC";
                                        $result_select_list_ebook_one = $conn ->query($select_list_ebook_one);
                                        
-                                       $select_list_ebook_two = "SELECT * FROM digitalbook_tb WHERE ((teacher_mail = '$email') AND (digital_book='e-project') AND (status=1)) ORDER BY id DESC";
+                                       $select_list_ebook_two = "SELECT * FROM digitalbook_tb WHERE ((advisor = '$email') AND (digital_book='e-project') AND (status=1)) ORDER BY id DESC";
                                        $result_select_list_ebook_two = $conn ->query($select_list_ebook_two);
 
-                                       $select_list_ebook_three = "SELECT * FROM digitalbook_tb WHERE ((teacher_mail = '$email') AND (digital_book='e-project') AND (status=2)) ORDER BY id DESC";
+                                       $select_list_ebook_three = "SELECT * FROM digitalbook_tb WHERE ((advisor = '$email') AND (digital_book='e-project') AND (status=2)) ORDER BY id DESC";
                                        $result_select_list_ebook_three = $conn ->query($select_list_ebook_three);
 
-                                       $select_list_ebook_four = "SELECT * FROM digitalbook_tb WHERE ((teacher_mail = '$email') AND (digital_book='e-project') AND (status=3)) ORDER BY id DESC";
+                                       $select_list_ebook_four = "SELECT * FROM digitalbook_tb WHERE ((advisor = '$email') AND (digital_book='e-project') AND (status=3)) ORDER BY id DESC";
                                        $result_select_list_ebook_four = $conn ->query($select_list_ebook_four);
                                         
                                         $cnt = 1;

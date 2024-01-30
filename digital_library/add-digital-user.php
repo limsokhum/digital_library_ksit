@@ -27,14 +27,10 @@ if(isset($_POST['submit'])){
     $date = $_POST['date'];
     $teacher_mail = $_POST['teacher_mail'];
     $advisor = $_POST['advisor'];
-    
     $digital_book =$_POST['digital_book'];
     $abstract = $_POST['abstract'];
     $keyword = $_POST['keyword'];
-    
     $comment = $_POST['comment'];
-
-
     $status = 0;
     
     // start upload image one
@@ -207,9 +203,6 @@ if(isset($_POST['submit'])){
     }
 }
 ?>
-
-
-
 <?php
 $query_user_prifile="SELECT * FROM usertable WHERE email = '$email'";
 // WHERE email = '$email'
@@ -641,14 +634,6 @@ if($result_user_profile ->num_rows>0){
 
     </div>
     <!-- Ent All Section Start Content -->
-
-
-
-
-
-
-
-
     <!-- Start Bottom Footer -->
     <?php include('includes/footer.php');?>
     <!-- Start Bottom Footer -->

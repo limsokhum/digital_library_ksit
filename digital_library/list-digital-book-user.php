@@ -89,6 +89,7 @@ $result_user_profile = $conn->query($query_user_prifile);
 if($result_user_profile ->num_rows>0){
     while($row_user_profile = $result_user_profile->fetch_assoc()){
         ?>
+
 <!-- Start Modal Bootstrap 5 -->
 <div class="modal fade" id="exampleModal" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -328,6 +329,43 @@ if($result_user_profile ->num_rows>0){
                                 $desc = strtr(html_entity_decode($row['abstract']),$trans);
                                 $desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
                                 ?>
+                        <!-- Modal -->
+                        <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"
+                                            style="font-family: 'Bayon', sans-serif;">មតិយោបល់ពី</h5>
+                                        <h6 class="modal-title text-warning px-2" id="exampleModalLabel"
+                                            style="font-family: 'Noto Serif Khmer', serif;">
+                                            <?php echo $row['advisor']?>
+                                        </h6>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style=" font-family: 'Noto Serif Khmer', serif;">
+
+                                        <?php
+                                            if($row['comment']==NULL){
+                                                ?>
+                                        <p style=" font-family: 'Noto Serif Khmer', serif;">
+                                            <?php echo("មិនទាន់មានមតិយោបល !");?></p>
+                                        <?php
+                                            }
+                                         echo $row['comment']; 
+                                         ?>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                            style="font-family: 'Noto Serif Khmer', serif;">បិត</button>
+                                        <button type="button" class="btn btn-primary"
+                                            style="font-family: 'Noto Serif Khmer', serif;">ទំនាក់ទំនង</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading<?php echo $row['id']?>">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -385,14 +423,14 @@ if($result_user_profile ->num_rows>0){
                             <div id="collapse<?php echo $row['id']?>" class="accordion-collapse collapse"
                                 aria-labelledby="heading<?php echo $row['id']?>" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <p>
-                                        <?php echo $desc?>
-                                    </p>
-
+                                    <?php 
+                                    echo $desc
+                                    ?>
+                                    <a class="btn btn-info" href="#" style="font-family: 'Noto Serif Khmer', serif;"
+                                        data-bs-toggle="modal" data-bs-target="#commentModal">មើលមតិយោបល់</a>
                                     <a class="btn btn-primary"
                                         href="edit-digital-book-user.php?id=<?php echo $row['id']?>"
                                         style="font-family: 'Noto Serif Khmer', serif;">កែសម្រួល</a>
-
                                     <a class="btn btn-danger"
                                         href="list-digital-book-user.php?id=<?php echo $row['id']?>"
                                         style="font-family: 'Noto Serif Khmer', serif;">លុបឯកសារ</a>
