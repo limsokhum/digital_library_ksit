@@ -26,7 +26,6 @@ if(isset($_POST['submit'])){
     $name_auther = $_POST['name_auther']; 
     $date = $_POST['date'];
     $teacher_mail = $_POST['teacher_mail'];
-    $advisor = $_POST['advisor'];
     $digital_book =$_POST['digital_book'];
     $abstract = $_POST['abstract'];
     $keyword = $_POST['keyword'];
@@ -83,7 +82,7 @@ if(isset($_POST['submit'])){
     $size = $_FILES['myfile']['size'];
 
     if($file==NULL && $imageName_one==NULL && $imageName_two==NULL){
-        $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$status')";
+        $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,comment,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$comment','$status')";
     }
     elseif($file!=NULL && $imageName_one==NULL && $imageName_two==NULL){
             if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
@@ -95,15 +94,15 @@ if(isset($_POST['submit'])){
                 
             //-- move the uploaded (temporary) file to the specified destination --//
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filename','$size',0,0,'$status')";
+                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,comment,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$comment','$filename','$size',0,0,'$status')";
                     }
             }
         }elseif($file==NULL && $imageName_one!=NULL && $imageName_two==NULL){
-            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,image_one,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filesArray_one','$status')";
+            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,comment,image_one,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$comment','$filesArray_one','$status')";
         }elseif($file==NULL && $imageName_one==NULL && $imageName_two!=NULL){
-            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,image_two,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filesArray_two','$status')";
+            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,comment,image_two,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$comment','$filesArray_two','$status')";
         }elseif($file==NULL && $imageName_one!=NULL && $imageName_two!=NULL){
-            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,image_one,image_two,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filesArray_one','$filesArray_two','$status')";
+            $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,comment,image_one,image_two,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$comment','$filesArray_one','$filesArray_two','$status')";
             
         }elseif($file!=NULL && $imageName_one!=NULL && $imageName_two==NULL){
             if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
@@ -115,7 +114,7 @@ if(isset($_POST['submit'])){
             //-- move the uploaded (temporary) file to the specified destination --//
                 
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,image_one,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filesArray_one','$filename','$size',0,0,'$status')";
+                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,comment,image_one,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$comment','$filesArray_one','$filename','$size',0,0,'$status')";
                     }
             }
         }elseif($file!=NULL && $imageName_one==NULL && $imageName_two!=NULL){
@@ -129,7 +128,7 @@ if(isset($_POST['submit'])){
             //-- move the uploaded (temporary) file to the specified destination --//
                 
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,image_two,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filesArray_two','$filename','$size',0,0,'$status')";
+                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,comment,image_two,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$comment','$filesArray_two','$filename','$size',0,0,'$status')";
                     }
             }
         }else{
@@ -143,7 +142,7 @@ if(isset($_POST['submit'])){
             //-- move the uploaded (temporary) file to the specified destination --//
                 
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,advisor,digital_book,keyword,abstract,comment,image_one,image_two,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$advisor','$digital_book','$keyword','$abstract','$comment','$filesArray_one','$filesArray_two','$filename','$size',0,0,'$status')";
+                    $sql = "INSERT INTO digitalbook_tb (title,name_auther,date,teacher_mail,digital_book,keyword,abstract,comment,image_one,image_two,name,size,downloads,view,status) VALUES('$title','$name_auther','$date','$teacher_mail','$digital_book','$keyword','$abstract','$comment','$filesArray_one','$filesArray_two','$filename','$size',0,0,'$status')";
 
                     }
             }
@@ -187,10 +186,10 @@ if(isset($_POST['submit'])){
     
     $status = "verified";
     
-    if($password==NULL && $cpassword==NULL && $filesArray==NULL && $advisor=NULL){
+    if($password==NULL && $cpassword==NULL && $filesArray==NULL){
         $update_pass = "UPDATE usertable SET name ='$name', email='$email',code='$code',status='$status' WHERE email = '$email'";
-    }elseif($password==NULL && $cpassword==NULL && $filesArray==NULL && $advisor!=NULL){
-        $update_pass = "UPDATE usertable SET name ='$name', email='$email', advisor='$advisor', code='$code',status='$status' WHERE email = '$email'";
+    }elseif($password==NULL && $cpassword==NULL && $filesArray==NULL){
+        $update_pass = "UPDATE usertable SET name ='$name', email='$email', code='$code',status='$status' WHERE email = '$email'";
     }elseif($password==NULL && $cpassword==NULL && $filesArray!==NULL){
         $update_pass = "UPDATE usertable SET name ='$name', email='$email',image='$filesArray',code='$code',status='$status' WHERE email = '$email'";
     }else{
@@ -273,39 +272,8 @@ if($result_user_profile ->num_rows>0){
                             <input type="password" name="cpassword" class="form-control form-control">
                         </div>
                     </div>
-                    <div class="form-group my-2">
-                        <label class="label-control" for=""
-                            style="font-family:'Koulen', sans-serif;">តើអ្នកចង់ប្ដូគ្រូជំនួយការឬ ?
 
-                        </label>
-                        <div class="form-check d-flex">
-                            <input onclick="onclickShowAdvisor()" class="form-check-input" type="radio" name=""
-                                value="">
-                            <label class="form-check-label mx-1" style="font-family:Khmer OS System;"> ប្ដូគ្រូជំនួយការ
-                            </label>
-                        </div>
-                    </div>
-                    <div id="advisor" class="hidden-advisor">
-                        <div class="form-group">
-                            <select name="advisor" class="form-control" style="font-family: 'Noto Serif Khmer', serif;">
-                                <option selected>ជ្រើសរើសគ្រូជំនួយការ</option>
-                                <?php
-                                                $advisor_tb = "SELECT * FROM teacher_tb WHERE select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់'";
-                                                $result_advisor = $conn -> query($advisor_tb);
-                                                if($result_advisor->num_rows > 0){
-                                                    while($row = $result_advisor -> fetch_assoc()){
-                                                        ?>
-                                <option class="text primary form-control" value="<?php echo ($row['teacher_mail'])?>">
-                                    <?php echo $row['firstname']. $row['lastname']?>
-                                </option>
-                                <?php
-                                                }
-                                                }
-                                                ?>
-                            </select>
-                        </div>
 
-                    </div>
                     <div class="row mb-3">
                         <div class="col-sm-12">
                             <label class="label-control my-1" for="" style="font-family:'Koulen', sans-serif;">រូប
@@ -498,8 +466,7 @@ if($result_user_profile ->num_rows>0){
 
                                     <input type="hidden" name="teacher_mail" class="form-control form-control" id=""
                                         value="<?php echo $row_user_add_digital['email']?>">
-                                    <input type="hidden" name="advisor" class="text-input form-control"
-                                        value="<?php echo $row_user_add_digital['advisor']?>" id="">
+
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="label-control my-1" for=""
@@ -612,25 +579,7 @@ if($result_user_profile ->num_rows>0){
         </div>
         <!-- End Type Research -->
 
-        <!-- Start Modal Bootstrap 5 -->
-        <div class="modal fade" id="exampleModal" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Ent Modal Bootstrap 5 -->
+
 
     </div>
     <!-- Ent All Section Start Content -->
@@ -700,15 +649,7 @@ if($result_user_profile ->num_rows>0){
         document.getElementById('passwords').style.display = "none";
     }
     </script>
-    <script>
-    function onclickShowAdvisor() {
-        document.getElementById('advisor').style.display = "block";
-    }
 
-    function onclickRemove() {
-        document.getElementById('advisor').style.display = "none";
-    }
-    </script>
     <!-- Script Js Default Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js">
     </script>

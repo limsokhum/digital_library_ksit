@@ -9,7 +9,6 @@ if($email != false && $password != false){
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
         $status = $fetch_info['status']; 
-        $advisor = $fetch_info['advisor'];
         $code = $fetch_info['code'];
         if($status == "verified"){
             if($code != 0){
@@ -55,7 +54,6 @@ if(isset($_GET['id'])){
  if(isset($_POST['edit_profile'])){
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $advisor = mysqli_real_escape_string($conn, $_POST['advisor']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
     
@@ -81,10 +79,10 @@ if(isset($_GET['id'])){
     
     $status = "verified";
     
-    if($password==NULL && $cpassword==NULL && $filesArray==NULL && $advisor=NULL){
+    if($password==NULL && $cpassword==NULL && $filesArray==NULL){
         $update_pass = "UPDATE usertable SET name ='$name', email='$email',code='$code',status='$status' WHERE email = '$email'";
-    }elseif($password==NULL && $cpassword==NULL && $filesArray==NULL && $advisor!=NULL){
-        $update_pass = "UPDATE usertable SET name ='$name', email='$email', advisor='$advisor', code='$code',status='$status' WHERE email = '$email'";
+    }elseif($password==NULL && $cpassword==NULL && $filesArray==NULL){
+        $update_pass = "UPDATE usertable SET name ='$name', email='$email', code='$code',status='$status' WHERE email = '$email'";
     }elseif($password==NULL && $cpassword==NULL && $filesArray!==NULL){
         $update_pass = "UPDATE usertable SET name ='$name', email='$email',image='$filesArray',code='$code',status='$status' WHERE email = '$email'";
     }else{
@@ -596,15 +594,7 @@ if($result_user_profile ->num_rows>0){
         document.getElementById('passwords').style.display = "none";
     }
     </script>
-    <script>
-    function onclickShowAdvisor() {
-        document.getElementById('advisor').style.display = "block";
-    }
 
-    function onclickRemove() {
-        document.getElementById('advisor').style.display = "none";
-    }
-    </script>
     <!-- Script Js Default Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js">
     </script>

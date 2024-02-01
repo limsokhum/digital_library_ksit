@@ -9,7 +9,6 @@ $errors = array();
 if(isset($_POST['signup'])){
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $advisor = mysqli_real_escape_string($conn, $_POST['advisor']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
     if($password !== $cpassword){
@@ -24,8 +23,8 @@ if(isset($_POST['signup'])){
         $encpass = password_hash($password, PASSWORD_BCRYPT);
         $code = rand(999999, 111111);
         $status = "notverified";
-        $insert_data = "INSERT INTO usertable (name, email, advisor, password, code, status)
-                        values('$name', '$email', '$advisor', '$encpass', '$code', '$status')";
+        $insert_data = "INSERT INTO usertable (name, email, password, code, status)
+                        values('$name', '$email', '$encpass', '$code', '$status')";
         $data_check = mysqli_query($conn, $insert_data);
         if($data_check){
             $subject = "លេខកូដផ្ទៀងផ្ទាត់អ៊ីមែល";

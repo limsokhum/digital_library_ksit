@@ -29,7 +29,6 @@ if(isset($_GET['id'])){
         $name_auther = $_POST['name_auther']; 
         $date = $_POST['date'];
         $teacher_mail = $_POST['teacher_mail'];
-        $advisor = $_POST['advisor'];
         
         $digital_book =$_POST['digital_book'];
         $abstract = $_POST['abstract'];
@@ -88,7 +87,7 @@ if(isset($_GET['id'])){
         $size = $_FILES['myfile']['size'];
 
         if($file==NULL && $imageName_one==NULL && $imageName_two==NULL){
-            $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',advisor='$advisor',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',status='$status' WHERE id = $query_edit_digital_book_id";
+            $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',status='$status' WHERE id = $query_edit_digital_book_id";
         }
         elseif($file!=NULL && $imageName_one==NULL && $imageName_two==NULL){
                 if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
@@ -100,16 +99,16 @@ if(isset($_GET['id'])){
                     
                 //-- move the uploaded (temporary) file to the specified destination --//
                     if (move_uploaded_file($file, $destination)) {
-                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',advisor='$advisor',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',name='$filename',size='$size',downloads=0,view=0,status='$status' WHERE id = $query_edit_digital_book_id";
+                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',name='$filename',size='$size',downloads=0,view=0,status='$status' WHERE id = $query_edit_digital_book_id";
                         }
                 }
             }elseif($file==NULL && $imageName_one!=NULL && $imageName_two==NULL){
-                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',advisor='$advisor',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',image_one='$filesArray_one',status='$status' WHERE id = $query_edit_digital_book_id";
+                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',image_one='$filesArray_one',status='$status' WHERE id = $query_edit_digital_book_id";
             }elseif($file==NULL && $imageName_one==NULL && $imageName_two!=NULL){
-                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',advisor='$advisor',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',image_two='$filesArray_two',status='$status' WHERE id = $query_edit_digital_book_id";
+                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',image_two='$filesArray_two',status='$status' WHERE id = $query_edit_digital_book_id";
                 
             }elseif($file==NULL && $imageName_one!=NULL && $imageName_two!=NULL){
-                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',advisor='$advisor',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment'$comment',image_one='$filesArray_one',image_two='$filesArray_two',status='$status' WHERE id = $query_edit_digital_book_id";
+                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment'$comment',image_one='$filesArray_one',image_two='$filesArray_two',status='$status' WHERE id = $query_edit_digital_book_id";
                 
             }elseif($file!=NULL && $imageName_one!=NULL && $imageName_two==NULL){
                 if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
@@ -122,7 +121,7 @@ if(isset($_GET['id'])){
                     
                     if (move_uploaded_file($file, $destination)) {
                         
-                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',advisor='$advisor',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',image_one='$filesArray_one',name='$filename',size='$size',downloads=0,view=0,status='$status' WHERE id = $query_edit_digital_book_id";
+                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',image_one='$filesArray_one',name='$filename',size='$size',downloads=0,view=0,status='$status' WHERE id = $query_edit_digital_book_id";
                         }
                 }
             }elseif($file!=NULL && $imageName_one==NULL && $imageName_two!=NULL){
@@ -136,7 +135,7 @@ if(isset($_GET['id'])){
                 //-- move the uploaded (temporary) file to the specified destination --//
                     
                     if (move_uploaded_file($file, $destination)) {
-                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',advisor='$advisor',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',image_two='$filesArray_two',name='$filename',size='$size',downloads=0,view=0,status='$status' WHERE id = $query_edit_digital_book_id";
+                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',image_two='$filesArray_two',name='$filename',size='$size',downloads=0,view=0,status='$status' WHERE id = $query_edit_digital_book_id";
 
                         }
                 }
@@ -151,7 +150,7 @@ if(isset($_GET['id'])){
                 //-- move the uploaded (temporary) file to the specified destination --//
                     
                     if (move_uploaded_file($file, $destination)) {
-                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',advisor='$advisor',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',image_one='$filesArray_one',image_two='$filesArray_two',name='$filename',size='$size',downloads=0,view=0,status='$status' WHERE id = $query_edit_digital_book_id";
+                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',teacher_mail='$teacher_mail',digital_book='$digital_book',keyword='$keyword',abstract='$abstract',comment='$comment',image_one='$filesArray_one',image_two='$filesArray_two',name='$filename',size='$size',downloads=0,view=0,status='$status' WHERE id = $query_edit_digital_book_id";
                         }
                 }
             }
@@ -170,7 +169,6 @@ if(isset($_GET['id'])){
  if(isset($_POST['edit_profile'])){
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $advisor = mysqli_real_escape_string($conn, $_POST['advisor']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
     
@@ -284,39 +282,6 @@ if($result_user_profile ->num_rows>0){
                             </label>
                             <input type="password" name="cpassword" class="form-control form-control">
                         </div>
-                    </div>
-                    <div class="form-group my-2">
-                        <label class="label-control" for=""
-                            style="font-family:'Koulen', sans-serif;">តើអ្នកចង់ប្ដូគ្រូជំនួយការឬ ?
-
-                        </label>
-                        <div class="form-check d-flex">
-                            <input onclick="onclickShowAdvisor()" class="form-check-input" type="radio" name=""
-                                value="">
-                            <label class="form-check-label mx-1" style="font-family:Khmer OS System;"> ប្ដូគ្រូជំនួយការ
-                            </label>
-                        </div>
-                    </div>
-                    <div id="advisor" class="hidden-advisor">
-                        <div class="form-group">
-                            <select name="advisor" class="form-control" style="font-family: 'Noto Serif Khmer', serif;">
-                                <option selected>ជ្រើសរើសគ្រូជំនួយការ</option>
-                                <?php
-                                                $advisor_tb = "SELECT * FROM teacher_tb WHERE select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់'";
-                                                $result_advisor = $conn -> query($advisor_tb);
-                                                if($result_advisor->num_rows > 0){
-                                                    while($row = $result_advisor -> fetch_assoc()){
-                                                        ?>
-                                <option class="text primary form-control" value="<?php echo ($row['teacher_mail'])?>">
-                                    <?php echo $row['firstname']. $row['lastname']?>
-                                </option>
-                                <?php
-                                                }
-                                                }
-                                                ?>
-                            </select>
-                        </div>
-
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-12">
@@ -534,8 +499,6 @@ if(isset($_GET['id'])){
 
                                     <input type="hidden" name="teacher_mail" class="form-control form-control" id=""
                                         value="<?php echo $row_user_add_digital['email']?>">
-                                    <input type="hidden" name="advisor" class="form-control form-control" id=""
-                                        value="<?php echo $row_user_add_digital['advisor']?>">
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="label-control my-1" for=""
@@ -717,15 +680,7 @@ if(isset($_GET['id'])){
         document.documentElement.scrollTop = 0;
     }
     </script>
-    <script>
-    function onclickShowAdvisor() {
-        document.getElementById('advisor').style.display = "block";
-    }
 
-    function onclickRemove() {
-        document.getElementById('advisor').style.display = "none";
-    }
-    </script>
     <!-- Script Js Default Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js">
     </script>
