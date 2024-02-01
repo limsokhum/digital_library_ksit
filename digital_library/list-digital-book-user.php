@@ -9,6 +9,7 @@ if($email != false && $password != false){
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
         $status = $fetch_info['status']; 
+        $advisor = $fetch_info['advisor'];
         $code = $fetch_info['code'];
         if($status == "verified"){
             if($code != 0){
@@ -21,6 +22,23 @@ if($email != false && $password != false){
 }else{
     header('Location: index.php');
 }
+
+if(isset($_POST['send-email'])){
+    
+    $subject = $_POST['desc-email'];
+    $email_subject = "$advisor .$subject";
+    $user_sender = "From: $email" ;
+
+    if(mail($advisor,$subject,$email_subject,$user_sender)){
+        $_SESSION['statuse'] = "<Type Your success message here>";
+    ?>
+
+
+<?php
+    }else{
+    echo("Don't Send");
+    }
+    }
 
 if(isset($_GET['id'])){
     $delete_digital_book = $_GET['id'];
@@ -266,6 +284,14 @@ if($result_user_profile ->num_rows>0){
     <!-- Custom Search Button Function -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
     <title>List Digital Book For Users</title>
 </head>
 
@@ -285,6 +311,18 @@ if($result_user_profile ->num_rows>0){
     <div class="container">
 
         <?php
+        if(isset($_SESSION['statuse']))
+        {
+            ?>
+        <div class="alert alert-primary alert-dismissible fade show mt-3" role="alert"
+            style="font-family: 'Noto Serif Khmer', serif;">
+            <strong>អ្នកបានផ្ញើរអ៊ីម៉ែលទៅបានដោយជោគជ័យ!</strong> អ្នកផ្ញើរទៅ<span
+                class="text-warning"><?php echo $advisor?></span>.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php 
+            unset($_SESSION['status']);
+        }
                                      if(isset($_SESSION['status']))
                                      {
                                          ?>
@@ -328,8 +366,8 @@ if($result_user_profile ->num_rows>0){
                                 unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
                                 $desc = strtr(html_entity_decode($row['abstract']),$trans);
                                 $desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
-                                ?>
-                        <!-- Modal -->
+                        ?>
+                        <!-- Start Modal Comment -->
                         <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
@@ -360,12 +398,55 @@ if($result_user_profile ->num_rows>0){
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
                                             style="font-family: 'Noto Serif Khmer', serif;">បិត</button>
-                                        <button type="button" class="btn btn-primary"
-                                            style="font-family: 'Noto Serif Khmer', serif;">ទំនាក់ទំនង</button>
+                                        <a href="#" class="btn btn-primary"
+                                            style="font-family: 'Noto Serif Khmer', serif;" data-bs-toggle="modal"
+                                            data-bs-target="#emailModal">ទំនាក់ទំនង</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Ent Modal Comment -->
+
+                        <!-- Start Contact Email -->
+                        <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"
+                                            style="font-family: 'Bayon', sans-serif;">ទំនាក់ទនទៅកាន់
+                                            Email
+                                        </h5>
+                                        <h6 class="modal-title text-warning px-2" id="exampleModalLabel"
+                                            style="font-family: 'Noto Serif Khmer', serif;">
+                                            <?php echo $row['advisor']?>
+                                        </h6>
+                                        <h5 class="modal-title" id="exampleModalLabel"
+                                            style="font-family: 'Bayon', sans-serif;">គ្រូជំនួយការ</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <form action="" method="post">
+                                        <div class="modal-body" style=" font-family: 'Noto Serif Khmer', serif;">
+                                            <textarea name="desc-email" id="summernote" cols="30" rows="10"
+                                                class="summernote text-input form-control">
+                                        </textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                                style="font-family: 'Noto Serif Khmer', serif;">បិត</button>
+                                            <button type="submit" name="send-email" class="btn btn-primary"
+                                                style="font-family: 'Noto Serif Khmer', serif;">
+                                                ផ្ញើរ <i class="fa-solid fa-paper-plane"></i></button>
+
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ent Contact Email -->
+
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading<?php echo $row['id']?>">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -459,13 +540,6 @@ if($result_user_profile ->num_rows>0){
     </div>
     <!-- Ent All Section Start Content -->
 
-
-
-
-
-
-
-
     <!-- Start Bottom Footer -->
     <?php include('includes/footer.php');?>
     <!-- Start Bottom Footer -->
@@ -497,7 +571,22 @@ if($result_user_profile ->num_rows>0){
         document.documentElement.scrollTop = 0;
     }
     </script>
-
+    <script>
+    $('#summernote').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+    </script>
     <script>
     function onclickShow() {
         document.getElementById('passwords').style.display = "block";
