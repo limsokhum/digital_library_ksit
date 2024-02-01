@@ -251,8 +251,6 @@ if($result_user_profile ->num_rows>0){
 ?>
 
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -373,10 +371,10 @@ if($result_user_profile ->num_rows>0){
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel"
                                             style="font-family: 'Bayon', sans-serif;">មតិយោបល់ពី</h5>
-                                        <h6 class="modal-title text-warning px-2" id="exampleModalLabel"
+                                        <!-- <h6 class="modal-title text-warning px-2" id="exampleModalLabel"
                                             style="font-family: 'Noto Serif Khmer', serif;">
-                                            <?php echo $row['advisor']?>
-                                        </h6>
+                                            <?php //echo $row['advisor']?>
+                                        </h6> -->
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -415,12 +413,12 @@ if($result_user_profile ->num_rows>0){
                                             style="font-family: 'Bayon', sans-serif;">ទំនាក់ទនទៅកាន់
                                             Email
                                         </h5>
-                                        <h6 class="modal-title text-warning px-2" id="exampleModalLabel"
+                                        <!-- <h6 class="modal-title text-warning px-2" id="exampleModalLabel"
                                             style="font-family: 'Noto Serif Khmer', serif;">
-                                            <?php echo $row['advisor']?>
-                                        </h6>
-                                        <h5 class="modal-title" id="exampleModalLabel"
-                                            style="font-family: 'Bayon', sans-serif;">គ្រូជំនួយការ</h5>
+                                            <?php //echo $row['advisor']?>
+                                        </h6> -->
+                                        <!-- <h5 class="modal-title" id="exampleModalLabel"
+                                            style="font-family: 'Bayon', sans-serif;">គ្រូជំនួយការ</h5> -->
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
