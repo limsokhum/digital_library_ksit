@@ -449,7 +449,7 @@ if($result_user_profile ->num_rows>0){
     </div>
     <!-- Ent All Section Start Content -->
     <!-- Start Bottom Footer -->
-    <?php include('includes/footer.php');?>
+    <?php include('includes/user-topbar.php');?>
 
     <!-- Start Bottom Footer -->
     <!-- Start Bottom Footer Copyright -->
