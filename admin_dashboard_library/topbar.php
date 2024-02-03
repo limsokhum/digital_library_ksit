@@ -1,4 +1,26 @@
-<?php include('../config/conn_db.php');?>
+<?php
+require_once "ControlAdmin.php";
+$email = $_SESSION['email'];
+$password = $_SESSION['password'];
+if($email != false && $password != false){
+    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $run_Sql = mysqli_query($conn, $sql);
+    if($run_Sql){
+        $fetch_info = mysqli_fetch_assoc($run_Sql);
+        $status = $fetch_info['status']; 
+        $code = $fetch_info['code'];
+        if($status == "verified"){
+            if($code != 0){
+                header('Location: reset-code.php');
+            }
+        }else{
+            header('Location: admin-otp.php');
+        }
+    }
+}else{
+    header('Location: login.php');
+}
+?>
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
     <!-- Sidebar Toggle (Topbar) -->
@@ -147,7 +169,7 @@
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <?php
-            $select_admin = "SELECT * FROM admintable";
+            $select_admin = "SELECT * FROM admintable WHERE email='$email'";
             $select_query = $conn->query($select_admin);
             if($select_query->num_rows>0){
                 while($row_select_admin = $select_query->fetch_assoc()){

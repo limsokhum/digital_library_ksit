@@ -57,7 +57,7 @@ if($email != false && $password != false){
                 $edit_code = 0;
                 $edit_encpass = password_hash($edit_password, PASSWORD_BCRYPT);
                 $edit_status = "verified";
-                $edit_update_pass = "UPDATE admintable SET name = '$edit_name', email='$edit_email', password = '$edit_encpass', code='$edit_code', image='$filesArray', status='$edit_status' WHERE id = $edit_profile_admin";
+                $edit_update_pass = "UPDATE admintable SET name = '$edit_name', email='$edit_email', password = '$edit_encpass', code='$edit_code', image='$filesArray', status='$edit_status'  WHERE (email='$email' && id = $edit_profile_admin) ";
                 $edit_run_query = mysqli_query($conn, $edit_update_pass);
                 if($edit_run_query){
                     echo
@@ -143,7 +143,7 @@ if($email != false && $password != false){
                             <div class="p-5">
                                 <form action="" method="post" enctype="multipart/form-data">
                                     <?php
-                                    $select_query_profile_admin = "SELECT * FROM admintable";
+                                    $select_query_profile_admin = "SELECT * FROM admintable WHERE email='$email'";
                                     $result_select_query_profile_admin = $conn->query($select_query_profile_admin);
                                     if($result_select_query_profile_admin->num_rows>0){
                                         while($row_query_profile= $result_select_query_profile_admin->fetch_assoc()){

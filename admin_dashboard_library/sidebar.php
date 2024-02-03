@@ -55,6 +55,8 @@
              data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
                  <h6 class="collapse-header">Control People</h6>
+                 <a class="collapse-item" href="list_admin.php"><i class="fa-solid fa-minus mx-2"
+                         style="color: grey; font-size: 0.5rem;"></i>Admin</a>
                  <a class="collapse-item" href="list-representative.php"><i class="fa-solid fa-minus mx-2"
                          style="color: grey; font-size: 0.5rem;"></i>List Representative</a>
                  <a class="collapse-item" href="list-teacher.php"><i class="fa-solid fa-minus mx-2"

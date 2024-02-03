@@ -9,6 +9,7 @@ $errors = array();
 if(isset($_POST['signup'])){
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $sex = mysqli_real_escape_string($conn, $_POST['sex']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
     $totalFiles = count($_FILES['fileImg']['name']);
@@ -40,8 +41,8 @@ if(isset($_POST['signup'])){
         $encpass = password_hash($password, PASSWORD_BCRYPT);
         $code = rand(999999, 111111);
         $status = "notverified";
-        $insert_data = "INSERT INTO admintable (name, email, password, code, image, status)
-                        values('$name', '$email', '$encpass', '$code', '$filesArray', '$status')";
+        $insert_data = "INSERT INTO admintable (name, email, sex, password, code, image, status)
+                        values('$name', '$email', '$sex', '$encpass', '$code', '$filesArray', '$status')";
         $data_check = mysqli_query($conn, $insert_data);
         if($data_check){
             $subject = "Email Verification Code";
@@ -52,7 +53,7 @@ if(isset($_POST['signup'])){
                 $_SESSION['info'] = $info;
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
-                header('location: admin-otp.php');
+                header('location: admin_otp.php');
                 exit();
             }else{
                 $errors['otp-error'] = "Failed while sending code!";

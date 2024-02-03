@@ -43,7 +43,7 @@ if(isset($_POST["submit"])){
         mysqli_query($conn, $query); 
         
         $_SESSION['status'] = "<Type Your success message here>";
-        } ?>
+        } 
 ?>
 <!DOCTYPE html>
 <html lang="en">

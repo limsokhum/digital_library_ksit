@@ -162,7 +162,7 @@ require_once "ControlTeacher.php";
                                                 </label>
                                                 <div class="form-check d-flex">
                                                     <input class="form-check-input" type="radio" name="sex"
-                                                        value="ប្រុស">
+                                                        value="ប្រុស" checked="checked">
                                                     <label class="form-check-label"
                                                         style="font-family:Khmer OS System;">ប្រុស
                                                     </label>,
@@ -279,7 +279,7 @@ require_once "ControlTeacher.php";
                                                             <spatn class="text-danger">:*
                                                             </spatn>
                                                         </label>
-                                                        <input type="text" name="teacher_password"
+                                                        <input type="password" name="teacher_password"
                                                             class="form-control form-control" autocomplete="off">
                                                     </div>
                                                     <div class="col-sm-6">
@@ -288,7 +288,7 @@ require_once "ControlTeacher.php";
                                                             <spatn class="text-danger">:*
                                                             </spatn>
                                                         </label>
-                                                        <input type="text" name="teacher_cpassword"
+                                                        <input type="password" name="teacher_cpassword"
                                                             class="form-control form-control" autocomplete="off">
                                                     </div>
                                                 </div>
