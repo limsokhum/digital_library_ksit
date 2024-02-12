@@ -222,7 +222,7 @@ if($result_user_profile ->num_rows>0){
     <title>Home Page</title>
 </head>
 
-<body style="background-color: #dedede; widht:100%;">
+<body style="background-color: #dedede;">
     <!-- Scroll to Top -->
     <div onclick="topFunction()" id="myBtn"><i class="fa-solid fa-circle-chevron-up"
             style="color: orange; font-size: 1.4rem;"></i></div>
@@ -256,9 +256,7 @@ if($result_user_profile ->num_rows>0){
                                 និងពាក្យគន្លឹះបាន។</dd>
                             <dd>- អាចទាញយកឯកសារ។</dd>
                         </dl>
-                        <a class="btn btn-success" href="list-digital-book-user.php"
-                            style="color: #fff; font-family: 'Bayon', sans-serif; background-color: #336666;">ឯកសារស្រាវជ្រាវ
-                        </a>
+
                         <div class="col-sm-12">
                             <div class="containct-contact-us float-end">
                                 <div class="contanct-title">
@@ -280,54 +278,6 @@ if($result_user_profile ->num_rows>0){
             </div>
         </div>
         <!-- End slide Show -->
-        <!-- Start Type Research -->
-        <!-- <div class="card mt-2" style="width: 100%;">
-            <div class="card-body">
-                <h4 class="type-research-title py-4">អាចធ្វើការស្វែងរកឯកសារឌីជីថលដូចជា៖ e-Book, e-Project, e-Journal
-                </h4>
-                <div class="card-type-research mt-3">
-                    <a href="ebook_page.php" style="text-decoration: none; color: black;">
-                        <div class="card-types-research">
-                            <div class="icon-type-research text-center">
-                                <i class="fa-solid fa-book my-3" style="font-size: 4.5rem; color: #336666;"></i>
-                            </div>
-                            <div class="contanct-type-research text-center">
-                                <h5 class="text-warning">E-Book</h5>
-                                <p>Read and Download</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="eproject.php" style="text-decoration: none; color: black;">
-                        <div class="card-types-research">
-                            <div class="icon-type-research text-center">
-                                <i class="fa-solid fa-book-tanakh my-3" style="font-size: 4.5rem; color: #336666;"></i>
-                            </div>
-                            <div class="contanct-type-research text-center">
-                                <h5 class="text-warning">E-Project</h5>
-                                <p>Read and Download</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="ejournal_page.php" style="text-decoration: none; color: black;">
-                        <div class="card-types-research">
-                            <div class="icon-type-research text-center">
-                                <i class="fa-solid fa-book-journal-whills my-3"
-                                    style="font-size: 4.5rem; color: #336666;"></i>
-                            </div>
-                            <div class="contanct-type-research text-center">
-                                <h5 class="text-warning">E-Journal</h5>
-                                <p>Read and Download</p>
-                            </div>
-                        </div>
-                    </a>
-
-                </div>
-            </div>
-        </div> -->
-        <!-- End Type Research -->
-
         <!-- Start Filter Metadata -->
         <div class="card mt-2" style="width: 100%;">
             <div class="card-body">
@@ -336,7 +286,7 @@ if($result_user_profile ->num_rows>0){
                 </h4>
                 <div class="content-reshearch">
                     <div class="form-reshearch mt-3">
-                        <form action="" method="post">
+                        <form action="filter-user-data.php" method="GET">
                             <div class="form-group">
                                 <input class="form-control research-input" type="text" name="title"
                                     value="<?php if(isset($_GET['title'])){echo $_GET['title']; }else{echo "";} ?>"
@@ -356,14 +306,14 @@ if($result_user_profile ->num_rows>0){
                                             <select class="form-select research-input" name="digital_book"
                                                 aria-label="Default select example">
                                                 <option selected>ប្រភេទអត្ថបទ</option>
-                                                <option
-                                                    value="<?php if(isset($_GET['digital_book'])){echo $_GET['e-book']; }else{echo "";} ?>">
+                                                <option value="e-book"
+                                                    <?= isset($_GET['digital_book']) == true ? $_GET['digital_book'] == 'e-book':'' ?>>
                                                     e-Book</option>
-                                                <option
-                                                    value="<?php if(isset($_GET['digital_book'])){echo $_GET['e-project']; }else{echo "";} ?>">
+                                                <option value="e-project"
+                                                    <?= isset($_GET['digital_book']) == true ? $_GET['digital_book'] == 'e-project':'' ?>>
                                                     e-Project</option>
-                                                <option
-                                                    value="<?php if(isset($_GET['digital_book'])){echo $_GET['e-journal']; }else{echo "";} ?>">
+                                                <option value="e-journal"
+                                                    <?= isset($_GET['digital_book']) == true ? $_GET['digital_book'] == 'e-journal':'' ?>>
                                                     e-Journal</option>
                                             </select>
                                         </div>
@@ -371,8 +321,8 @@ if($result_user_profile ->num_rows>0){
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <input class="form-control research-input" type="date" name="date"
-                                            value="<?php if(isset($_GET['date'])){echo $_GET['date']; }else{echo "";} ?>"
+                                        <input class="form-control research-input" type="date" name="creationdate"
+                                            value="<?php if(isset($_GET['creationdate'])){echo $_GET['creationdate']; }else{echo "";} ?>"
                                             id="">
                                     </div>
                                 </div>
@@ -380,8 +330,8 @@ if($result_user_profile ->num_rows>0){
                             <div class="row mt-2">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input class="form-control research-input" type="text" name="abstract" id=""
-                                            value="<?php if(isset($_GET['abstract'])){echo $_GET['abstract']; }else{echo "";} ?>"
+                                        <input class="form-control research-input" type="text" name="keyword" id=""
+                                            value="<?php if(isset($_GET['keyword'])){echo $_GET['keyword']; }else{echo "";} ?>"
                                             placeholder="ពាក្យគន្លឹះ...">
                                     </div>
                                 </div>
@@ -417,64 +367,7 @@ if($result_user_profile ->num_rows>0){
 
                             <?php
 
-if(isset($_GET['title']) && isset($_GET['name_auther']) && isset($_GET['digital_book']) && isset($_GET['date']) || isset($_GET['abstract']))
-{
-    $title = $_GET['title'];
-    $name_auther = $_GET['name_auther'];
-    $digital_book = $_GET['digital_book'];
-    $date = $_GET['date'];
-    $abstract = $_GET['abstract'];
 
-    $query = "SELECT * FROM digitalbook_tb WHERE (title=$title AND name_auther=$name_auther AND digital_book=$digital_book AND date=$date)";
-    $query_run = mysqli_query($conn, $query);
-    // $query_run = $conn->query($query);
-
-    if(mysqli_num_rows($query_run) > 0){
-    foreach($query_run as $items){ ?>
-                            <div class="card-body news-announcements">
-                                <div class="img-news">
-                                    <?php
-                    foreach (json_decode($items["image_one"]) as $image) : ?>
-                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
-                                    <?php endforeach; ?>
-                                </div>
-                                <div class="detail-news">
-                                    <h6 class="research-title"><span class="defult-title">ប្រធានបទ </span> ៖
-                                        ​<?php echo $row['title']?></h6>
-
-                                    <small class="research-title"><span class="defult-title">អ្នកស្រាវជ្រាវ </span>
-                                        ៖
-                                        <?php echo $row['name_auther']?> <span class="defult-title">, ប្រភេទសៀវភៅ
-                                        </span> ៖
-                                        <?php echo $row['digital_book']?> <span class="defult-title">, បោះពុម្ភ
-                                        </span> ៖
-                                        <?php echo $row['date']?>
-                                    </small>
-
-                                    <p class="research-text"><?php
-                    
-                    $content=$items['abstract'];
-                    $string= strip_tags($content);
-                    if(strlen($string) >500):   
-                    $stringCut= substr($string,0,500);
-                    $endPoint=strrpos($stringCut,' ');
-                    $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
-                    $string .= '...<a class="text-danger fw-bolder" href="user-digital-page.php?id=' . $row['id'] . '">អានបន្ថែម</a>';
-                    endif;
-                    echo $string;
-                    
-                    ?></p>
-                                </div>
-                            </div>
-
-                            <?php
-        
-    }
-    }
-    else{
-    echo "No Record Found";
-    }
-}else{
     if (isset($_GET['page_no']) && $_GET['page_no']!="") {
         $page_no = $_GET['page_no'];
         } else {
@@ -526,7 +419,7 @@ if(isset($_GET['title']) && isset($_GET['name_auther']) && isset($_GET['digital_
                     $stringCut= substr($string,0,500);
                     $endPoint=strrpos($stringCut,' ');
                     $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
-                    $string .= '...<a class="text-danger fw-bolder" href="user-digital-page.php?id=' . $row['id'] . '">អានបន្ថែម</a>';
+                    $string .= '...<a class="text-danger fw-bolder" href="digital-page.php?id=' . $row['id'] . '">អានបន្ថែម</a>';
                                         endif;
                                         echo $string;
                                         ?></p>
@@ -539,10 +432,6 @@ if(isset($_GET['title']) && isset($_GET['name_auther']) && isset($_GET['digital_
                         }
                         mysqli_close($conn);
                     
-                    
-                            }
-
-                            
                             ?>
 
 
@@ -637,10 +526,6 @@ if(isset($_GET['title']) && isset($_GET['name_auther']) && isset($_GET['digital_
         <!-- Ent Content Computer -->
 
 
-
-
-    </div>
-
     </div>
     <!-- Ent All Section Start Content -->
 
@@ -680,17 +565,6 @@ if(isset($_GET['title']) && isset($_GET['name_auther']) && isset($_GET['digital_
     function topFunction() {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
-    }
-    </script>
-
-
-    <script>
-    function onclickShow() {
-        document.getElementById('passwords').style.display = "block";
-    }
-
-    function onclickRemove() {
-        document.getElementById('passwords').style.display = "none";
     }
     </script>
 

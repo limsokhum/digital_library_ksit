@@ -1,6 +1,6 @@
 <?php
 
-include('../config/conn_db.php');
+require_once "ControlAdmin.php";
 if(isset($_GET['id'])){
 if(isset($_POST["submit"])){
 $select_department_id = $_GET['id'];
@@ -10,19 +10,24 @@ $department_detials = $_POST['department_detials'];
 $status = 1;
 $totalFiles = count($_FILES['fileImg']['name']);
 $filesArray = array();
-
-for($i = 0; $i < $totalFiles; $i++){ $imageName=$_FILES["fileImg"]["name"][$i];
-    $tmpName=$_FILES["fileImg"]["tmp_name"][$i]; $imageExtension=explode('.', $imageName);
-    $imageExtension=strtolower(end($imageExtension)); $newImageName=uniqid() . '.' . $imageExtension;
-    move_uploaded_file($tmpName, 'uploads/' . $newImageName); $filesArray[]=$newImageName; }
-    $filesArray=json_encode($filesArray);
-    $query="UPDATE department_tb SET department_code='$department_code',	department_title='$department_detials',	department_detials='$department_detials', image='$filesArray',	status=1 WHERE id=$select_department_id"
-    ; mysqli_query($conn, $query); echo "
+if($filesArray == NULL){
+    $query="UPDATE department_tb SET department_code='$department_code',	department_title='$department_title',	department_detials='$department_detials',	status=1 WHERE id='$select_department_id'";
+}elseif($filesArray !== NULL){
+    for($i = 0; $i < $totalFiles; $i++){ $imageName=$_FILES["fileImg"]["name"][$i];
+        $tmpName=$_FILES["fileImg"]["tmp_name"][$i]; $imageExtension=explode('.', $imageName);
+        $imageExtension=strtolower(end($imageExtension)); $newImageName=uniqid() . '.' . $imageExtension;
+        move_uploaded_file($tmpName, 'uploads/' . $newImageName); $filesArray[]=$newImageName; }
+        $filesArray=json_encode($filesArray);
+        $query="UPDATE department_tb SET department_code='$department_code',	department_title='$department_title',	department_detials='$department_detials', image='$filesArray',	status=1 WHERE id=$select_department_id"; 
+}
+    mysqli_query($conn, $query); 
+    echo "
         <script>
           alert('Successfully Added');
-          document.location.href = 'index.php';
+          document.location.href = 'list-department.php';
         </script>
-        " ; } } ?>
+        " ; } } 
+        ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -165,7 +170,7 @@ for($i = 0; $i < $totalFiles; $i++){ $imageName=$_FILES["fileImg"]["name"][$i];
                                                         <h3>Images Upload</h3>
                                                         <p>Image size must be note limited</p>
                                                         <input type="file" class="btn btn-secondary" name="fileImg[]"
-                                                            accept=".jpg, .jpeg, .png" required multiple>
+                                                            accept=".jpg, .jpeg, .png" multiple>
                                                     </div>
                                                 </div>
                                             </div>

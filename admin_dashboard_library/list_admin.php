@@ -111,15 +111,15 @@ if(isset($_GET['id'])){
                                         <tr>
                                             <th>#</th>
                                             <th>ឈ្មោះ</th>
+                                            <th>ភេទ</th>
                                             <th>អ៊ីម៉ែល</th>
-                                            <th>លេខទូរស័ព្ទ</th>
-                                            <th>តួនាទី</th>
+                                            <th>រូបភាព</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $select_teacher = "SELECT * FROM staff_tb ";
+                                            $select_teacher = "SELECT * FROM admintable";
                                             $result_select_teacher = $conn->query($select_teacher);
                                             $cnt = 1;
                                             if($result_select_teacher->num_rows>0){
@@ -127,10 +127,14 @@ if(isset($_GET['id'])){
                                                     ?>
                                         <tr>
                                             <td><?php echo $cnt ?></td>
-                                            <td><?php echo $row['firstname']?> <?php echo $row['lastname']?></td>
+                                            <td><?php echo $row['name']?></td>
+                                            <td><?php echo $row['sex']?></td>
                                             <td><?php echo $row['email']?></td>
-                                            <td><?php echo $row['phone']?></td>
-                                            <td><?php echo $row['select_role']?></td>
+                                            <td> <?php
+                                                        foreach (json_decode($row["image"]) as $image) : ?>
+                                                <img src="uploads/<?php echo $image; ?>" width=40>
+                                                <?php endforeach; ?>
+                                            </td>
                                             <td>
                                                 <a href="view-teacher-management.php?id=<?php echo $row['id']?>"
                                                     class="btn btn-success btn-circle btn-sm">

@@ -1,5 +1,4 @@
 <?php
-
 require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
@@ -21,40 +20,45 @@ if($email != false && $password != false){
 }else{
     header('Location: login.php');
 }
+
+
 if(isset($_GET['id'])){
+    
     $select_view_major_id = $_GET['id'];
-    if(isset($_POST["submit"])){
+    if(isset($_POST["update-major"])){
         $major_code = $_POST['major_code'];
         $major_title = $_POST['major_title'];
         $select_department = $_POST['select_department'];
         $major_detials = $_POST['major_detials'];
         $status = 1;
+        
         $totalFiles = count($_FILES['fileImg']['name']);
         $filesArray = array();
-      
-        for($i = 0; $i < $totalFiles; $i++){
-          $imageName = $_FILES["fileImg"]["name"][$i];
-          $tmpName = $_FILES["fileImg"]["tmp_name"][$i];
-      
-          $imageExtension = explode('.', $imageName);
-          $imageExtension = strtolower(end($imageExtension));
-      
-          $newImageName = uniqid() . '.' . $imageExtension;
-      
-          move_uploaded_file($tmpName, 'uploads/' . $newImageName);
-          $filesArray[] = $newImageName;
+        if($filesArray==NULL){
+            $query ="UPDATE major_tb SET major_code='$major_code',	major_title='$major_title',   select_department='$select_department',	major_detials='$major_detials',	status='$status' WHERE id='$select_view_major_id'";
+        }elseif($filesArray!==NULL){
+            
+            for($i = 0; $i < $totalFiles; $i++){
+                $imageName = $_FILES["fileImg"]["name"][$i];
+                $tmpName = $_FILES["fileImg"]["tmp_name"][$i];
+            
+                $imageExtension = explode('.', $imageName);
+                $imageExtension = strtolower(end($imageExtension));
+                $newImageName = uniqid() . '.' . $imageExtension;
+                move_uploaded_file($tmpName, 'uploads/' . $newImageName);
+                $filesArray[] = $newImageName;
+              }
+            
+              $filesArray = json_encode($filesArray);
+              $query ="UPDATE major_tb SET major_code='$major_code',	major_title='$major_title',   select_department='$select_department',	major_detials='$major_detials',	image='$filesArray',	status='$status' WHERE id='$select_view_major_id'";
         }
-      
-        $filesArray = json_encode($filesArray);
-        
-        $query ="UPDATE major_tb SET major_code='$major_code',	major_title='$major_title',   select_department='$select_department',	major_detials='$major_detials',	image='$filesArray',	status='$status' WHERE id=$select_view_major_id";
         
         mysqli_query($conn, $query);
         echo
         "
         <script>
           alert('Successfully Added');
-          document.location.href = 'index.php';
+          document.location.href = 'list-major.php';
         </script>
         ";
       }
@@ -145,7 +149,7 @@ if(isset($_GET['id'])){
                         </div>
                         <div class="card-body p-0">
                             <div class="p-5">
-                                <form action="" method="post" enctype="multipart/form-data">
+                                <form action="" method="POST" enctype="multipart/form-data">
                                     <?php
                                     if(isset($_GET['id'])){
                                         $select_view_major_id = $_GET['id'];
@@ -195,7 +199,7 @@ if(isset($_GET['id'])){
 
                                                 <select name="select_department" class="form-control"
                                                     aria-label="Default select">
-                                                    <option selected>ជ្រើសរើសដេប៉ាតឺម៉ង់</option>
+                                                    <option>ជ្រើសរើសដេប៉ាតឺម៉ង់</option>
                                                     <?php
                                                 $department_tb = "SELECT * FROM department_tb";
                                                 $department_tb_result = $conn -> query($department_tb);
@@ -203,7 +207,7 @@ if(isset($_GET['id'])){
                                                     while($row_department = $department_tb_result -> fetch_assoc()){
                                                         ?>
                                                     <option value="<?php echo ($row_department['id'])?>">
-                                                        <?php echo ($row_department['id'].$row_department['department_title'])?>
+                                                        <?php echo ($row_department['department_title'])?>
                                                     </option>
                                                     <?php
                                                 }
@@ -222,7 +226,7 @@ if(isset($_GET['id'])){
                                         </label>
                                         <textarea name="major_detials" id="" cols="30" rows="10"
                                             class="summernote form-control">
-                                            <?php echo $row['major_title']?>
+                                            <?php echo  $desc?>
                                         </textarea>
                                     </div>
                                     <div class="form-group">
@@ -234,14 +238,13 @@ if(isset($_GET['id'])){
                                                         <h3>Images Upload</h3>
                                                         <p>Image size must be note limited</p>
                                                         <input type="file" class="btn btn-secondary" name="fileImg[]"
-                                                            accept=".jpg, .jpeg, .png" required multiple>
+                                                            accept=".jpg, .jpeg, .png" multiple>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
-                                    <button type="submit" name="submit" class=" btn btn-primary"><i
+                                    <button type="submit" name="update-major" class=" btn btn-primary"><i
                                             class="fa-solid fa-circle-check"></i> Submit</button>
                                     <?php
                                     }

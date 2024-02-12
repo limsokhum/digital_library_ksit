@@ -156,7 +156,7 @@ if(isset($_POST["submit"])){
                                                 </label>
                                                 <div class="form-check d-flex">
                                                     <input class="form-check-input" type="radio" name="sex"
-                                                        value="ប្រុស">
+                                                        value="ប្រុស" checked="checked">
                                                     <label class="form-check-label"
                                                         style="font-family:Khmer OS System;">ប្រុស
                                                     </label>,

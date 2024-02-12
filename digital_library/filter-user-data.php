@@ -1,0 +1,427 @@
+<?php
+require_once('controllerUserData.php');
+
+$email = $_SESSION['email'];
+$password = $_SESSION['password'];
+if($email != false && $password != false){
+    $sql = "SELECT * FROM usertable WHERE email = '$email'";
+    $run_Sql = mysqli_query($conn, $sql);
+    if($run_Sql){
+        $fetch_info = mysqli_fetch_assoc($run_Sql);
+        $status = $fetch_info['status']; 
+        $code = $fetch_info['code'];
+        if($status == "verified"){
+            if($code != 0){
+                header('Location: reset-code.php');
+            }
+        }else{
+            header('Location: user-otp.php');
+        }
+    }
+}else{
+    header('Location: index.php');
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Custom CSS3 -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Icon Favicon -->
+    <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+    <!-- Google Font Family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Default Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+
+    <!-- Custom Search Button Function -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Filter Metadata</title>
+</head>
+
+<body style="background-color: #dedede;">
+    <!-- Scroll to Top -->
+    <div onclick="topFunction()" id="myBtn"><i class="fa-solid fa-circle-chevron-up"
+            style="color: orange; font-size: 1.4rem;"></i></div>
+    <!-- Start Section Top Bar -->
+    <?php include('includes/user-topbar.php');?>
+    <!-- Ent Section Top Bar -->
+
+    <!-- Start Navigation Bar -->
+    <?php include('includes/navbar-user.php');?>
+    <!-- Ent Navigation Bar -->
+
+    <!-- Start All Section Start Content -->
+    <div class="container">
+
+        <!-- Start Slide Show -->
+        <div class="card mt-2" style="width: 100%;">
+            <div class="row container-header">
+                <div class="col-sm-6">
+                    <img src="assets/images/library_books.jpg" class="card-img-top">
+                </div>
+                <div class="col-sm-6">
+                    <div class="card-body">
+                        <p class="contanct-text">សិក្សាបានគ្រប់ពេលវេលា និងគ្រប់ទីកន្លែង</p>
+                        <h3 class="contanct-title">សូមស្វាគមន៍មកកាន់
+                            ប្រព័ន្ធគ្រប់គ្រងបណ្ណាល័យឌីជីថលវិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ</h3>
+                        <dl>
+                            <dt>និស្សិត និងអ្នកស្រាវជ្រាវទូទៅ ៖</dt>
+                            <dd class="mt-1">- អាចធ្វើការស្វែងរកឯកសារឌីជីថលដូចជា e-Book, e-Project, e-Journal ដោយអាច
+                                filter តាម metadata មួយចំនួនដូចជា ឆ្នាំបោះពុម្ភ ឈ្មោះអ្នកនិពន្ធ ចំណងជើង ប្រភេទអត្ថបទ
+                                និងពាក្យគន្លឹះបាន។</dd>
+                            <dd>- អាចទាញយកឯកសារ។</dd>
+                        </dl>
+
+                        <div class="col-sm-12">
+                            <div class="containct-contact-us float-end">
+                                <div class="contanct-title">
+                                    Contact-us៖
+                                </div>
+                                <div class="email">
+                                    <i class="fa-solid fa-envelope fs-5" style="color: #336666;"></i><a href=""
+                                        class="text-decoration-none mx-2 text-dark fw-bolder">info@ksit.edu.kh,
+                                        bunhe@ksit.edu.kh</a>
+                                </div>
+                                <div class="phone d-flex">
+                                    <i class="fa-solid fa-phone-volume fs-5" style="color: #336666;"></i>
+                                    <p class="mx-2 fw-bolder">+855 97 222 0 829</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End slide Show -->
+
+        <!-- Start Content Computer -->
+        <div class="section-computer my-2">
+
+            <div class="title d-flex">
+                <div class="computer">
+                    <h5>កម្រងអត្ថបទទូទៅ</h5>
+                </div>
+                <div class="rows"></div>
+            </div>
+
+            <div class="card" style="width: 100%;">
+
+                <div class="container row my-4">
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
+                        <div id="myTable" class="card mb-2" style="width: 100%;">
+                            <!-- start one input value -->
+                            <?php
+                            if(isset($_GET['title']) || isset($_GET['name_auther']) || isset($_GET['digital_book']) || isset($_GET['creationdate']) || isset($_GET['keyword']))
+                            // if(isset($_GET['title']) && isset($_GET['name_auther']) && isset($_GET['digital_book']) && isset($_GET['creationdate']) || isset($_GET['keyword']))
+                            {
+                                $title = $_GET['title'];
+                                $name_auther = $_GET['name_auther'];
+                                $digital_book = $_GET['digital_book'];
+                                $creationdate = $_GET['creationdate'];
+                                $keyword = $_GET['keyword'];
+                                $query = "SELECT * FROM digitalbook_tb WHERE title='$title' || name_auther='$name_auther' || digital_book='$digital_book' || creationdate='$creationdate' || keyword='$keyword'";
+                                // $query = "SELECT * FROM digitalbook_tb WHERE (title='$title' AND name_auther='$name_auther' AND digital_book='$digital_book' AND creationdate='$creationdate' AND keyword='$keyword')";
+                                $query_run = mysqli_query($conn, $query);
+                                // $query_run = $conn->query($query);
+                                if(mysqli_num_rows($query_run) > 0){
+                                foreach($query_run as $items){ ?>
+                            <div class="card-body news-announcements">
+                                <div class="img-news">
+                                    <?php
+                                    foreach (json_decode($items["image_one"]) as $image) : ?>
+                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
+                                    <?php endforeach; ?>
+                                </div>
+                                <div class="detail-news">
+                                    <h6 class="research-title"><span class="defult-title">ប្រធានបទ </span> ៖
+                                        ​<?php echo $items['title']?></h6>
+                                    <small class="research-title"><span class="defult-title">អ្នកស្រាវជ្រាវ </span> ៖
+                                        <?php echo $items['name_auther']?> <span class="defult-title">, ប្រភេទសៀវភៅ
+                                        </span> ៖
+                                        <?php echo $items['digital_book']?> <span class="defult-title">, បោះពុម្ភ
+                                        </span> ៖
+                                        <?php echo $items['date']?>
+                                    </small>
+
+                                    <p class="research-text"><?php
+                    
+                                    $content=$items['abstract'];
+                                    $string= strip_tags($content);
+                                    if(strlen($string) >500):   
+                                    $stringCut= substr($string,0,500);
+                                    $endPoint=strrpos($stringCut,' ');
+                                    $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
+                                    $string .= '...<a class="text-danger fw-bolder" href="digital-page.php?id=' . $items['id'] . '">អានបន្ថែម</a>';
+                                    endif;
+                                    echo $string;
+                                    
+                                    ?></p>
+                                </div>
+                            </div>
+
+                            <?php
+        
+    }
+    }elseif(isset($_GET['title']) && isset($_GET['name_auther']) || isset($_GET['digital_book']) || isset($_GET['creationdate']) || isset($_GET['keyword'])){
+        $title = $_GET['title'];
+        $name_auther = $_GET['name_auther'];
+        $digital_book = $_GET['digital_book'];
+        $creationdate = $_GET['creationdate'];
+        $keyword = $_GET['keyword'];
+        $query = "SELECT * FROM digitalbook_tb WHERE title='$title' && name_auther='$name_auther' || digital_book='$digital_book' || creationdate='$creationdate' || keyword='$keyword'";
+        $query_run = mysqli_query($conn, $query);
+        foreach($query_run as $items){
+            ?>
+                            <div class="card-body news-announcements">
+                                <div class="img-news">
+                                    <?php
+                                    foreach (json_decode($items["image_one"]) as $image) : ?>
+                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
+                                    <?php endforeach; ?>
+                                </div>
+                                <div class="detail-news">
+                                    <h6 class="research-title"><span class="defult-title">ប្រធានបទ </span> ៖
+                                        ​<?php echo $items['title']?></h6>
+                                    <small class="research-title"><span class="defult-title">អ្នកស្រាវជ្រាវ </span> ៖
+                                        <?php echo $items['name_auther']?> <span class="defult-title">, ប្រភេទសៀវភៅ
+                                        </span> ៖
+                                        <?php echo $items['digital_book']?> <span class="defult-title">, បោះពុម្ភ
+                                        </span> ៖
+                                        <?php echo $items['date']?>
+                                    </small>
+
+                                    <p class="research-text"><?php
+                    
+                                    $content=$items['abstract'];
+                                    $string= strip_tags($content);
+                                    if(strlen($string) >500):   
+                                    $stringCut= substr($string,0,500);
+                                    $endPoint=strrpos($stringCut,' ');
+                                    $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
+                                    $string .= '...<a class="text-danger fw-bolder" href="digital-page.php?id=' . $items['id'] . '">អានបន្ថែម</a>';
+                                    endif;
+                                    echo $string;
+                                    
+                                    ?></p>
+                                </div>
+                            </div>
+                            <?php
+        }
+        
+    }elseif(isset($_GET['title']) && isset($_GET['name_auther']) && isset($_GET['digital_book']) || isset($_GET['creationdate']) || isset($_GET['keyword'])){
+        $title = $_GET['title'];
+        $name_auther = $_GET['name_auther'];
+        $digital_book = $_GET['digital_book'];
+        $creationdate = $_GET['creationdate'];
+        $keyword = $_GET['keyword'];
+        $query = "SELECT * FROM digitalbook_tb WHERE title='$title' AND name_auther='$name_auther' AND digital_book='$digital_book' || creationdate='$creationdate' || keyword='$keyword'";
+        $query_run = mysqli_query($conn, $query);
+        foreach($query_run as $items){
+            ?>
+                            <div class="card-body news-announcements">
+                                <div class="img-news">
+                                    <?php
+                                    foreach (json_decode($items["image_one"]) as $image) : ?>
+                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
+                                    <?php endforeach; ?>
+                                </div>
+                                <div class="detail-news">
+                                    <h6 class="research-title"><span class="defult-title">ប្រធានបទ </span> ៖
+                                        ​<?php echo $items['title']?></h6>
+                                    <small class="research-title"><span class="defult-title">អ្នកស្រាវជ្រាវ </span> ៖
+                                        <?php echo $items['name_auther']?> <span class="defult-title">, ប្រភេទសៀវភៅ
+                                        </span> ៖
+                                        <?php echo $items['digital_book']?> <span class="defult-title">, បោះពុម្ភ
+                                        </span> ៖
+                                        <?php echo $items['date']?>
+                                    </small>
+
+                                    <p class="research-text"><?php
+                    
+                                    $content=$items['abstract'];
+                                    $string= strip_tags($content);
+                                    if(strlen($string) >500):   
+                                    $stringCut= substr($string,0,500);
+                                    $endPoint=strrpos($stringCut,' ');
+                                    $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
+                                    $string .= '...<a class="text-danger fw-bolder" href="digital-page.php?id=' . $items['id'] . '">អានបន្ថែម</a>';
+                                    endif;
+                                    echo $string;
+                                    
+                                    ?></p>
+                                </div>
+                            </div>
+                            <?php
+        }
+        
+    }elseif(isset($_GET['title']) AND isset($_GET['name_auther']) AND isset($_GET['digital_book']) AND isset($_GET['creationdate']) || isset($_GET['keyword'])){
+        $title = $_GET['title'];
+        $name_auther = $_GET['name_auther'];
+        $digital_book = $_GET['digital_book'];
+        $creationdate = $_GET['creationdate'];
+        $keyword = $_GET['keyword'];
+        $query = "SELECT * FROM digitalbook_tb WHERE title='$title' AND name_auther='$name_auther' AND digital_book='$digital_book' AND creationdate='$creationdate' || keyword='$keyword'";
+        $query_run = mysqli_query($conn, $query);
+        foreach($query_run as $items){
+            ?>
+                            <div class="card-body news-announcements">
+                                <div class="img-news">
+                                    <?php
+                                    foreach (json_decode($items["image_one"]) as $image) : ?>
+                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
+                                    <?php endforeach; ?>
+                                </div>
+                                <div class="detail-news">
+                                    <h6 class="research-title"><span class="defult-title">ប្រធានបទ </span> ៖
+                                        ​<?php echo $items['title']?></h6>
+                                    <small class="research-title"><span class="defult-title">អ្នកស្រាវជ្រាវ </span> ៖
+                                        <?php echo $items['name_auther']?> <span class="defult-title">, ប្រភេទសៀវភៅ
+                                        </span> ៖
+                                        <?php echo $items['digital_book']?> <span class="defult-title">, បោះពុម្ភ
+                                        </span> ៖
+                                        <?php echo $items['date']?>
+                                    </small>
+
+                                    <p class="research-text"><?php
+                    
+                                    $content=$items['abstract'];
+                                    $string= strip_tags($content);
+                                    if(strlen($string) >500):   
+                                    $stringCut= substr($string,0,500);
+                                    $endPoint=strrpos($stringCut,' ');
+                                    $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
+                                    $string .= '...<a class="text-danger fw-bolder" href="digital-page.php?id=' . $items['id'] . '">អានបន្ថែម</a>';
+                                    endif;
+                                    echo $string;
+                                    
+                                    ?></p>
+                                </div>
+                            </div>
+                            <?php
+        }
+        
+    }elseif(isset($_GET['title']) AND isset($_GET['name_auther']) AND isset($_GET['digital_book']) AND isset($_GET['creationdate']) AND isset($_GET['keyword'])){
+        $title = $_GET['title'];
+        $name_auther = $_GET['name_auther'];
+        $digital_book = $_GET['digital_book'];
+        $creationdate = $_GET['creationdate'];
+        $keyword = $_GET['keyword'];
+        $query = "SELECT * FROM digitalbook_tb WHERE title='$title' AND name_auther='$name_auther' AND digital_book='$digital_book' AND creationdate='$creationdate' AND keyword='$keyword'";
+        $query_run = mysqli_query($conn, $query);
+        foreach($query_run as $items){
+            ?>
+                            <div class="card-body news-announcements">
+                                <div class="img-news">
+                                    <?php
+                                    foreach (json_decode($items["image_one"]) as $image) : ?>
+                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
+                                    <?php endforeach; ?>
+                                </div>
+                                <div class="detail-news">
+                                    <h6 class="research-title"><span class="defult-title">ប្រធានបទ </span> ៖
+                                        ​<?php echo $items['title']?></h6>
+                                    <small class="research-title"><span class="defult-title">អ្នកស្រាវជ្រាវ </span> ៖
+                                        <?php echo $items['name_auther']?> <span class="defult-title">, ប្រភេទសៀវភៅ
+                                        </span> ៖
+                                        <?php echo $items['digital_book']?> <span class="defult-title">, បោះពុម្ភ
+                                        </span> ៖
+                                        <?php echo $items['date']?>
+                                    </small>
+
+                                    <p class="research-text"><?php
+                    
+                                    $content=$items['abstract'];
+                                    $string= strip_tags($content);
+                                    if(strlen($string) >500):   
+                                    $stringCut= substr($string,0,500);
+                                    $endPoint=strrpos($stringCut,' ');
+                                    $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
+                                    $string .= '...<a class="text-danger fw-bolder" href="digital-page.php?id=' . $items['id'] . '">អានបន្ថែម</a>';
+                                    endif;
+                                    echo $string;
+                                    
+                                    ?></p>
+                                </div>
+                            </div>
+                            <?php
+        }
+        
+    }else{
+    ?>
+                            <div class="container text-center mt-4">
+                                <?php echo '<h5 style="font-family:\'Koulen\', sans-serif;">គ្មានទិន្នន័យ!</h5>'; ?>
+                            </div>
+                            <?php
+    
+    }
+}
+                            ?>
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                        <?php include('includes/department.php');?>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Ent Content Computer -->
+    </div>
+    <!-- Ent All Section Start Content -->
+
+    <!-- Start Bottom Footer -->
+    <?php include('includes/footer.php');?>
+    <!-- Start Bottom Footer -->
+    <!-- Start Bottom Footer Copyright -->
+    <?php include('includes/bottom.php');?>
+    <!-- Ent Bottom Footer Copyright -->
+
+
+    <script>
+    // Get the button
+    let mybutton = document.getElementById("myBtn");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+
+    <!-- Script Js Default Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js">
+    </script>
+</body>
+
+</html>

@@ -209,7 +209,7 @@ for($i = 0; $i < $totalFiles; $i++){ $imageName=$_FILES["fileImg"]["name"][$i];
                                                         <h3>Images Upload</h3>
                                                         <p>Image size must be note limited</p>
                                                         <input type="file" class="btn btn-secondary" name="fileImg[]"
-                                                            accept=".jpg, .jpeg, .png" required multiple>
+                                                            accept=".jpg, .jpeg, .png" multiple>
                                                     </div>
                                                 </div>
                                             </div>
