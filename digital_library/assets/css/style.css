@@ -9,6 +9,7 @@
   box-sizing: border-box;
 }
 
+
 .hidden-changpassword {
   display: none;
 }
@@ -349,20 +350,23 @@ dd {
 
 
 .news-announcementses .detail-newseses .research-title {
-  font-family: 'Bayon', sans-serif;
+  font-family: "Hanuman", serif;
+  font-weight: 900;
   color: orange;
   cursor: pointer;
 }
 
 .news-announcementses .detail-newseses .defult-title {
-  font-family: 'Bayon', sans-serif;
+  font-family: "Hanuman", serif;
+  font-weight: 900;
   color: #336666;
   cursor: pointer;
 }
 
 .news-announcementses .detail-newseses .research-text {
   color: #336666;
-  font-family: 'Noto Serif Khmer', serif;
+  font-family: "Hanuman", serif;
+  font-weight: 900;
   font-size: 1rem;
   cursor: pointer;
 }
@@ -409,13 +413,15 @@ dd {
 }
 
 .news-announcements .detail-news .research-title {
-  font-family: 'Bayon', sans-serif;
+  font-family: "Hanuman", serif;
+  font-weight: 900;
   color: orange;
   cursor: pointer;
 }
 
 .news-announcements .detail-news .defult-title {
-  font-family: 'Bayon', sans-serif;
+  font-family: "Hanuman", serif;
+  font-weight: 900;
   color: #336666;
   cursor: pointer;
 }
@@ -451,7 +457,8 @@ dd {
   }
 
   .news-announcements .detail-news .research-title {
-    font-family: 'Bayon', sans-serif;
+    font-family: "Hanuman", serif;
+    font-weight: 900;
     color: orange;
     cursor: pointer;
   }

@@ -40,13 +40,19 @@ if(isset($_GET['id'])){
             $imageExtension=strtolower(end($imageExtension)); $newImageName=uniqid() . '.' . $imageExtension;
             move_uploaded_file($tmpName, 'uploads/' . $newImageName); $filesArray[]=$newImageName; }
             $filesArray=json_encode($filesArray); 
-            $query="UPDATE  staff_tb SET firstname='$firstname',	lastname='$lastname',	email='$email',	phone='$phone',	select_role='$select_role',	image='$filesArray',	details='$detials' WHERE teacher_management.id= $setion_edit_teacher" ;
-            mysqli_query($conn, $query); echo "
+            $query="UPDATE  staff_tb SET firstname='$firstname',	lastname='$lastname',	email='$email',	phone='$phone',	select_role='$select_role',	image='$filesArray',	details='$detials' WHERE id= $setion_edit_teacher" ;
+            $result_edit_teacher_management = $conn->query($query);
+            // mysqli_query($conn, $query); 
+            if($result_edit_teacher_management==true){
+                echo "
             <script>
               alert('Successfully Added');
               document.location.href = 'index.php';
             </script>
-            " ; } 
+            " ; 
+            }
+            
+        } 
 }
 
 

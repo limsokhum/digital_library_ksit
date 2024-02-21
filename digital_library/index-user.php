@@ -216,6 +216,11 @@ if($result_user_profile ->num_rows>0){
     <!-- Default Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@100;300;400;700;900&display=swap"
+        rel="stylesheet">
+
     <!-- Custom Search Button Function -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -358,7 +363,6 @@ if($result_user_profile ->num_rows>0){
                 </div>
                 <div class="rows"></div>
             </div>
-
             <div class="card" style="width: 100%;">
 
                 <div class="container row my-4">
@@ -567,7 +571,15 @@ if($result_user_profile ->num_rows>0){
         document.documentElement.scrollTop = 0;
     }
     </script>
+    <script>
+    function onclickShow() {
+        document.getElementById('passwords').style.display = "block";
+    }
 
+    function onclickRemove() {
+        document.getElementById('passwords').style.display = "none";
+    }
+    </script>
     <!-- Script Js Default Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js">
     </script>

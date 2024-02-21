@@ -72,7 +72,7 @@
             <div class="card" style="width: 100%;">
                 <?php
                 $select_department = "SELECT major_tb.id,major_tb.major_code, major_tb.image, major_tb.major_title, major_tb.select_department,major_tb.major_detials,major_tb.status,major_tb.creationdate,department_tb.department_title
-                FROM major_tb INNER JOIN department_tb ON major_tb.select_department=department_tb.id WHERE major_title='វិទ្យាសាស្រ្ដសត្វ'";
+                FROM major_tb INNER JOIN department_tb ON major_tb.select_department=department_tb.id WHERE major_title='វិទ្យាសាស្ដ្រសត្វ'";
                 $result_select_department = $conn->query($select_department);
                 if($result_select_department->num_rows>0){
                     while($row_select_department= $result_select_department->fetch_assoc()){

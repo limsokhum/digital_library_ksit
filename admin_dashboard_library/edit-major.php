@@ -23,8 +23,7 @@ if($email != false && $password != false){
 
 
 if(isset($_GET['id'])){
-    
-    $select_view_major_id = $_GET['id'];
+    $edit_view_major_id = $_GET['id'];
     if(isset($_POST["update-major"])){
         $major_code = $_POST['major_code'];
         $major_title = $_POST['major_title'];
@@ -35,13 +34,11 @@ if(isset($_GET['id'])){
         $totalFiles = count($_FILES['fileImg']['name']);
         $filesArray = array();
         if($filesArray==NULL){
-            $query ="UPDATE major_tb SET major_code='$major_code',	major_title='$major_title',   select_department='$select_department',	major_detials='$major_detials',	status='$status' WHERE id='$select_view_major_id'";
+            $query ="UPDATE major_tb SET 	major_code='$major_code',	major_title='$major_title',   select_department='$select_department',	major_detials='$major_detials',	 status='$status' WHERE id='$edit_view_major_id'";
         }elseif($filesArray!==NULL){
-            
             for($i = 0; $i < $totalFiles; $i++){
                 $imageName = $_FILES["fileImg"]["name"][$i];
                 $tmpName = $_FILES["fileImg"]["tmp_name"][$i];
-            
                 $imageExtension = explode('.', $imageName);
                 $imageExtension = strtolower(end($imageExtension));
                 $newImageName = uniqid() . '.' . $imageExtension;
@@ -50,17 +47,20 @@ if(isset($_GET['id'])){
               }
             
               $filesArray = json_encode($filesArray);
-              $query ="UPDATE major_tb SET major_code='$major_code',	major_title='$major_title',   select_department='$select_department',	major_detials='$major_detials',	image='$filesArray',	status='$status' WHERE id='$select_view_major_id'";
+              $query ="UPDATE major_tb SET major_code='$major_code', major_title='$major_title',   select_department='$select_department',	major_detials='$major_detials',	image='$filesArray',status='$status' WHERE id='$edit_view_major_id'";
         }
-        
-        mysqli_query($conn, $query);
-        echo
-        "
-        <script>
-          alert('Successfully Added');
-          document.location.href = 'list-major.php';
-        </script>
-        ";
+        $result_edit_major = $conn->query($query);
+        // mysqli_query($conn, $query);
+        if($result_edit_major==true){
+            echo
+            "
+            <script>
+              alert('Successfully Added');
+              document.location.href = 'list-major.php';
+            </script>
+            ";
+        }
+       
       }
 }
 

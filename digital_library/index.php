@@ -25,6 +25,11 @@ include('../config/conn_db.php');
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@100;300;400;700;900&display=swap"
+        rel="stylesheet">
+
     <!-- Default Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 
@@ -212,7 +217,8 @@ include('../config/conn_db.php');
                                     <?php endforeach; ?>
                                 </div>
                                 <div class="detail-news">
-                                    <h6 class="research-title"><span class="defult-title">ប្រធានបទ </span> ៖
+                                    <h6 class="research-title"><span class="defult-title">ប្រធានបទ </span>
+                                        ៖
                                         ​<?php echo $row['title']?></h6>
 
                                     <small class="research-title"><span class="defult-title">អ្នកស្រាវជ្រាវ </span>
@@ -225,13 +231,13 @@ include('../config/conn_db.php');
                                     </small>
                                     <p class="research-text"><?php
                     
-                    $content=$row['abstract'];
-                    $string= strip_tags($content);
-                    if(strlen($string) >500):
-                    $stringCut= substr($string,0,500);
-                    $endPoint=strrpos($stringCut,' ');
-                    $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
-                    $string .= '...<a class="text-danger fw-bolder" href="digital-page.php?id=' . $row['id'] . '">អានបន្ថែម</a>';
+                                    $content=$row['abstract'];
+                                    $string= strip_tags($content);
+                                    if(strlen($string) >500):
+                                    $stringCut= substr($string,0,500);
+                                    $endPoint=strrpos($stringCut,' ');
+                                    $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
+                                    $string .= '...<a class="text-danger fw-bolder" href="digital-page.php?id=' . $row['id'] . '">អានបន្ថែម</a>';
                                         endif;
                                         echo $string;
                                         ?></p>
