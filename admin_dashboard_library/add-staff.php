@@ -110,7 +110,7 @@ if(isset($_POST["submit"])){
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header d-flex justify-content-between py-3">
-                            <h6 class="m-0 float-start font-weight-bold text-primary">Insert Data</h6>
+                            <h6 class="m-0 float-start font-weight-bold" style="color: #336666;">Insert Data</h6>
                         </div>
                         <div class="card-body p-0">
                             <div class="p-5">

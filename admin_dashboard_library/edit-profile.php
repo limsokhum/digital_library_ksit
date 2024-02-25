@@ -214,8 +214,10 @@ if($email != false && $password != false){
                                     }
                                     ?>
 
-                                    <button type="submit" name="submit" class=" btn btn-primary"><i
-                                            class="fa-solid fa-circle-check"></i> Submit</button>
+                                    <button type="submit" name="submit" class=" btn"
+                                        style="background-color: #336666; color: white;"><i
+                                            class="fa-solid fa-circle-check"></i>
+                                        Submit</button>
                                 </form>
                             </div>
                         </div>

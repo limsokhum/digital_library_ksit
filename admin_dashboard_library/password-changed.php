@@ -17,7 +17,7 @@ if($_SESSION['info'] == false){
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="d-flex vh-100 vw-100 justify-conten-center align-items-center">
+<body class="d-flex vh-100 vw-100 justify-conten-center align-items-center" style="background-color: #336666;">
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4 form login-form">

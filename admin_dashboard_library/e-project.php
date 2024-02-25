@@ -134,9 +134,10 @@ if (isset($_GET['file_id_view'])) {
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header d-flex justify-content-between py-3">
-                            <h6 class="m-0 float-start font-weight-bold text-primary">DataTables</h6>
-                            <a class="m-0 btn btn-primary float-end font-weight-bold text-light"
-                                href="add-admin-digital.php">Add e-Project</a>
+                            <h6 class="m-0 float-start font-weight-bold" style="color: #336666;">DataTables</h6>
+                            <a class="m-0 btn float-end font-weight-bold text-light" href="add-admin-digital.php"
+                                style="background-color: #336666;">Add
+                                e-Project</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

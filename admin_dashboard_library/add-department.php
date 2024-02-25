@@ -133,7 +133,7 @@ if(isset($_POST["submit"])){
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header d-flex justify-content-between py-3">
-                            <h6 class="m-0 float-start font-weight-bold text-primary">Insert Department</h6>
+                            <h6 class="m-0 float-start font-weight-bold" style="color: #336666;">Insert Department</h6>
                         </div>
                         <div class="card-body p-0">
 
@@ -202,8 +202,10 @@ if(isset($_POST["submit"])){
 
                                         </div>
                                     </div>
-                                    <button type="submit" name="submit" class=" btn btn-primary"><i
-                                            class="fa-solid fa-circle-check"></i> Submit</button>
+                                    <button type="submit" name="submit" class=" btn"
+                                        style="background-color: #336666; color: white;"><i
+                                            class="fa-solid fa-circle-check"></i>
+                                        Submit</button>
                                 </form>
                             </div>
                         </div>

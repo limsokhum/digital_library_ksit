@@ -25,7 +25,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="" style="background-color: #336666;">
 
     <div class="container">
 
@@ -71,16 +71,20 @@
                                                 placeholder="Password" require>
                                         </div>
 
-                                        <input class="form-control btn btn-primary" type="submit" name="login"
-                                            value="Admin Login">
+                                        <input class="form-control btn" style="background-color: #336666; color: white;"
+                                            type="submit" name="login" value="Admin Login">
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="login-teacher.php">Representative Login</a>
+                                        <a class="small" href="login-teacher.php"
+                                            style="color: #336666; font-weight: bold;">Representative
+                                            Login</a>
                                     </div>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.php">Admin Forgot Password?</a>
+                                    <div class=" text-center">
+                                        <a class="small text-danger" href="forgot-password.php"
+                                            style=" font-weight: bold;">Admin
+                                            Forgot Password?</a>
                                     </div>
                                 </div>
                             </div>

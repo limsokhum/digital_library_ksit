@@ -29,7 +29,6 @@ if($email != false && $password != false){
 // Start Custom Edit Digiral Book
 if(isset($_GET['id'])){
     $query_edit_digital_book_id = $_GET['id']; // Id Selct edit 
-    
     if(isset($_POST['submit'])){
         $title = $_POST['title']; 
         $name_auther = $_POST['name_auther']; 
@@ -256,7 +255,7 @@ if(isset($_GET['id'])){
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 float-start font-weight-bold text-primary">Edit Data</h6>
+                            <h6 class="m-0 float-start font-weight-bold" style="color: #336666;">Edit Data</h6>
                         </div>
                         <div class="card-body p-0">
                             <div class="p-5">
@@ -483,7 +482,8 @@ if(isset($_GET['id'])){
                                         <input type="radio" name="status" class="" id="" aria-describedby="" value="3">
                                         <label for="">Reject</label>
                                     </div>
-                                    <button type="submit" name="submit" class="btn btn-primary"><i
+                                    <button type="submit" name="submit" class="btn"
+                                        style="background-color: #336666; color: white;"><i
                                             class="fa-solid fa-circle-check"></i>
                                         Edit Digital Book
                                     </button>

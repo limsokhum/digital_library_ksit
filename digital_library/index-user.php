@@ -261,7 +261,8 @@ if($result_user_profile ->num_rows>0){
                                 និងពាក្យគន្លឹះបាន។</dd>
                             <dd>- អាចទាញយកឯកសារ។</dd>
                         </dl>
-
+                        <a href="list-digital-book-user.php" class="btn btn-success"
+                            style="color: #fff; font-family: 'Bayon', sans-serif; background-color: #336666;">ឯកសារស្រាវជ្រាវ</a>
                         <div class="col-sm-12">
                             <div class="containct-contact-us float-end">
                                 <div class="contanct-title">

@@ -35,7 +35,7 @@ if($email == false){
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="" style="background-color: #336666;">
 
     <div class="container">
 
@@ -84,12 +84,15 @@ if($email == false){
                                             <input class="form-control" type="number" name="otp"
                                                 placeholder="Enter verification code" required>
                                         </div>
-                                        <input class="form-control btn btn-primary" type="submit" name="check-reset-otp"
-                                            value="Submit">
+                                        <input class="form-control btn" style="background-color: #336666; color: white;"
+                                            type="submit" name="check-reset-otp" value="Submit">
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="login.php">Already have an account? Login!</a>
+                                        <a class="small text-danger" style="font-weight: bold;" href="login.php">Already
+                                            have an
+                                            account?
+                                            Login!</a>
                                     </div>
                                 </div>
                             </div>

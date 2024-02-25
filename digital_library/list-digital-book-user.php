@@ -23,16 +23,12 @@ if($email != false && $password != false){
 }
 
 if(isset($_POST['send-email'])){
-    
     $subject = $_POST['desc-email'];
-    $email_subject = "$advisor .$subject";
-    $user_sender = "From: $email" ;
-
-    if(mail($advisor,$subject,$email_subject,$user_sender)){
+    $email_subject = "$email .$subject";
+    $user_sender = "From: sokhumlim@gmail.com";
+    if(mail($email,$subject,$email_subject,$user_sender)){
         $_SESSION['statuse'] = "<Type Your success message here>";
     ?>
-
-
 <?php
     }else{
     echo("Don't Send");
@@ -48,8 +44,6 @@ if(isset($_GET['id'])){
     }
 }
 ?>
-
-
 <?php
  if(isset($_POST['edit_profile'])){
     $name = mysqli_real_escape_string($conn, $_POST['name']);
@@ -105,12 +99,11 @@ $result_user_profile = $conn->query($query_user_prifile);
 if($result_user_profile ->num_rows>0){
     while($row_user_profile = $result_user_profile->fetch_assoc()){
         ?>
-
 <!-- Start Modal Bootstrap 5 -->
 <div class="modal fade" id="exampleModal" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
+            <!-- Start Change profile -->
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"
@@ -141,7 +134,6 @@ if($result_user_profile ->num_rows>0){
                     <div class="form-group my-2">
                         <label class="label-control" for=""
                             style="font-family:'Koulen', sans-serif;">តើអ្នកចង់ប្ដូលេខសម្ងាត់ឬ ?
-
                         </label>
                         <div class="form-check d-flex">
                             <input onclick="onclickShow()" class="form-check-input" type="radio" name="select_role"
@@ -317,8 +309,7 @@ if($result_user_profile ->num_rows>0){
             ?>
         <div class="alert alert-primary alert-dismissible fade show mt-3" role="alert"
             style="font-family: 'Noto Serif Khmer', serif;">
-            <strong>អ្នកបានផ្ញើរអ៊ីម៉ែលទៅបានដោយជោគជ័យ!</strong> អ្នកផ្ញើរទៅ<span
-                class="text-warning"><?php echo $advisor?></span>.
+            <strong>អ្នកបានផ្ញើរអ៊ីម៉ែលទៅបានដោយជោគជ័យ!</strong>.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <?php 
@@ -368,85 +359,6 @@ if($result_user_profile ->num_rows>0){
                                 $desc = strtr(html_entity_decode($row['abstract']),$trans);
                                 $desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
                         ?>
-                        <!-- Start Modal Comment -->
-                        <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel"
-                                            style="font-family: 'Bayon', sans-serif;">មតិយោបល់ពី</h5>
-                                        <!-- <h6 class="modal-title text-warning px-2" id="exampleModalLabel"
-                                            style="font-family: 'Noto Serif Khmer', serif;">
-                                            <?php //echo $row['advisor']?>
-                                        </h6> -->
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body" style=" font-family: 'Noto Serif Khmer', serif;">
-
-                                        <?php
-                                            if($row['comment']==NULL){
-                                                ?>
-                                        <p class="text-danger" style=" font-family: 'Noto Serif Khmer', serif;">
-                                            <?php echo("មិនទាន់មានមតិយោបល !");?></p>
-                                        <?php
-                                            }
-                                         echo $row['comment']; 
-                                         ?>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                            style="font-family: 'Noto Serif Khmer', serif;">បិត</button>
-                                        <a href="#" class="btn btn-primary"
-                                            style="font-family: 'Noto Serif Khmer', serif;" data-bs-toggle="modal"
-                                            data-bs-target="#emailModal">ទំនាក់ទំនង</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Ent Modal Comment -->
-
-                        <!-- Start Contact Email -->
-                        <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel"
-                                            style="font-family: 'Bayon', sans-serif;">ទំនាក់ទនទៅកាន់
-                                            Email
-                                        </h5>
-                                        <!-- <h6 class="modal-title text-warning px-2" id="exampleModalLabel"
-                                            style="font-family: 'Noto Serif Khmer', serif;">
-                                            <?php //echo $row['advisor']?>
-                                        </h6> -->
-                                        <!-- <h5 class="modal-title" id="exampleModalLabel"
-                                            style="font-family: 'Bayon', sans-serif;">គ្រូជំនួយការ</h5> -->
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <form action="" method="post">
-                                        <div class="modal-body" style=" font-family: 'Noto Serif Khmer', serif;">
-                                            <textarea name="desc-email" id="summernote" cols="30" rows="10"
-                                                class="summernote text-input form-control">
-                                        </textarea>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                                style="font-family: 'Noto Serif Khmer', serif;">បិត</button>
-                                            <button type="submit" name="send-email" class="btn btn-primary"
-                                                style="font-family: 'Noto Serif Khmer', serif;">
-                                                ផ្ញើរ <i class="fa-solid fa-paper-plane"></i></button>
-
-                                        </div>
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Ent Contact Email -->
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading<?php echo $row['id']?>">
@@ -504,18 +416,26 @@ if($result_user_profile ->num_rows>0){
                             </h2>
                             <div id="collapse<?php echo $row['id']?>" class="accordion-collapse collapse"
                                 aria-labelledby="heading<?php echo $row['id']?>" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
+                                <div class="accordion-body" style='font-family: "Hanuman", serif; '>
                                     <?php 
                                     echo $desc
                                     ?>
-                                    <a class="btn btn-info" href="#" style="font-family: 'Noto Serif Khmer', serif;"
-                                        data-bs-toggle="modal" data-bs-target="#commentModal">មើលមតិយោបល់</a>
-                                    <a class="btn btn-primary"
-                                        href="edit-digital-book-user.php?id=<?php echo $row['id']?>"
-                                        style="font-family: 'Noto Serif Khmer', serif;">កែសម្រួល</a>
-                                    <a class="btn btn-danger"
-                                        href="list-digital-book-user.php?id=<?php echo $row['id']?>"
-                                        style="font-family: 'Noto Serif Khmer', serif;">លុបឯកសារ</a>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="desc-email" value="Can I have you?">
+                                        <button type="submit" name="send-email" class="btn btn-primary my-3"
+                                            style="font-family: 'Noto Serif Khmer', serif;">
+                                            ផ្ញើរ <i class="fa-solid fa-paper-plane"></i></button>
+                                        <!-- <a class="btn btn-info my-3" href="#"
+                                        style="font-family: 'Noto Serif Khmer', serif;" data-bs-toggle="modal"
+                                        data-bs-target="#commentModal">មើលមតិយោបល់</a> -->
+                                        <a class="btn btn-primary"
+                                            href="edit-digital-book-user.php?id=<?php echo $row['id']?>"
+                                            style="font-family: 'Noto Serif Khmer', serif;">កែសម្រួល</a>
+                                        <a class="btn btn-danger"
+                                            href="list-digital-book-user.php?id=<?php echo $row['id']?>"
+                                            style="font-family: 'Noto Serif Khmer', serif;">លុបឯកសារ</a>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>

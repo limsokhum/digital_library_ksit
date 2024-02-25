@@ -83,9 +83,9 @@ if($email != false && $password != false){
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header d-flex justify-content-between py-3">
-                            <a class="m-0 btn btn-primary float-start font-weight-bold text-light"
-                                href="list-major.php"><i class="fa-solid fa-backward"></i> Back</a>
-                            <h6 class="m-0 float-end font-weight-bold text-primary">View Major</h6>
+                            <a class="m-0 btn float-start font-weight-bold text-light" href="list-major.php"
+                                style="background-color: #336666;"><i class="fa-solid fa-backward"></i> Back</a>
+                            <h6 class="m-0 float-end font-weight-bold " style="color: #336666;">View Major</h6>
                         </div>
                         <div class="card-body p-0">
                             <div class="p-5">

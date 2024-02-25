@@ -41,7 +41,7 @@ if(isset($_GET['id'])){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin list Teacher Management</title>
+    <title>Admin list Admin Management</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -88,9 +88,10 @@ if(isset($_GET['id'])){
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header d-flex justify-content-between py-3">
-                            <h6 class="m-0 float-start font-weight-bold text-primary">DataTables</h6>
-                            <a class="m-0 btn btn-primary float-end font-weight-bold text-light"
-                                href="add-admin.php">Add Admin</a>
+                            <h6 class="m-0 float-start font-weight-bold " style="color: #336666;">DataTables</h6>
+                            <a class="m-0 btn float-end font-weight-bold text-light" href="add-admin.php"
+                                style="background-color: #336666;">Add
+                                Admin</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

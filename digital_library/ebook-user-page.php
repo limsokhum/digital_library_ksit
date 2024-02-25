@@ -320,40 +320,40 @@ if($result_user_profile ->num_rows>0){
                         <div class="swiper mySwiper mt-3">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <img src="http://ebooks.elibrary-rule.com/public/images/saranas/thumb/2015thesis_Page_04.jpg"
-                                        alt="" style="width: 100%; height: 100%;">
+                                    <img src="assets/images/cover_book_01.png" alt=""
+                                        style="width: 100%; height: 100%;">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="http://ebooks.elibrary-rule.com/public/images/saranas/thumb/2015thesis_Page_04.jpg"
-                                        alt="" style="width: 100%; height: 100%;">
+                                    <img src="assets/images/cover_book_01.png" alt=""
+                                        style="width: 100%; height: 100%;">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="http://ebooks.elibrary-rule.com/public/images/saranas/thumb/2015thesis_Page_04.jpg"
-                                        alt="" style="width: 100%; height: 100%;">
+                                    <img src="assets/images/cover_book_01.png" alt=""
+                                        style="width: 100%; height: 100%;">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="http://ebooks.elibrary-rule.com/public/images/saranas/thumb/2015thesis_Page_04.jpg"
-                                        alt="" style="width: 100%; height: 100%;">
+                                    <img src="assets/images/cover_book_01.png" alt=""
+                                        style="width: 100%; height: 100%;">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="http://ebooks.elibrary-rule.com/public/images/saranas/thumb/2015thesis_Page_04.jpg"
-                                        alt="" style="width: 100%; height: 100%;">
+                                    <img src="assets/images/cover_book_01.png" alt=""
+                                        style="width: 100%; height: 100%;">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="http://ebooks.elibrary-rule.com/public/images/saranas/thumb/2015thesis_Page_04.jpg"
-                                        alt="" style="width: 100%; height: 100%;">
+                                    <img src="assets/images/cover_book_01.png" alt=""
+                                        style="width: 100%; height: 100%;">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="http://ebooks.elibrary-rule.com/public/images/saranas/thumb/2015thesis_Page_04.jpg"
-                                        alt="" style="width: 100%; height: 100%;">
+                                    <img src="assets/images/cover_book_01.png" alt=""
+                                        style="width: 100%; height: 100%;">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="http://ebooks.elibrary-rule.com/public/images/saranas/thumb/2015thesis_Page_04.jpg"
-                                        alt="" style="width: 100%; height: 100%;">
+                                    <img src="assets/images/cover_book_01.png" alt=""
+                                        style="width: 100%; height: 100%;">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="http://ebooks.elibrary-rule.com/public/images/saranas/thumb/2015thesis_Page_04.jpg"
-                                        alt="" style="width: 100%; height: 100%;">
+                                    <img src="assets/images/cover_book_01.png" alt=""
+                                        style="width: 100%; height: 100%;">
                                 </div>
                             </div>
                             <div class="swiper-pagination"></div>

@@ -86,7 +86,7 @@ if(isset($_GET['id'])){
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class=" m-0 font-weight-bold text-primary">Teacher Representative</h6>
+                            <h6 class=" m-0 font-weight-bold" style="color: #336666;">Teacher Representative</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

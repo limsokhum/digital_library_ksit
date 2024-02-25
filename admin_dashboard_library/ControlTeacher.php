@@ -52,8 +52,11 @@ if(isset($_POST['teacher_signup'])){
         $teacher_encpass = password_hash($teacher_password, PASSWORD_BCRYPT);
         $teacher_code = rand(999999, 111111);
         $teacher_status = "notverified";
-        $teacher_insert_data = "INSERT INTO teacher_tb (teacher_id,	firstname,	lastname, sex,	teacher_mail,	phone,	select_major,	specialty,	select_role,	teacher_password, image, teacher_detials,	teacher_code,	teacher_status)
-                                                values('$teacher_id', '$firstname', '$lastname', '$sex', '$teacher_email', '$phone', '$select_major', '$specialty', '$select_role', '$teacher_encpass', '$filesArray', '$teacher_detials', '$teacher_code', '$teacher_status')";
+        $teacher_insert_data = "INSERT INTO teacher_tb (teacher_id,firstname,lastname,sex,teacher_mail,phone,select_major,specialty,select_role,teacher_password,image,teacher_detials,teacher_code,teacher_status) 
+        VALUES('$teacher_id','$firstname','$lastname','$sex','$teacher_email','$phone','$select_major','$specialty','$select_role','$teacher_password','$filesArray','$teacher_detials','$teacher_code','$teacher_status')";
+        // $teacher_insert_data = "INSERT INTO teacher_tb (teacher_id,	firstname,	lastname, sex,	teacher_mail,	phone,	select_major,	specialty,	select_role,	teacher_password, image, teacher_detials,	teacher_code,	teacher_status)
+        //                                       values('$teacher_id', '$firstname', '$lastname', '$sex', '$teacher_email', '$phone', '$select_major', '$specialty', '$select_role', '$teacher_encpass', '$filesArray', '$teacher_detials', '$teacher_code', '$teacher_status')";
+        // $teacher_data_check = mysqli_query($conn, $teacher_insert_data);
         $teacher_data_check = mysqli_query($conn, $teacher_insert_data);
         if($teacher_data_check){
             $teacher_subject = "Email Verification Code";
@@ -166,6 +169,7 @@ if(isset($_POST['teacher_signup'])){
             $teacher_encpass = password_hash($teacher_password, PASSWORD_BCRYPT);
             $teacher_update_pass = "UPDATE teacher_tb SET teacher_code = $teacher_code, teacher_password = '$teacher_encpass' WHERE teacher_email = '$teacher_email'";
             $teacher_run_query = mysqli_query($conn, $teacher_update_pass);
+            // $teacher_run_query = mysqli_query($conn, $teacher_update_pass);
             if($teacher_run_query){
                 $teacher_info = "Your password changed. Now you can login with your new password.";
                 $_SESSION['teacher_info'] = $teacher_info;

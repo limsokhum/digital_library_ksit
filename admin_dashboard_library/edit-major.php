@@ -145,7 +145,7 @@ if(isset($_GET['id'])){
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header d-flex justify-content-between py-3">
-                            <h6 class="m-0 float-start font-weight-bold text-primary">Insert Data</h6>
+                            <h6 class="m-0 float-start font-weight-bold" style="color: #336666;">Insert Data</h6>
                         </div>
                         <div class="card-body p-0">
                             <div class="p-5">
@@ -244,8 +244,10 @@ if(isset($_GET['id'])){
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" name="update-major" class=" btn btn-primary"><i
-                                            class="fa-solid fa-circle-check"></i> Submit</button>
+                                    <button type="submit" name="update-major" class=" btn"
+                                        style="background-color: #336666; color: white;"><i
+                                            class="fa-solid fa-circle-check"></i>
+                                        Submit</button>
                                     <?php
                                     }
                                     }

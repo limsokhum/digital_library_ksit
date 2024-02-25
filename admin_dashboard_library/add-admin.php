@@ -88,13 +88,11 @@ if($email != false && $password != false){
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4" style="width: 40rem">
                         <div class="card-header d-flex justify-content-between py-3">
-                            <h6 class="m-0 float-start font-weight-bold text-primary">Insert Data</h6>
+                            <h6 class="m-0 float-start font-weight-bold" style="color: #336666;">Insert Data</h6>
                         </div>
                         <div class="card-body p-0">
                             <div class="p-5">
-
                                 <form action="add-admin.php" method="post" enctype="multipart/form-data">
-
                                     <?php
                     if(count($errors) == 1){
                         ?>
@@ -180,8 +178,8 @@ if($email != false && $password != false){
                                             accept=".jpg, .jpeg, .png" required multiple>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control btn btn-primary" type="submit" name="signup"
-                                            value="Signup">
+                                        <input class="form-control btn" type="submit" name="signup" value="Signup"
+                                            style="background-color: #336666; color: white;">
                                     </div>
 
                                 </form>

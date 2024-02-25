@@ -36,7 +36,7 @@ if($_SESSION['info'] == false){
     <link rel="stylesheet" href="css/style-admin.css">
 </head>
 
-<body class="bg-gradient-primary">
+<body class="" style="background-color: #336666;">
 
     <div class="container">
 
@@ -91,8 +91,9 @@ if($_SESSION['info'] == false){
                                                 class="form-control form-control-user" id="exampleInputEmail"
                                                 aria-describedby="emailHelp" placeholder="Comform Password...">
                                         </div>
-                                        <input class="form-control btn btn-primary" type="submit" name="change-password"
-                                            value="Change">
+                                        <input class="form-control btn "
+                                            style="background-color: #336666; color: white;" type="submit"
+                                            name="change-password" value="Change Password">
                                     </form>
                                     <hr>
                                     <div class="text-center">

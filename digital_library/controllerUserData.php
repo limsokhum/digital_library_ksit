@@ -5,7 +5,6 @@ $email = "";
 $name = "";
 $errors = array();
 
-//if user signup button
 if(isset($_POST['signup'])){
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);

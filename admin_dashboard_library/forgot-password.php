@@ -31,7 +31,7 @@ require_once "ControlAdmin.php";
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gradient-primary">
+<body class="" style="background-color: #336666;">
 
     <div class="container">
 
@@ -72,12 +72,15 @@ require_once "ControlAdmin.php";
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address..." value="<?php echo $email ?>">
                                         </div>
-                                        <input class="form-control btn btn-primary" type="submit" name="check-email"
-                                            value="Continue">
+                                        <input class="form-control btn" style="background-color: #336666; color: white;"
+                                            type="submit" name="check-email" value="Continue">
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="login.php">Already have an account? Login!</a>
+                                        <a class="small" href="login.php" style="font-weight: bold; color: red;">Already
+                                            have
+                                            an
+                                            account? Login!</a>
                                     </div>
                                 </div>
                             </div>

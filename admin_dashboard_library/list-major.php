@@ -94,9 +94,9 @@ if($email != false && $password != false){
                     <div class="card shadow mb-4">
 
                         <div class="card-header d-flex justify-content-between py-3">
-                            <h6 class="m-0 float-start font-weight-bold text-primary">DataTables</h6>
-                            <a class="m-0 btn btn-primary float-end font-weight-bold text-light"
-                                href="add-major.php">Add
+                            <h6 class="m-0 float-start font-weight-bold" style="color: #336666;">DataTables</h6>
+                            <a class="m-0 btn  float-end font-weight-bold text-light" href="add-major.php"
+                                style="background-color: #336666;">Add
                                 Major</a>
                         </div>
                         <div class="card-body">
