@@ -93,7 +93,6 @@ require_once "ControlTeacher.php";
                         </div>
                         <div class="card-body p-0">
                             <div class="p-5">
-
                                 <form action="add-teacher.php" method="post" enctype="multipart/form-data">
                                     <?php
                                     if(count($teacher_errors) == 1){

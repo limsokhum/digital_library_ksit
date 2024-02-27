@@ -44,6 +44,58 @@ if(isset($_GET['id'])){
     }
 }
 ?>
+
+<?php
+            // if(isset($_GET['idcomment'])){
+            // $commentId= $_GET['idcomment'];
+            // $queryComment = "SELECT * FROM digitalbook_tb WHERE id=$commentId";
+            // $resultComment = $conn->query($queryComment);
+            // if($resultComment->num_rows>0){
+            // while($rowComment = $resultComment->fetch_assoc()){
+            ?>
+<!-- <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+<?php
+    //         }
+    //     }
+    // }
+?>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php
  if(isset($_POST['edit_profile'])){
     $name = mysqli_real_escape_string($conn, $_POST['name']);
@@ -303,6 +355,10 @@ if($result_user_profile ->num_rows>0){
     <!-- Start All Section Start Content -->
     <div class="container">
 
+
+
+
+
         <?php
         if(isset($_SESSION['statuse']))
         {
@@ -420,21 +476,41 @@ if($result_user_profile ->num_rows>0){
                                     <?php 
                                     echo $desc
                                     ?>
+                                    <div class="show-comment">
+                                        <div class="dsc-comment rounded border my-2" id="Comment">
+                                            <div class="content-dsc px-3">
+                                                <h5 class="fw-bolder mt-2 text-danger">មតិយោបល់ <i
+                                                        class="fa-solid fa-message text-warning"></i></h5>
+                                                <p>
+                                                    <?php
+                                                if($row['comment']==NULL){
+                                                    ?>
+                                                <p>មិនទាន់មានមតិយបល់!</p>
+                                                <?php
+                                                }else{?>
+                                                <p class=" text-primary"><?php echo $row['comment'];?></p>
+                                                <?php
+                                            }
+                                            ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <form action="" method="post">
                                         <input type="hidden" name="desc-email" value="Can I have you?">
                                         <button type="submit" name="send-email" class="btn btn-primary my-3"
                                             style="font-family: 'Noto Serif Khmer', serif;">
                                             ផ្ញើរ <i class="fa-solid fa-paper-plane"></i></button>
-                                        <!-- <a class="btn btn-info my-3" href="#"
-                                        style="font-family: 'Noto Serif Khmer', serif;" data-bs-toggle="modal"
-                                        data-bs-target="#commentModal">មើលមតិយោបល់</a> -->
                                         <a class="btn btn-primary"
                                             href="edit-digital-book-user.php?id=<?php echo $row['id']?>"
-                                            style="font-family: 'Noto Serif Khmer', serif;">កែសម្រួល</a>
+                                            style="font-family: 'Noto Serif Khmer', serif;">កែសម្រួល <i
+                                                class="fa-solid fa-pen-to-square"></i></a>
                                         <a class="btn btn-danger"
                                             href="list-digital-book-user.php?id=<?php echo $row['id']?>"
-                                            style="font-family: 'Noto Serif Khmer', serif;">លុបឯកសារ</a>
+                                            style="font-family: 'Noto Serif Khmer', serif;">លុបឯកសារ <i
+                                                class="fa-solid fa-trash"></i></a>
                                     </form>
+
 
                                 </div>
                             </div>
@@ -509,6 +585,10 @@ if($result_user_profile ->num_rows>0){
     });
     </script>
     <script>
+    function onclickComment() {
+        document.getElementById('Comment').style.display = "block";
+    }
+
     function onclickShow() {
         document.getElementById('passwords').style.display = "block";
     }
