@@ -39,7 +39,7 @@ if(isset($_GET['id'])){
         $abstract = $_POST['abstract'];
         $keyword = $_POST['keyword'];
         $status = $_POST['status'];
-        
+        $comment = $_POST['comment'];
         // start upload image one
         $totalFiles_one = count($_FILES['fileImg_one']['name']);
         $filesArray_one = array();
@@ -90,7 +90,7 @@ if(isset($_GET['id'])){
         $size = $_FILES['myfile']['size'];
 
         if($file==NULL && $imageName_one==NULL && $imageName_two==NULL){
-            $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',status='$status' WHERE id = $query_edit_digital_book_id";
+            $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',status='$status' ,comment='$comment' WHERE id = $query_edit_digital_book_id";
         }
         elseif($file!=NULL && $imageName_one==NULL && $imageName_two==NULL){
                 if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
@@ -102,16 +102,16 @@ if(isset($_GET['id'])){
                     
                 //-- move the uploaded (temporary) file to the specified destination --//
                     if (move_uploaded_file($file, $destination)) {
-                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',name='$filename',status='$status' WHERE id = $query_edit_digital_book_id";
+                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',name='$filename',status='$status',comment='$comment' WHERE id = $query_edit_digital_book_id";
                         }
                 }
             }elseif($file==NULL && $imageName_one!=NULL && $imageName_two==NULL){
-                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_one='$filesArray_one',status='$status' WHERE id = $query_edit_digital_book_id";
+                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_one='$filesArray_one',status='$status',comment='$comment' WHERE id = $query_edit_digital_book_id";
             }elseif($file==NULL && $imageName_one==NULL && $imageName_two!=NULL){
-                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_two='$filesArray_two',status='$status' WHERE id = $query_edit_digital_book_id";
+                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_two='$filesArray_two',status='$status',comment='$comment' WHERE id = $query_edit_digital_book_id";
                 
             }elseif($file==NULL && $imageName_one!=NULL && $imageName_two!=NULL){
-                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_one='$filesArray_one',image_two='$filesArray_two',status='$status' WHERE id = $query_edit_digital_book_id";
+                $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_one='$filesArray_one',image_two='$filesArray_two',status='$status',comment='$comment' WHERE id = $query_edit_digital_book_id";
                 
             }elseif($file!=NULL && $imageName_one!=NULL && $imageName_two==NULL){
                 if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
@@ -123,7 +123,7 @@ if(isset($_GET['id'])){
                 //-- move the uploaded (temporary) file to the specified destination --//
                     
                     if (move_uploaded_file($file, $destination)) {
-                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_one='$filesArray_one',name='$filename',status='$status' WHERE id = $query_edit_digital_book_id";
+                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_one='$filesArray_one',name='$filename',status='$status',comment='$comment' WHERE id = $query_edit_digital_book_id";
                         }
                 }
             }elseif($file!=NULL && $imageName_one==NULL && $imageName_two!=NULL){
@@ -137,7 +137,7 @@ if(isset($_GET['id'])){
                 //-- move the uploaded (temporary) file to the specified destination --//
                     
                     if (move_uploaded_file($file, $destination)) {
-                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_two='$filesArray_two',name='$filename',status='$status' WHERE id = $query_edit_digital_book_id";
+                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_two='$filesArray_two',name='$filename',status='$status',comment='$comment' WHERE id = $query_edit_digital_book_id";
                         }
                 }
             }else{
@@ -151,7 +151,7 @@ if(isset($_GET['id'])){
                 //-- move the uploaded (temporary) file to the specified destination --//
                     
                     if (move_uploaded_file($file, $destination)) {
-                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_one='$filesArray_one',image_two='$filesArray_two',name='$filename',status='$status' WHERE id = $query_edit_digital_book_id";
+                        $sql = "UPDATE digitalbook_tb SET title='$title',name_auther='$name_auther',date='$date',select_major='$select_major',digital_book='$digital_book',abstract='$abstract',keyword='$keyword',image_one='$filesArray_one',image_two='$filesArray_two',name='$filename',status='$status',comment='$comment' WHERE id = $query_edit_digital_book_id";
                         }
                 }
             }
@@ -468,6 +468,16 @@ if(isset($_GET['id'])){
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="label-control" for=""
+                                            style="font-family:'Koulen', sans-serif;">មតិយបល់
+                                            <spatn class=" text-danger">:*
+                                            </spatn>
+                                        </label>
+                                        <textarea name="comment" id="" cols="30" rows="10"
+                                            class="summernote form-control">
+                                        </textarea>
                                     </div>
                                     <label class="label-control" for=""
                                         style="font-family:'Koulen', sans-serif;">បច្ចុប្បន្នភាព

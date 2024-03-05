@@ -158,15 +158,18 @@ if (isset($_GET['file_id_view'])) {
                                         <tr>
                                             <th>#</th>
                                             <th>ប្រធានបទ</th>
-                                            <th>ជំនាញ</th>
-                                            <th>អ្នកនិពន្ធ</th>
                                             <th>អត្ថបទ</th>
+                                            <th>ជំនាញ</th>
                                             <th>ថ្ងៃ-ទី</th>
                                             <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
+                                        $query_select_digital_book_five = "SELECT * FROM digitalbook_tb WHERE (digital_book='e-project')AND(status=4) ORDER BY id DESC";
+                                        $result_select_digital_ebook_five = $conn->query($query_select_digital_book_five);
+                                        
                                         $query_select_digital_book_one = "SELECT * FROM digitalbook_tb WHERE (digital_book='e-project')AND(status=1) ORDER BY id DESC";
                                         $result_select_digital_ebook_one = $conn->query($query_select_digital_book_one);
 
@@ -186,13 +189,57 @@ if (isset($_GET['file_id_view'])) {
                                         <tr>
                                             <td><?php echo $cnt?></td>
                                             <td><?php echo $row_select_digital_ebook_one['title']?></td>
-                                            <td><?php echo $row_select_digital_ebook_one['select_major']?></td>
-                                            <td><?php echo $row_select_digital_ebook_one['name_auther']?></td>
-                                            <td><a class="text-secondary"
-                                                    href="e-project.php?file_id_view=<?php echo $row_select_digital_ebook_one['id'] ?>"
+                                            <td><?php
+                                            if($row_select_digital_ebook_one['name']==NULL){
+                                                ?>
+                                                <p>Null File</p>
+                                                <?php
+                                            }else{
+                                                ?>
+                                                <a class="text-secondary"
+                                                    href="e-books.php?file_id_view=<?php echo $row_select_digital_ebook_one['id'] ?>"
                                                     target="_blank"><?php echo $row_select_digital_ebook_one['name']?></a>
+                                                <?php
+                                            }
+                                            ?>
+
+                                            </td>
+                                            <td><?php 
+                                            if($row_select_digital_ebook_one['select_major']==NULL){
+                                            ?>
+                                                <p>អ្នកប្រើប្រាស់</p>
+                                                <?php
+                                            }else{
+                                                echo $row_select_digital_ebook_one['select_major'];
+                                            }
+                                           
+                                            ?>
                                             </td>
                                             <td><?php echo $row_select_digital_ebook_one['date']?></td>
+                                            <td><?php 
+                                                if($row_select_digital_ebook_one['status'] == 0){
+                                                    ?>
+                                                <p class="text-primary"><?php echo("Please Waiting");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_one['status'] ==1){
+                                                    ?>
+                                                <p class="text-secondary"><?php echo("Publish");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_one['status'] ==2){
+                                                    ?>
+                                                <p class="text-success"><?php echo("Edit");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_one['status'] ==4){
+                                                    ?>
+                                                <p class="text-primary"><?php echo("User Edited");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_one['status'] ==3){
+                                                    ?>
+                                                <p class="text-danger"><?php echo("Rejecked");?></p>
+                                                <?php
+                                                }
+                                            ?>
+                                            </td>
                                             <td>
                                                 <a href="view-digital-eproject.php?id=<?php echo $row_select_digital_ebook_one['id']?>"
                                                     class="btn btn-secondary btn-circle btn-sm">
@@ -218,13 +265,57 @@ if (isset($_GET['file_id_view'])) {
                                         <tr class="text-primary">
                                             <td><?php echo $cnt?></td>
                                             <td><?php echo $row_select_digital_ebook_two['title']?></td>
-                                            <td><?php echo $row_select_digital_ebook_two['select_major']?></td>
-                                            <td><?php echo $row_select_digital_ebook_two['name_auther']?></td>
-                                            <td><a class=""
+                                            <td><?php
+                                            if($row_select_digital_ebook_two['name']==NULL){
+                                                ?>
+                                                <p>Null File</p>
+                                                <?php
+                                            }else{
+                                                ?>
+                                                <a class="text-secondary"
                                                     href="e-books.php?file_id_view=<?php echo $row_select_digital_ebook_two['id'] ?>"
                                                     target="_blank"><?php echo $row_select_digital_ebook_two['name']?></a>
+                                                <?php
+                                            }
+                                            ?>
+
+                                            </td>
+                                            <td><?php 
+                                            if($row_select_digital_ebook_two['select_major']==NULL){
+                                            ?>
+                                                <p>អ្នកប្រើប្រាស់</p>
+                                                <?php
+                                            }else{
+                                                echo $row_select_digital_ebook_two['select_major'];
+                                            }
+                                           
+                                            ?>
                                             </td>
                                             <td><?php echo $row_select_digital_ebook_two['date']?></td>
+                                            <td class="text-secondary"><?php 
+                                                if($row_select_digital_ebook_two['status'] == 0){
+                                                    ?>
+                                                <p class="text-primary"><?php echo("Please Waiting");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_two['status'] ==1){
+                                                    ?>
+                                                <p class="text-secondary"><?php echo("Publish");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_two['status'] ==2){
+                                                    ?>
+                                                <p class="text-success"><?php echo("Edit");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_two['status'] ==4){
+                                                    ?>
+                                                <p class="text-primary"><?php echo("User Edited");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_two['status'] ==3){
+                                                    ?>
+                                                <p class="text-danger"><?php echo("Rejecked");?></p>
+                                                <?php
+                                                }
+                                            ?>
+                                            </td>
                                             <td>
                                                 <a href="view-digital-eproject.php?id=<?php echo $row_select_digital_ebook_two['id']?>"
                                                     class="btn btn-secondary btn-circle btn-sm">
@@ -244,20 +335,63 @@ if (isset($_GET['file_id_view'])) {
                                         $cnt=$cnt+1;
                                             }
                                         }
-
                                         if($result_select_digital_ebook_three->num_rows>0){
                                             while($row_select_digital_ebook_three = $result_select_digital_ebook_three->fetch_assoc()){
                                                 ?>
                                         <tr class="text-success">
                                             <td><?php echo $cnt?></td>
                                             <td><?php echo $row_select_digital_ebook_three['title']?></td>
-                                            <td><?php echo $row_select_digital_ebook_three['select_major']?></td>
-                                            <td><?php echo $row_select_digital_ebook_three['name_auther']?></td>
-                                            <td><a class="text-success"
+                                            <td><?php
+                                            if($row_select_digital_ebook_three['name']==NULL){
+                                                ?>
+                                                <p>Null File</p>
+                                                <?php
+                                            }else{
+                                                ?>
+                                                <a class="text-success"
                                                     href="e-books.php?file_id_view=<?php echo $row_select_digital_ebook_three['id'] ?>"
                                                     target="_blank"><?php echo $row_select_digital_ebook_three['name']?></a>
+                                                <?php
+                                            }
+                                            ?>
+
+                                            </td>
+                                            <td><?php 
+                                            if($row_select_digital_ebook_three['select_major']==NULL){
+                                            ?>
+                                                <p>អ្នកប្រើប្រាស់</p>
+                                                <?php
+                                            }else{
+                                                echo $row_select_digital_ebook_three['select_major'];
+                                            }
+                                           
+                                            ?>
                                             </td>
                                             <td><?php echo $row_select_digital_ebook_three['date']?></td>
+                                            <td><?php 
+                                                if($row_select_digital_ebook_three['status'] == 0){
+                                                    ?>
+                                                <p class="text-primary"><?php echo("Please Waiting");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_three['status'] ==1){
+                                                    ?>
+                                                <p class="text-secondary"><?php echo("Publish");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_three['status'] ==2){
+                                                    ?>
+                                                <p class="text-success"><?php echo("Edit");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_three['status'] ==4){
+                                                    ?>
+                                                <p class="text-primary"><?php echo("User Edited");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_three['status'] ==3){
+                                                    ?>
+                                                <p class="text-danger"><?php echo("Rejecked");?></p>
+                                                <?php
+                                                }
+                                            ?>
+                                            </td>
                                             <td>
                                                 <a href="view-digital-eproject.php?id=<?php echo $row_select_digital_ebook_three['id']?>"
                                                     class="btn btn-secondary btn-circle btn-sm">
@@ -283,13 +417,57 @@ if (isset($_GET['file_id_view'])) {
                                         <tr class="text-danger">
                                             <td><?php echo $cnt?></td>
                                             <td><?php echo $row_select_digital_ebook_for['title']?></td>
-                                            <td><?php echo $row_select_digital_ebook_for['select_major']?></td>
-                                            <td><?php echo $row_select_digital_ebook_for['name_auther']?></td>
-                                            <td><a class="text-danger"
+                                            <td><?php
+                                            if($row_select_digital_ebook_for['name']==NULL){
+                                                ?>
+                                                <p>Null File</p>
+                                                <?php
+                                            }else{
+                                                ?>
+                                                <a class="text-danger"
                                                     href="e-books.php?file_id_view=<?php echo $row_select_digital_ebook_for['id'] ?>"
                                                     target="_blank"><?php echo $row_select_digital_ebook_for['name']?></a>
+                                                <?php
+                                            }
+                                            ?>
+
+                                            </td>
+                                            <td><?php 
+                                            if($row_select_digital_ebook_for['select_major']==NULL){
+                                            ?>
+                                                <p>អ្នកប្រើប្រាស់</p>
+                                                <?php
+                                            }else{
+                                                echo $row_select_digital_ebook_for['select_major'];
+                                            }
+                                           
+                                            ?>
                                             </td>
                                             <td><?php echo $row_select_digital_ebook_for['date']?></td>
+                                            <td><?php 
+                                                if($row_select_digital_ebook_for['status'] == 0){
+                                                    ?>
+                                                <p class="text-primary"><?php echo("Please Waiting");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_for['status'] ==1){
+                                                    ?>
+                                                <p class="text-secondary"><?php echo("Publish");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_for['status'] ==2){
+                                                    ?>
+                                                <p class="text-success"><?php echo("Edit");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_for['status'] ==4){
+                                                    ?>
+                                                <p class="text-primary"><?php echo("User Edited");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_for['status'] ==3){
+                                                    ?>
+                                                <p class="text-danger"><?php echo("Rejecked");?></p>
+                                                <?php
+                                                }
+                                            ?>
+                                            </td>
                                             <td>
                                                 <a href="view-digital-eproject.php?id=<?php echo $row_select_digital_ebook_for['id']?>"
                                                     class="btn btn-secondary btn-circle btn-sm">
@@ -309,6 +487,92 @@ if (isset($_GET['file_id_view'])) {
                                         $cnt=$cnt+1;
                                             }
                                         }
+                                        ?>
+
+
+                                        <?php
+                                        if($result_select_digital_ebook_five->num_rows>0){
+                                        while($row_select_digital_ebook_five =
+                                        $result_select_digital_ebook_five->fetch_assoc()){
+                                        ?>
+                                        <tr class="text-primary">
+                                            <td><?php echo $cnt?></td>
+                                            <td>
+                                                <?php echo $row_select_digital_ebook_five['title']?>
+                                            </td>
+
+                                            </td>
+                                            <td><?php
+                                            if($row_select_digital_ebook_five['name']==NULL){
+                                                ?>
+                                                <p>Null File</p>
+                                                <?php
+                                            }else{
+                                                ?>
+                                                <a class="text-primary"
+                                                    href="e-books.php?file_id_view=<?php echo $row_select_digital_ebook_five['id'] ?>"
+                                                    target="_blank"><?php echo $row_select_digital_ebook_five['name']?></a>
+                                                <?php
+                                            }
+                                            ?>
+
+                                            </td>
+                                            <td><?php 
+                                            if($row_select_digital_ebook_five['select_major']==NULL){
+                                            ?>
+                                                <p>អ្នកប្រើប្រាស់</p>
+                                                <?php
+                                            }else{
+                                                echo $row_select_digital_ebook_five['select_major'];
+                                            }
+                                           
+                                            ?>
+                                            </td>
+                                            <td><?php echo $row_select_digital_ebook_five['date']?></td>
+                                            <td><?php 
+                                                if($row_select_digital_ebook_five['status'] == 0){
+                                                    ?>
+                                                <p class="text-primary"><?php echo("Please Waiting");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_five['status'] ==1){
+                                                    ?>
+                                                <p class="text-secondary"><?php echo("Publish");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_five['status'] ==2){
+                                                    ?>
+                                                <p class="text-success"><?php echo("Edit");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_five['status'] ==4){
+                                                    ?>
+                                                <p class="text-primary"><?php echo("User Edited");?></p>
+                                                <?php
+                                                }elseif($row_select_digital_ebook_five['status'] ==3){
+                                                    ?>
+                                                <p class="text-danger"><?php echo("Rejecked");?></p>
+                                                <?php
+                                                }
+                                            ?>
+                                            </td>
+                                            <td>
+                                                <a href="view-digital-ebook.php?id=<?php echo $row_select_digital_ebook_five['id']?>"
+                                                    class="btn btn-secondary btn-circle btn-sm">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                </a>
+                                                <a href="edit-digital-book.php?id=<?php echo $row_select_digital_ebook_five['id']?>"
+                                                    class="btn btn-primary btn-circle btn-sm">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                                <a href="e-books.php?id=<?php echo $row_select_digital_ebook_five['id']?>"
+                                                    class="btn btn-danger btn-circle btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                        $cnt=$cnt+1;
+                                            }
+                                        }
+                                        
                                         ?>
 
                                     </tbody>

@@ -35,7 +35,7 @@ if(isset($_GET['id'])){
         $comment = $_POST['comment'];
         $keyword = $_POST['keyword'];
     
-        $status = 0;
+        $status = 4;
         
         // start upload image one
         $totalFiles_one = count($_FILES['fileImg_one']['name']);

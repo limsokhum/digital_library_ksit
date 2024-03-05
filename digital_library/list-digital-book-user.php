@@ -356,9 +356,6 @@ if($result_user_profile ->num_rows>0){
     <div class="container">
 
 
-
-
-
         <?php
         if(isset($_SESSION['statuse']))
         {
@@ -402,8 +399,6 @@ if($result_user_profile ->num_rows>0){
                 <div class="card-type-list-digital-user mt-3">
                     <div class="accordion" id="accordionExample">
 
-
-
                         <?php
                         $query = "SELECT * FROM digitalbook_tb WHERE  teacher_mail='$email'";
                    
@@ -416,6 +411,9 @@ if($result_user_profile ->num_rows>0){
                                 $desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
                         ?>
 
+                        <?php
+                        if($row['status'] == 0){
+                            ?>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading<?php echo $row['id']?>">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -515,6 +513,431 @@ if($result_user_profile ->num_rows>0){
                                 </div>
                             </div>
                         </div>
+                        <?php
+                        }elseif($row['status'] ==1){
+                            ?>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading<?php echo $row['id']?>">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse<?php echo $row['id']?>" aria-expanded="false"
+                                    aria-controls="collapse<?php echo $row['id']?>">
+                                    <table class="table table-striped" style="font-family: 'Noto Serif Khmer', serif;">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ប្រធានបទ Digital Book</th>
+                                                <th scope="col">អ្នកនិពន្ធ</th>
+                                                <th scope="col">អត្ថបទ</th>
+                                                <th scope="col">ប្រភេទអត្ថបទ</th>
+                                                <th scope="col">កាលបរិច្ឆេត</th>
+                                                <th scope="col">status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <?php echo $row['title']?>
+                                                </th>
+                                                <td><?php echo $row['name_auther']?></td>
+                                                <td><?php echo $row['name']?></td>
+                                                <td><?php echo $row['digital_book']?></td>
+                                                <td><?php echo $row['date']?></td>
+
+                                                <td>
+                                                    <?php 
+                                                if($row['status'] == 0){
+                                                    ?>
+                                                    <p class="text-primary"><?php echo("Please Waiting");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==1){
+                                                    ?>
+                                                    <p class="text-secondary"><?php echo("Publish");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==2){
+                                                    ?>
+                                                    <p class="text-success"><?php echo("Editing");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==3){
+                                                    ?>
+                                                    <p class="text-danger"><?php echo("Rejecked");?></p>
+                                                    <?php
+                                                }
+                                            ?>
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </button>
+                            </h2>
+                            <div id="collapse<?php echo $row['id']?>" class="accordion-collapse collapse"
+                                aria-labelledby="heading<?php echo $row['id']?>" data-bs-parent="#accordionExample">
+                                <div class="accordion-body" style="font-family: 'Noto Serif Khmer', serif; ">
+                                    <div class="lh-lg">
+                                        <?php 
+                                    echo $desc
+                                    ?>
+                                    </div>
+
+                                    <div class=" show-comment">
+                                        <div class="dsc-comment rounded border my-2" id="Comment">
+                                            <div class="content-dsc px-3">
+                                                <h5 class="fw-bolder mt-2 text-danger">មតិយោបល់ <i
+                                                        class="fa-solid fa-message text-warning"></i></h5>
+                                                <p>
+                                                    <?php
+                                                if($row['comment']==NULL){
+                                                    ?>
+                                                <p>មិនទាន់មានមតិយបល់!</p>
+                                                <?php
+                                                }else{?>
+                                                <p class=" text-primary"><?php echo $row['comment'];?></p>
+                                                <?php
+                                            }
+                                            ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <form action="" method="post">
+                                        <input type="hidden" name="desc-email" value="Can I have you?">
+                                        <button type="submit" name="send-email" class="btn btn-primary my-3"
+                                            style="font-family: 'Noto Serif Khmer', serif;">
+                                            ផ្ញើរ <i class="fa-solid fa-paper-plane"></i></button>
+                                        <a class="btn btn-primary"
+                                            href="edit-digital-book-user.php?id=<?php echo $row['id']?>"
+                                            style="font-family: 'Noto Serif Khmer', serif;">កែសម្រួល <i
+                                                class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="btn btn-danger"
+                                            href="list-digital-book-user.php?id=<?php echo $row['id']?>"
+                                            style="font-family: 'Noto Serif Khmer', serif;">លុបឯកសារ <i
+                                                class="fa-solid fa-trash"></i></a>
+                                    </form> -->
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                            
+                        }elseif($row['status'] ==2){
+                            ?>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading<?php echo $row['id']?>">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse<?php echo $row['id']?>" aria-expanded="false"
+                                    aria-controls="collapse<?php echo $row['id']?>">
+                                    <table class="table table-striped" style="font-family: 'Noto Serif Khmer', serif;">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ប្រធានបទ Digital Book</th>
+                                                <th scope="col">អ្នកនិពន្ធ</th>
+                                                <th scope="col">អត្ថបទ</th>
+                                                <th scope="col">ប្រភេទអត្ថបទ</th>
+                                                <th scope="col">កាលបរិច្ឆេត</th>
+                                                <th scope="col">status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <?php echo $row['title']?>
+                                                </th>
+                                                <td><?php echo $row['name_auther']?></td>
+                                                <td><?php echo $row['name']?></td>
+                                                <td><?php echo $row['digital_book']?></td>
+                                                <td><?php echo $row['date']?></td>
+
+                                                <td>
+                                                    <?php 
+                                                if($row['status'] == 0){
+                                                    ?>
+                                                    <p class="text-primary"><?php echo("Please Waiting");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==1){
+                                                    ?>
+                                                    <p class="text-secondary"><?php echo("Publish");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==2){
+                                                    ?>
+                                                    <p class="text-success"><?php echo("Editing");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==3){
+                                                    ?>
+                                                    <p class="text-danger"><?php echo("Rejecked");?></p>
+                                                    <?php
+                                                }
+                                            ?>
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </button>
+                            </h2>
+                            <div id="collapse<?php echo $row['id']?>" class="accordion-collapse collapse"
+                                aria-labelledby="heading<?php echo $row['id']?>" data-bs-parent="#accordionExample">
+                                <div class="accordion-body" style='font-family: "Hanuman", serif; '>
+                                    <?php 
+                                    echo $desc
+                                    ?>
+                                    <div class="show-comment">
+                                        <div class="dsc-comment rounded border my-2" id="Comment">
+                                            <div class="content-dsc px-3">
+                                                <h5 class="fw-bolder mt-2 text-danger">មតិយោបល់ <i
+                                                        class="fa-solid fa-message text-warning"></i></h5>
+                                                <p>
+                                                    <?php
+                                                if($row['comment']==NULL){
+                                                    ?>
+                                                <p>មិនទាន់មានមតិយបល់!</p>
+                                                <?php
+                                                }else{?>
+                                                <p class=" text-primary"><?php echo $row['comment'];?></p>
+                                                <?php
+                                            }
+                                            ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="desc-email" value="Can I have you?">
+                                        <button type="submit" name="send-email" class="btn btn-primary my-3"
+                                            style="font-family: 'Noto Serif Khmer', serif;">
+                                            ផ្ញើរ <i class="fa-solid fa-paper-plane"></i></button>
+                                        <a class="btn btn-primary"
+                                            href="edit-digital-book-user.php?id=<?php echo $row['id']?>"
+                                            style="font-family: 'Noto Serif Khmer', serif;">កែសម្រួល <i
+                                                class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="btn btn-danger"
+                                            href="list-digital-book-user.php?id=<?php echo $row['id']?>"
+                                            style="font-family: 'Noto Serif Khmer', serif;">លុបឯកសារ <i
+                                                class="fa-solid fa-trash"></i></a>
+                                    </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        }elseif($row['status'] ==4){
+                            ?>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading<?php echo $row['id']?>">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse<?php echo $row['id']?>" aria-expanded="false"
+                                    aria-controls="collapse<?php echo $row['id']?>">
+                                    <table class="table table-striped" style="font-family: 'Noto Serif Khmer', serif;">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ប្រធានបទ Digital Book</th>
+                                                <th scope="col">អ្នកនិពន្ធ</th>
+                                                <th scope="col">អត្ថបទ</th>
+                                                <th scope="col">ប្រភេទអត្ថបទ</th>
+                                                <th scope="col">កាលបរិច្ឆេត</th>
+                                                <th scope="col">status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <?php echo $row['title']?>
+                                                </th>
+                                                <td><?php echo $row['name_auther']?></td>
+                                                <td><?php echo $row['name']?></td>
+                                                <td><?php echo $row['digital_book']?></td>
+                                                <td><?php echo $row['date']?></td>
+
+                                                <td>
+                                                    <?php 
+                                                if($row['status'] == 0){
+                                                    ?>
+                                                    <p class="text-primary"><?php echo("Please Waiting");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==1){
+                                                    ?>
+                                                    <p class="text-secondary"><?php echo("Publish");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==2){
+                                                    ?>
+                                                    <p class="text-success"><?php echo("Editing");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==3){
+                                                    ?>
+                                                    <p class="text-danger"><?php echo("Rejecked");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==4){
+                                                    ?>
+                                                    <p class="text-warning"><?php echo("I'm edited");?></p>
+                                                    <?php
+                                                }
+                                            ?>
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </button>
+                            </h2>
+                            <div id="collapse<?php echo $row['id']?>" class="accordion-collapse collapse"
+                                aria-labelledby="heading<?php echo $row['id']?>" data-bs-parent="#accordionExample">
+                                <div class="accordion-body" style='font-family: "Hanuman", serif; '>
+                                    <?php 
+                                    echo $desc
+                                    ?>
+                                    <div class="show-comment">
+                                        <div class="dsc-comment rounded border my-2" id="Comment">
+                                            <div class="content-dsc px-3">
+                                                <h5 class="fw-bolder mt-2 text-danger">មតិយោបល់ <i
+                                                        class="fa-solid fa-message text-warning"></i></h5>
+                                                <p>
+                                                    <?php
+                                                if($row['comment']==NULL){
+                                                    ?>
+                                                <p>មិនទាន់មានមតិយបល់!</p>
+                                                <?php
+                                                }else{?>
+                                                <p class=" text-primary"><?php echo $row['comment'];?></p>
+                                                <?php
+                                            }
+                                            ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="desc-email" value="Can I have you?">
+                                        <button type="submit" name="send-email" class="btn btn-primary my-3"
+                                            style="font-family: 'Noto Serif Khmer', serif;">
+                                            ផ្ញើរ <i class="fa-solid fa-paper-plane"></i></button>
+                                        <a class="btn btn-primary"
+                                            href="edit-digital-book-user.php?id=<?php echo $row['id']?>"
+                                            style="font-family: 'Noto Serif Khmer', serif;">កែសម្រួល <i
+                                                class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="btn btn-danger"
+                                            href="list-digital-book-user.php?id=<?php echo $row['id']?>"
+                                            style="font-family: 'Noto Serif Khmer', serif;">លុបឯកសារ <i
+                                                class="fa-solid fa-trash"></i></a>
+                                    </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        }elseif($row['status'] ==3){
+                            ?>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading<?php echo $row['id']?>">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse<?php echo $row['id']?>" aria-expanded="false"
+                                    aria-controls="collapse<?php echo $row['id']?>">
+                                    <table class="table table-striped" style="font-family: 'Noto Serif Khmer', serif;">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ប្រធានបទ Digital Book</th>
+                                                <th scope="col">អ្នកនិពន្ធ</th>
+                                                <th scope="col">អត្ថបទ</th>
+                                                <th scope="col">ប្រភេទអត្ថបទ</th>
+                                                <th scope="col">កាលបរិច្ឆេត</th>
+                                                <th scope="col">status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <?php echo $row['title']?>
+                                                </th>
+                                                <td><?php echo $row['name_auther']?></td>
+                                                <td><?php echo $row['name']?></td>
+                                                <td><?php echo $row['digital_book']?></td>
+                                                <td><?php echo $row['date']?></td>
+
+                                                <td>
+                                                    <?php 
+                                                if($row['status'] == 0){
+                                                    ?>
+                                                    <p class="text-primary"><?php echo("Please Waiting");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==1){
+                                                    ?>
+                                                    <p class="text-secondary"><?php echo("Publish");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==2){
+                                                    ?>
+                                                    <p class="text-success"><?php echo("Editing");?></p>
+                                                    <?php
+                                                }elseif($row['status'] ==3){
+                                                    ?>
+                                                    <p class="text-danger"><?php echo("Rejecked");?></p>
+                                                    <?php
+                                                }
+                                            ?>
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </button>
+                            </h2>
+                            <div id="collapse<?php echo $row['id']?>" class="accordion-collapse collapse"
+                                aria-labelledby="heading<?php echo $row['id']?>" data-bs-parent="#accordionExample">
+                                <div class="accordion-body" style='font-family: "Hanuman", serif; '>
+                                    <div class="dsc-digital my-3 text-danger">
+                                        <?php 
+                                    echo $desc
+                                    ?>
+                                    </div>
+
+                                    <div class="show-comment">
+                                        <div class="dsc-comment rounded border my-2" id="Comment">
+                                            <div class="content-dsc px-3">
+                                                <h5 class="fw-bolder mt-2 text-danger">មតិយោបល់ <i
+                                                        class="fa-solid fa-message text-warning"></i></h5>
+                                                <p>
+                                                    <?php
+                                                if($row['comment']==NULL){
+                                                    ?>
+                                                <p>មិនទាន់មានមតិយបល់!</p>
+                                                <?php
+                                                }else{?>
+                                                <p class=" text-primary"><?php echo $row['comment'];?></p>
+                                                <?php
+                                            }
+                                            ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="desc-email" value="Can I have you?">
+                                        <button type="submit" name="send-email" class="btn btn-primary my-3"
+                                            style="font-family: 'Noto Serif Khmer', serif;">
+                                            ផ្ញើរ <i class="fa-solid fa-paper-plane"></i></button>
+                                        <a class="btn btn-primary"
+                                            href="edit-digital-book-user.php?id=<?php echo $row['id']?>"
+                                            style="font-family: 'Noto Serif Khmer', serif;">កែសម្រួល <i
+                                                class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="btn btn-danger"
+                                            href="list-digital-book-user.php?id=<?php echo $row['id']?>"
+                                            style="font-family: 'Noto Serif Khmer', serif;">លុបឯកសារ <i
+                                                class="fa-solid fa-trash"></i></a>
+                                    </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+
+
+
                         <?php
                             }
                         }
