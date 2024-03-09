@@ -35,7 +35,6 @@ if(isset($_POST['teacher_signup'])){
       move_uploaded_file($tmpName, 'uploads/' . $newImageName);
       $filesArray[] = $newImageName;
     }
-  
     $filesArray = json_encode($filesArray);
     
     $teacher_detials = $_POST['teacher_detials'];
@@ -43,17 +42,18 @@ if(isset($_POST['teacher_signup'])){
     if($teacher_password !== $teacher_cpassword){
         $teacher_errors['teacher_password'] = "Confirm password not matched!";
     }
-    $teacher_email_check = "SELECT * FROM teacher_tb WHERE teacher_mail = '$teacher_email'";
+    $teacher_email_check = "SELECT * FROM member WHERE email = '$teacher_email'";
     $teacher_res = mysqli_query($conn, $teacher_email_check);
     if(mysqli_num_rows($teacher_res) > 0){
         $teacher_errors['teacher_email'] = "Email that you have entered is already exist!";
     }
     if(count($teacher_errors) === 0){
+        // $teacher_encpass = password_hash($teacher_password, PASSWORD_BCRYPT);
         $teacher_encpass = password_hash($teacher_password, PASSWORD_BCRYPT);
         $teacher_code = rand(999999, 111111);
         $teacher_status = "notverified";
-        $teacher_insert_data = "INSERT INTO teacher_tb (teacher_id,firstname,lastname,sex,teacher_mail,phone,select_major,specialty,select_role,teacher_password,image,teacher_detials,teacher_code,teacher_status) 
-        VALUES('$teacher_id','$firstname','$lastname','$sex','$teacher_email','$phone','$select_major','$specialty','$select_role','$teacher_password','$filesArray','$teacher_detials','$teacher_code','$teacher_status')";
+        $teacher_insert_data = "INSERT INTO member (member_id,firstname,lastname,sex,email,phone,select_major,specialty,select_role,password,image,detail,code,status) 
+        VALUES('$teacher_id','$firstname','$lastname','$sex','$teacher_email','$phone','$select_major','$specialty','$select_role','$teacher_encpass','$filesArray','$teacher_detials','$teacher_code','$teacher_status')";
         // $teacher_insert_data = "INSERT INTO teacher_tb (teacher_id,	firstname,	lastname, sex,	teacher_mail,	phone,	select_major,	specialty,	select_role,	teacher_password, image, teacher_detials,	teacher_code,	teacher_status)
         //                                       values('$teacher_id', '$firstname', '$lastname', '$sex', '$teacher_email', '$phone', '$select_major', '$specialty', '$select_role', '$teacher_encpass', '$filesArray', '$teacher_detials', '$teacher_code', '$teacher_status')";
         // $teacher_data_check = mysqli_query($conn, $teacher_insert_data);
@@ -83,15 +83,15 @@ if(isset($_POST['teacher_signup'])){
     if(isset($_POST['teacher_check'])){
         $_SESSION['teacher_info'] = "";
         $teacher_otp_code = mysqli_real_escape_string($conn, $_POST['teacher_otp']);
-        $teacher_check_code = "SELECT * FROM teacher_tb WHERE teacher_code = $teacher_otp_code";
+        $teacher_check_code = "SELECT * FROM member WHERE code = $teacher_otp_code";
         $teacher_code_res = mysqli_query($conn, $teacher_check_code);
         if(mysqli_num_rows($teacher_code_res) > 0){
             $teacher_fetch_data = mysqli_fetch_assoc($teacher_code_res);
-            $teacher_fetch_code = $teacher_fetch_data['teacher_code'];
-            $teacher_email = $teacher_fetch_data['teacher_mail'];
+            $teacher_fetch_code = $teacher_fetch_data['code'];
+            $teacher_email = $teacher_fetch_data['email'];
             $teacher_code = 0;
             $teacher_status = 'verified';
-            $teacher_update_otp = "UPDATE teacher_tb SET teacher_code = $teacher_code, teacher_status = '$teacher_status' WHERE teacher_code = $teacher_fetch_code";
+            $teacher_update_otp = "UPDATE member SET code = $teacher_code, status = '$teacher_status' WHERE code = $teacher_fetch_code";
             $teacher_update_res = mysqli_query($conn, $teacher_update_otp);
             if($teacher_update_res){
                 $_SESSION['teacher_name'] = $teacher_name;
@@ -110,11 +110,11 @@ if(isset($_POST['teacher_signup'])){
     //if teacher click continue button in forgot password form for teacher dashboard
     if(isset($_POST['teacher_check-email'])){
         $teacher_email = mysqli_real_escape_string($conn, $_POST['teacher_email']);
-        $teacher_check_email = "SELECT * FROM teacher_tb WHERE teacher_mail='$teacher_email'";
+        $teacher_check_email = "SELECT * FROM member WHERE email='$teacher_email'";
         $teacher_run_sql = mysqli_query($conn, $teacher_check_email);
         if(mysqli_num_rows($teacher_run_sql) > 0){
             $teacher_code = rand(999999, 111111);
-            $teacher_insert_code = "UPDATE teacher_tb SET teacher_code = $teacher_code WHERE teacher_mail = '$teacher_email'";
+            $teacher_insert_code = "UPDATE member SET code = $teacher_code WHERE email = '$teacher_email'";
             $teacher_run_query =  mysqli_query($conn, $teacher_insert_code);
             if($teacher_run_query){
                 $teacher_subject = "Password Reset Code";
@@ -141,11 +141,11 @@ if(isset($_POST['teacher_signup'])){
     if(isset($_POST['teacher_check-reset-otp'])){
         $_SESSION['teacher_info'] = "";
         $teacher_otp_code = mysqli_real_escape_string($conn, $_POST['teacher_otp']);
-        $teacher_check_code = "SELECT * FROM teacher_tb WHERE teacher_code = $teacher_otp_code";
+        $teacher_check_code = "SELECT * FROM member WHERE code = $teacher_otp_code";
         $teacher_code_res = mysqli_query($conn, $teacher_check_code);
         if(mysqli_num_rows($teacher_code_res) > 0){
             $teacher_fetch_data = mysqli_fetch_assoc($teacher_code_res);
-            $teacher_email = $teacher_fetch_data['teacher_email'];
+            $teacher_email = $teacher_fetch_data['email'];
             $_SESSION['teacher_email'] = $teacher_email;
             $teacher_info = "Please create a new password that you don't use on any other site.";
             $_SESSION['teacher_info'] = $teacher_info;
@@ -167,7 +167,7 @@ if(isset($_POST['teacher_signup'])){
             $teacher_code = 0;
             $teacher_email = $_SESSION['teacher_email']; //getting this email using session
             $teacher_encpass = password_hash($teacher_password, PASSWORD_BCRYPT);
-            $teacher_update_pass = "UPDATE teacher_tb SET teacher_code = $teacher_code, teacher_password = '$teacher_encpass' WHERE teacher_email = '$teacher_email'";
+            $teacher_update_pass = "UPDATE member SET code = $teacher_code, password = '$teacher_encpass' WHERE email = '$teacher_email'";
             $teacher_run_query = mysqli_query($conn, $teacher_update_pass);
             // $teacher_run_query = mysqli_query($conn, $teacher_update_pass);
             if($teacher_run_query){

@@ -4,7 +4,7 @@ require_once('controllerUserData.php');
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM usertable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='អ្នកប្រើប្រាស់') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -15,7 +15,7 @@ if($email != false && $password != false){
                 header('Location: reset-code.php');
             }
         }else{
-            header('Location: user-otp.php');
+            header('Location: index.php');
         }
     }
 }else{
@@ -126,14 +126,14 @@ if(isset($_GET['id'])){
     $status = "verified";
     
     if($password==NULL && $cpassword==NULL && $filesArray==NULL){
-        $update_pass = "UPDATE usertable SET name ='$name', email='$email',code='$code',status='$status' WHERE email = '$email'";
+        $update_pass = "UPDATE member SET name ='$name', email='$email',code='$code',status='$status' WHERE email = '$email'";
     }elseif($password==NULL && $cpassword==NULL && $filesArray==NULL){
-        $update_pass = "UPDATE usertable SET name ='$name', email='$email', code='$code',status='$status' WHERE email = '$email'";
+        $update_pass = "UPDATE member SET name ='$name', email='$email', code='$code',status='$status' WHERE email = '$email'";
     }elseif($password==NULL && $cpassword==NULL && $filesArray!==NULL){
-        $update_pass = "UPDATE usertable SET name ='$name', email='$email',image='$filesArray',code='$code',status='$status' WHERE email = '$email'";
+        $update_pass = "UPDATE member SET name ='$name', email='$email',image='$filesArray',code='$code',status='$status' WHERE email = '$email'";
     }else{
             $encpass = password_hash($password, PASSWORD_BCRYPT);
-            $update_pass = "UPDATE usertable SET name ='$name', email='$email', password = '$encpass',  image='$filesArray',code='$code', status='$status' WHERE email = '$email'";
+            $update_pass = "UPDATE member SET name ='$name', email='$email', password = '$encpass',  image='$filesArray',code='$code', status='$status' WHERE email = '$email'";
     }
     $result_editprofile =$conn ->query($update_pass);
     if($result_editprofile==true){
@@ -145,7 +145,7 @@ if(isset($_GET['id'])){
 
 
 <?php
-$query_user_prifile="SELECT * FROM usertable WHERE email = '$email'";
+$query_user_prifile="SELECT * FROM member WHERE email = '$email'";
 // WHERE email = '$email'
 $result_user_profile = $conn->query($query_user_prifile);
 if($result_user_profile ->num_rows>0){
@@ -230,12 +230,12 @@ if($result_user_profile ->num_rows>0){
                             <select name="advisor" class="form-control" style="font-family: 'Noto Serif Khmer', serif;">
                                 <option selected>ជ្រើសរើសគ្រូជំនួយការ</option>
                                 <?php
-                                                $advisor_tb = "SELECT * FROM teacher_tb WHERE select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់'";
+                                                $advisor_tb = "SELECT * FROM member WHERE select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់'";
                                                 $result_advisor = $conn -> query($advisor_tb);
                                                 if($result_advisor->num_rows > 0){
                                                     while($row = $result_advisor -> fetch_assoc()){
                                                         ?>
-                                <option class="text primary form-control" value="<?php echo ($row['teacher_mail'])?>">
+                                <option class="text primary form-control" value="<?php echo ($row['email'])?>">
                                     <?php echo $row['firstname']. $row['lastname']?>
                                 </option>
                                 <?php

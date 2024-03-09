@@ -8,12 +8,13 @@ $errors = array();
 if(isset($_POST['signup'])){
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $select_role = "អ្នកប្រើប្រាស់";
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
     if($password !== $cpassword){
         $errors['password'] = "បញ្ជាក់ពាក្យសម្ងាត់មិនត្រូវគ្នា!";
     }
-    $email_check = "SELECT * FROM usertable WHERE email = '$email'";
+    $email_check = "SELECT * FROM member WHERE email = '$email'";
     $res = mysqli_query($conn, $email_check);
     if(mysqli_num_rows($res) > 0){
         $errors['email'] = "អ៊ីមែលដែលអ្នកបានបញ្ចូលមានរួចហើយ!";
@@ -22,8 +23,8 @@ if(isset($_POST['signup'])){
         $encpass = password_hash($password, PASSWORD_BCRYPT);
         $code = rand(999999, 111111);
         $status = "notverified";
-        $insert_data = "INSERT INTO usertable (name, email, password, code, status)
-                        values('$name', '$email', '$encpass', '$code', '$status')";
+        $insert_data = "INSERT INTO member (name, email, select_role , password, code, status)
+                        values('$name', '$email', '$select_role', '$encpass', '$code', '$status')";
         $data_check = mysqli_query($conn, $insert_data);
         if($data_check){
             $subject = "លេខកូដផ្ទៀងផ្ទាត់អ៊ីមែល";
@@ -49,7 +50,7 @@ if(isset($_POST['signup'])){
     if(isset($_POST['check'])){
         $_SESSION['info'] = "";
         $otp_code = mysqli_real_escape_string($conn, $_POST['otp']);
-        $check_code = "SELECT * FROM usertable WHERE code = $otp_code";
+        $check_code = "SELECT * FROM member WHERE code = $otp_code";
         $code_res = mysqli_query($conn, $check_code);
         if(mysqli_num_rows($code_res) > 0){
             $fetch_data = mysqli_fetch_assoc($code_res);
@@ -57,7 +58,7 @@ if(isset($_POST['signup'])){
             $email = $fetch_data['email'];
             $code = 0;
             $status = 'verified';
-            $update_otp = "UPDATE usertable SET code = $code, status = '$status' WHERE code = $fetch_code";
+            $update_otp = "UPDATE member SET code = $code, status = '$status' WHERE code = $fetch_code";
             $update_res = mysqli_query($conn, $update_otp);
             if($update_res){
                 $_SESSION['name'] = $name;
@@ -76,7 +77,7 @@ if(isset($_POST['signup'])){
     if(isset($_POST['login'])){
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
-        $check_email = "SELECT * FROM usertable WHERE email = '$email'";
+        $check_email = "SELECT * FROM member WHERE email = '$email'";
         $res = mysqli_query($conn, $check_email); 
         if(mysqli_num_rows($res) > 0){
             $fetch = mysqli_fetch_assoc($res);
@@ -92,6 +93,7 @@ if(isset($_POST['signup'])){
                     $info = "វាហាក់ដូចជាអ្នកមិនទាន់បានផ្ទៀងផ្ទាត់អ៊ីមែលរបស់អ្នកនៅឡើយ - $email";
                     $_SESSION['info'] = $info;
                     header('location: user-otp.php');
+                    // header('location: index.php');
                 }
             }else{
                 $errors['email'] = "អ៊ីមែល ឬពាក្យសម្ងាត់មិនត្រឹមត្រូវ!";
@@ -104,11 +106,11 @@ if(isset($_POST['signup'])){
     //if user click continue button in forgot password form
     if(isset($_POST['check-email'])){
         $email = mysqli_real_escape_string($conn, $_POST['email']);
-        $check_email = "SELECT * FROM usertable WHERE email='$email'";
+        $check_email = "SELECT * FROM member WHERE email='$email'";
         $run_sql = mysqli_query($conn, $check_email);
         if(mysqli_num_rows($run_sql) > 0){
             $code = rand(999999, 111111);
-            $insert_code = "UPDATE usertable SET code = $code WHERE email = '$email'";
+            $insert_code = "UPDATE member SET code = $code WHERE email = '$email'";
             $run_query =  mysqli_query($conn, $insert_code);
             if($run_query){
                 $subject = "លេខកូដកំណត់ពាក្យសម្ងាត់ឡើងវិញ";
@@ -135,7 +137,7 @@ if(isset($_POST['signup'])){
     if(isset($_POST['check-reset-otp'])){
         $_SESSION['info'] = "";
         $otp_code = mysqli_real_escape_string($conn, $_POST['otp']);
-        $check_code = "SELECT * FROM usertable WHERE code = $otp_code";
+        $check_code = "SELECT * FROM member WHERE code = $otp_code";
         $code_res = mysqli_query($conn, $check_code);
         if(mysqli_num_rows($code_res) > 0){
             $fetch_data = mysqli_fetch_assoc($code_res);
@@ -161,7 +163,7 @@ if(isset($_POST['signup'])){
             $code = 0;
             $email = $_SESSION['email']; //getting this email using session
             $encpass = password_hash($password, PASSWORD_BCRYPT);
-            $update_pass = "UPDATE usertable SET code = $code, password = '$encpass' WHERE email = '$email'";
+            $update_pass = "UPDATE member SET code = $code, password = '$encpass' WHERE email = '$email'";
             $run_query = mysqli_query($conn, $update_pass);
             if($run_query){
                 $info = "ពាក្យសម្ងាត់របស់អ្នកបានផ្លាស់ប្តូរ។ ឥឡូវនេះ អ្នកអាចចូលដោយប្រើពាក្យសម្ងាត់ថ្មីរបស់អ្នក។";

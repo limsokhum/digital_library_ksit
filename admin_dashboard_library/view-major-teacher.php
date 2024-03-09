@@ -3,22 +3,22 @@ require_once "Control-Change-Password-teacher.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM teacher_tb WHERE teacher_mail = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='អ្នកគ្រប់គ្រង') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
-        $status = $fetch_info['teacher_status']; 
-        $code = $fetch_info['teacher_code'];
+        $status = $fetch_info['status']; 
+        $code = $fetch_info['code'];
         if($status == "verified"){
             if($code != 0){
-                header('Location: teacher-reset-codes.php');
+                header('Location: reset-code.php');
             }
         }else{
-            header('Location: admin-otp.php');
+            header('Location: login.php');
         }
     }
 }else{
-    header('Location: login-teacher.php');
+    header('Location: login.php');
 }
 ?>
 <!DOCTYPE html>

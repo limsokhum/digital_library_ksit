@@ -5,7 +5,7 @@ require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='អ្នកគ្រប់គ្រង') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -16,14 +16,13 @@ if($email != false && $password != false){
                 header('Location: reset-code.php');
             }
         }else{
-            header('Location: admin-otp.php');
+            header('Location: login.php');
         }
     }
 }else{
     header('Location: login.php');
 }
 // Ent Login Admin
-
 
 
 // Start Custom Edit Digiral Book
@@ -331,12 +330,11 @@ if(isset($_GET['id'])){
                                                 </label>
                                                 <!-- select_major -->
                                                 <?php
-                                                $query_admin_select ="SELECT * FROM admintable";
+                                                $query_admin_select ="SELECT * FROM member";
                                                 $result_admin_select = $conn -> query($query_admin_select);
                                                 if($result_admin_select-> num_rows > 0){
                                                     while($row_admin_select = $result_admin_select->fetch_assoc()){
                                                         ?>
-
                                                 <input type="hidden" name="teacher_mail"
                                                     class="form-control form-control" id=""
                                                     value="<?php echo $row_admin_select['email']?>">
@@ -407,7 +405,6 @@ if(isset($_GET['id'])){
                                         </textarea>
                                         </div>
                                         <div class="form-group">
-
                                             <label class="label-control" for=""
                                                 style="font-family:'Koulen', sans-serif;">ពាក្យគន្លឺះ
                                                 <spatn class=" text-danger">:*

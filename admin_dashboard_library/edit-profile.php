@@ -4,10 +4,9 @@ require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='អ្នកគ្រប់គ្រង') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
-        
         $fetch_info = mysqli_fetch_assoc($run_Sql);
         $status = $fetch_info['status']; 
         $code = $fetch_info['code'];
@@ -16,7 +15,7 @@ if($email != false && $password != false){
                 header('Location: reset-code.php');
             }
         }else{
-            header('Location: admin-otp.php');
+            header('Location: login.php');
         }
     }
 }else{
@@ -34,11 +33,11 @@ if($email != false && $password != false){
             
             $totalFiles = count($_FILES['fileImg']['name']);
             $filesArray = array();
-      
+            
             for($i = 0; $i < $totalFiles; $i++){
             $imageName = $_FILES["fileImg"]["name"][$i];
             $tmpName = $_FILES["fileImg"]["tmp_name"][$i];
-        
+            
             $imageExtension = explode('.', $imageName);
             $imageExtension = strtolower(end($imageExtension));
         
@@ -143,7 +142,7 @@ if($email != false && $password != false){
                             <div class="p-5">
                                 <form action="" method="post" enctype="multipart/form-data">
                                     <?php
-                                    $select_query_profile_admin = "SELECT * FROM admintable WHERE email='$email'";
+                                    $select_query_profile_admin = "SELECT * FROM member WHERE email='$email'";
                                     $result_select_query_profile_admin = $conn->query($select_query_profile_admin);
                                     if($result_select_query_profile_admin->num_rows>0){
                                         while($row_query_profile= $result_select_query_profile_admin->fetch_assoc()){

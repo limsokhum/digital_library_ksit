@@ -72,13 +72,13 @@
                                     ?>
                                 <div class="container">
                                     <?php
-                                    $select_staff ="SELECT * FROM staff_tb WHERE 	select_role='នាយក' && id=$admin_staff";
+                                    $select_staff ="SELECT * FROM member WHERE 	select_role='នាយក' && id=$admin_staff";
                                     $result_staff = $conn->query($select_staff);
                                     if($result_staff->num_rows>0){
                                         while($row_stff = $result_staff->fetch_assoc()){
                                             $trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
                                                 unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
-                                                $desc = strtr(html_entity_decode($row_stff['details']),$trans);
+                                                $desc = strtr(html_entity_decode($row_stff['detail']),$trans);
                                                 $desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
                                             ?>
                                     <div class="card-body">
@@ -182,7 +182,7 @@
                                         <div class="rowses"></div>
                                         <div class="control-profile my-2">
                                             <?php
-                                            $select_staff_staff = "SELECT * FROM staff_tb WHERE select_role='នាយករង'";
+                                            $select_staff_staff = "SELECT * FROM member WHERE select_role='នាយករង'";
                                             $result_staff_staff = $conn->query($select_staff_staff);
                                             if($result_staff_staff->num_rows >0){
                                                 while($row_staffs = $result_staff_staff->fetch_assoc()){

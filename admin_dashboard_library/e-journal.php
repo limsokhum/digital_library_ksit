@@ -8,7 +8,7 @@ $password = $_SESSION['password'];
 
 if($email != false && $password != false){
     
-    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE email = '$email'";
     
     $run_Sql = mysqli_query($conn, $sql);
 

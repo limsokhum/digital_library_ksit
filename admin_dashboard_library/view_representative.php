@@ -4,7 +4,7 @@ require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='អ្នកគ្រប់គ្រង') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -15,7 +15,7 @@ if($email != false && $password != false){
                 header('Location: reset-code.php');
             }
         }else{
-            header('Location: admin-otp.php');
+            header('Location: login.php');
         }
     }
 }else{
@@ -101,17 +101,19 @@ if($email != false && $password != false){
                                     <?php
                                     if(isset($_GET['id'])){
                                         $select_teacher_id = $_GET['id'];
-                                        $select_teacher = "SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
-                                            teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
-                                            teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
-                                            teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE teacher_tb.id=$select_teacher_id";
+                                        $select_teacher ="SELECT member.id, member.member_id, member.firstname, member.lastname, member.sex,  member.email, member.phone, member.select_major, member.specialty, member.select_role, member.image, member.detail,major_tb.major_title,major_tb.creationdate
+                                        FROM member INNER JOIN major_tb ON member.select_major=major_tb.id WHERE  member.id=$select_teacher_id";
+                                        // $select_teacher = "SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
+                                        //     teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
+                                        //     teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
+                                        //     teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE teacher_tb.id=$select_teacher_id";
 
                                         $result_select_teacher = $conn->query($select_teacher);
                                         if($result_select_teacher->num_rows>0){
                                             while($row_select_teacher = $result_select_teacher->fetch_assoc()){
                                                 $trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
                                                 unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
-                                                $desc = strtr(html_entity_decode($row_select_teacher['teacher_detials']),$trans);
+                                                $desc = strtr(html_entity_decode($row_select_teacher['detail']),$trans);
                                                 $desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
                                                 
                                                 ?>
@@ -124,7 +126,7 @@ if($email != false && $password != false){
                                                 <div class="col-sm-10">
                                                     <span class="text-primary fw-bolder"> :*</span>
                                                     <span
-                                                        class="detail-digital mx-4"><?php echo $row_select_teacher['teacher_id']?></span>
+                                                        class="detail-digital mx-4"><?php echo $row_select_teacher['id']?></span>
                                                 </div>
                                             </div>
 
@@ -153,7 +155,7 @@ if($email != false && $password != false){
                                                 <div class="col-sm-10">
                                                     <span class="text-primary fw-bolder"> :*</span>
                                                     <span
-                                                        class="detail-digital mx-4"><?php echo $row_select_teacher['teacher_mail']?></span>
+                                                        class="detail-digital mx-4"><?php echo $row_select_teacher['email']?></span>
                                                 </div>
                                             </div>
 

@@ -4,7 +4,7 @@ require_once('controllerUserData.php');
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM usertable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='អ្នកប្រើប្រាស់') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -15,7 +15,7 @@ if($email != false && $password != false){
                 header('Location: reset-code.php');
             }
         }else{
-            header('Location: user-otp.php');
+            header('Location: index.php');
         }
     }
 }else{
@@ -52,14 +52,14 @@ if($email != false && $password != false){
     $status = "verified";
     
     if($password==NULL && $cpassword==NULL && $filesArray==NULL){
-        $update_pass = "UPDATE usertable SET name ='$name', email='$email',code='$code',status='$status' WHERE email = '$email'";
+        $update_pass = "UPDATE member SET name ='$name', email='$email',code='$code',status='$status' WHERE email = '$email'";
     }elseif($password==NULL && $cpassword==NULL && $filesArray==NULL ){
-        $update_pass = "UPDATE usertable SET name ='$name', email='$email', code='$code',status='$status' WHERE email = '$email'";
+        $update_pass = "UPDATE member SET name ='$name', email='$email', code='$code',status='$status' WHERE email = '$email'";
     }elseif($password==NULL && $cpassword==NULL && $filesArray!==NULL){
-        $update_pass = "UPDATE usertable SET name ='$name', email='$email',image='$filesArray',code='$code',status='$status' WHERE email = '$email'";
+        $update_pass = "UPDATE member SET name ='$name', email='$email',image='$filesArray',code='$code',status='$status' WHERE email = '$email'";
     }else{
             $encpass = password_hash($password, PASSWORD_BCRYPT);
-            $update_pass = "UPDATE usertable SET name ='$name', email='$email', password = '$encpass',  image='$filesArray',code='$code', status='$status' WHERE email = '$email'";
+            $update_pass = "UPDATE member SET name ='$name', email='$email', password = '$encpass',  image='$filesArray',code='$code', status='$status' WHERE email = '$email'";
     }
     $result_editprofile =$conn ->query($update_pass);
     if($result_editprofile==true){
@@ -71,7 +71,7 @@ if($email != false && $password != false){
 
 
 <?php
-$query_user_prifile="SELECT * FROM usertable WHERE email = '$email'";
+$query_user_prifile="SELECT * FROM member WHERE email = '$email'";
 // WHERE email = '$email'
 $result_user_profile = $conn->query($query_user_prifile);
 if($result_user_profile ->num_rows>0){
@@ -261,13 +261,13 @@ if($result_user_profile ->num_rows>0){
                                 <?php
                                 if(isset($_GET['id'])){
                                     $staff_id = $_GET['id'];
-                                    $query_staff = "SELECT * FROM staff_tb WHERE select_role='នាយករង' && id=$staff_id";
+                                    $query_staff = "SELECT * FROM member WHERE select_role='នាយករង' && id=$staff_id";
                                     $result_query = $conn->query($query_staff);
                                     if($result_query->num_rows>0){
                                         while($row_staffs = $result_query->fetch_assoc()){
                                             $trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
                                                 unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
-                                                $desc = strtr(html_entity_decode($row_staffs['details']),$trans);
+                                                $desc = strtr(html_entity_decode($row_staffs['detail']),$trans);
                                                 $desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
                                             ?>
                                 <div class="container">

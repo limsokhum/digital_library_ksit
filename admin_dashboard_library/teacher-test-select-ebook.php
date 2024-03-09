@@ -3,7 +3,7 @@ require_once "Control-Change-Password-teacher.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM teacher_tb WHERE teacher_mail = '$email'";
+    $sql = "SELECT * FROM member WHERE email = '$email'";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);

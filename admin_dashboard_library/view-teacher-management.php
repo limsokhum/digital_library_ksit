@@ -4,22 +4,22 @@ require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
-        $status = $fetch_info['status']; 
-        $code = $fetch_info['code'];
+        $status = $fetch_info['teacher_status']; 
+        $code = $fetch_info['teacher_code'];
         if($status == "verified"){
             if($code != 0){
-                header('Location: reset-code.php');
+                header('Location: teacher-reset-codes.php');
             }
         }else{
-            header('Location: admin-otp.php');
+            header('Location: index-teacher.php');
         }
     }
 }else{
-    header('Location: login.php');
+    header('Location: login-teacher.php');
 }
 
 ?>
@@ -100,14 +100,14 @@ if($email != false && $password != false){
                                     <?php
                                     if(isset($_GET['id'])){
                                         $select_teacher_id = $_GET['id'];
-                                        $select_teacher = "SELECT * FROM staff_tb WHERE staff_tb.id=$select_teacher_id";
+                                        $select_teacher = "SELECT * FROM member WHERE member.id=$select_teacher_id";
 
                                         $result_select_teacher = $conn->query($select_teacher);
                                         if($result_select_teacher->num_rows>0){
                                             while($row_select_teacher = $result_select_teacher->fetch_assoc()){
                                                 $trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
                                                 unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
-                                                $desc = strtr(html_entity_decode($row_select_teacher['details']),$trans);
+                                                $desc = strtr(html_entity_decode($row_select_teacher['detail']),$trans);
                                                 $desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
                                                 
                                                 ?>

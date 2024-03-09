@@ -3,7 +3,7 @@ require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='អ្នកគ្រប់គ្រង') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -14,7 +14,7 @@ if($email != false && $password != false){
                 header('Location: reset-code.php');
             }
         }else{
-            header('Location: admin-otp.php');
+            header('Location: login.php');
         }
     }
 }else{
@@ -23,7 +23,7 @@ if($email != false && $password != false){
 
 if(isset($_GET['id'])){
     $select_teacher_id = $_GET['id'];
-    $delete_teacher = "DELETE FROM staff_tb WHERE id=$select_teacher_id";
+    $delete_teacher = "DELETE FROM member WHERE id=$select_teacher_id";
     $result_delete_teacher = $conn->query($delete_teacher);
     if($result_delete_teacher==TRUE){
         $_SESSION['status'] = "<Type Your success message here>";

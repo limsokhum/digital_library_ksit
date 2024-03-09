@@ -4,7 +4,7 @@ require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='អ្នកគ្រប់គ្រង') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -15,14 +15,16 @@ if($email != false && $password != false){
                 header('Location: reset-code.php');
             }
         }else{
-            header('Location: admin-otp.php');
+            header('Location: login.php');
         }
     }
 }else{
     header('Location: login.php');
 }
 
-if(isset($_POST["submit"])){
+
+//if staff signup button
+if(isset($_POST['submit'])){
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $sex = $_POST['sex'];
@@ -30,20 +32,75 @@ if(isset($_POST["submit"])){
     $phone = $_POST['phone'];
     $select_role = $_POST['select_role'];
     $detials = $_POST['detials'];
+    
     $totalFiles = count($_FILES['fileImg']['name']);
     $filesArray = array();
-    
-    for($i = 0; $i < $totalFiles; $i++){ $imageName=$_FILES["fileImg"]["name"][$i];
-        $tmpName=$_FILES["fileImg"]["tmp_name"][$i]; $imageExtension=explode('.', $imageName);
-        $imageExtension=strtolower(end($imageExtension)); $newImageName=uniqid() . '.' . $imageExtension;
-        move_uploaded_file($tmpName, 'uploads/' . $newImageName); $filesArray[]=$newImageName; }
-        $filesArray=json_encode($filesArray); $query="INSERT INTO staff_tb (firstname,	lastname, sex,	email,	phone,	select_role,	image,	details	
-        ) 
+    for($i = 0; $i < $totalFiles; $i++){
+      $imageName = $_FILES["fileImg"]["name"][$i];
+      $tmpName = $_FILES["fileImg"]["tmp_name"][$i];
+      $imageExtension = explode('.', $imageName);
+      $imageExtension = strtolower(end($imageExtension));
+      $newImageName = uniqid() . '.' . $imageExtension;
+      move_uploaded_file($tmpName, 'uploads/' . $newImageName);
+      $filesArray[] = $newImageName;
+    }
+    $filesArray = json_encode($filesArray);
+   
+    $email_check = "SELECT * FROM member WHERE email = '$email'";
+    $res = mysqli_query($conn, $email_check);
+    if(mysqli_num_rows($res) > 0){
+        $errors['email'] = "Email that you have entered is already exist!";
+    }
+    if(count($errors) === 0){
+        $insert_data ="INSERT INTO member (firstname,	lastname, sex,	email,	phone,	select_role,	image,	detail) 
         VALUES('$firstname', '$lastname', '$sex', '$email', '$phone', '$select_role', '$filesArray', '$detials')" ;
-        mysqli_query($conn, $query); 
+        $data_check = mysqli_query($conn, $insert_data);
+        // if($data_check){
+        //     $subject = "Email Verification Code";
+        //     $message = "Your verification code is $code";
+        //     $sender = "From: sokhunlim36@gmail.com";
+        //     if(mail($email, $subject, $message, $sender)){
+        //         $info = "We've sent a verification code to your email - $email";
+        //         $_SESSION['info'] = $info;
+        //         $_SESSION['email'] = $email;
+        //         $_SESSION['password'] = $password;
+        //         header('location: admin_otp.php');
+        //         exit();
+        //     }else{
+        //         $errors['otp-error'] = "Failed while sending code!";
+        //     }
+        // }else{
+        //     $errors['db-error'] = "Failed while inserting data into database!";
+        // }
+    }
+
+}
+
+
+// if(isset($_POST["submit"])){
+//     $firstname = $_POST['firstname'];
+//     $lastname = $_POST['lastname'];
+//     $sex = $_POST['sex'];
+//     $email = $_POST['email'];
+//     $phone = $_POST['phone'];
+//     $select_role = $_POST['select_role'];
+//     $detials = $_POST['detials'];
+//     $totalFiles = count($_FILES['fileImg']['name']);
+//     $filesArray = array();
+    
+    
+//     for($i = 0; $i < $totalFiles; $i++){ $imageName=$_FILES["fileImg"]["name"][$i];
+//         $tmpName=$_FILES["fileImg"]["tmp_name"][$i]; $imageExtension=explode('.', $imageName);
+//         $imageExtension=strtolower(end($imageExtension)); $newImageName=uniqid() . '.' . $imageExtension;
+//         move_uploaded_file($tmpName, 'uploads/' . $newImageName); $filesArray[]=$newImageName; }
+//         $filesArray=json_encode($filesArray); 
+//         $query="INSERT INTO staff_tb (firstname,	lastname, sex,	email,	phone,	select_role,	image,	details	
+//         ) 
+//         VALUES('$firstname', '$lastname', '$sex', '$email', '$phone', '$select_role', '$filesArray', '$detials')" ;
+//         mysqli_query($conn, $query); 
         
-        $_SESSION['status'] = "<Type Your success message here>";
-        } 
+//         $_SESSION['status'] = "<Type Your success message here>";
+//         } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,6 +171,35 @@ if(isset($_POST["submit"])){
                         </div>
                         <div class="card-body p-0">
                             <div class="p-5">
+
+                                <?php
+                    if(count($errors) == 1){
+                        ?>
+                                <div class="alert alert-danger text-center">
+                                    <?php
+                            foreach($errors as $showerror){
+                                echo $showerror;
+                            }
+                            ?>
+                                </div>
+                                <?php
+                    }elseif(count($errors) > 1){
+                        ?>
+                                <div class="alert alert-danger">
+                                    <?php
+                            foreach($errors as $showerror){
+                                ?>
+                                    <li><?php echo $showerror; ?></li>
+                                    <?php
+                            }
+                            ?>
+                                </div>
+                                <?php
+                    }
+                    ?>
+
+
+
                                 <?php
                                      if(isset($_SESSION['status']))
                                      {
@@ -207,7 +293,7 @@ if(isset($_POST["submit"])){
                                                 </label>
                                                 <div class="form-check d-flex">
                                                     <input class="form-check-input" type="radio" name="select_role"
-                                                        value="នាយក">
+                                                        value="នាយក" checked="checked">
                                                     <label class="form-check-label"
                                                         style="font-family:Khmer OS System;">នាយក
                                                     </label>,

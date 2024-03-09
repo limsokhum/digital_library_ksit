@@ -3,7 +3,7 @@ require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='អ្នកគ្រប់គ្រង') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -14,7 +14,7 @@ if($email != false && $password != false){
                 header('Location: reset-code.php');
             }
         }else{
-            header('Location: admin-otp.php');
+            header('Location: login.php');
         }
     }
 }else{
@@ -23,7 +23,7 @@ if($email != false && $password != false){
 
 if(isset($_GET['id'])){
     $representative = $_GET['id'];
-    $delete_representative = "DELETE FROM teacher_tb WHERE id = $representative";
+    $delete_representative = "DELETE FROM member WHERE id = $representative";
     $result_delect_representative = $conn->query($delete_representative);
     if($result_delect_representative == TRUE){
         $_SESSION['status'] = "<Type Your success message here>";
@@ -117,10 +117,12 @@ if(isset($_GET['id'])){
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $query_representative ="SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
-                                        teacher_tb.lastname,teacher_tb.sex,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
-                                        teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
-                                        teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE teacher_tb.select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់' ORDER BY id DESC";
+                                         $query_representative ="SELECT member.id, member.member_id, member.firstname, member.lastname, member.sex,  member.email, member.phone, member.select_major, member.specialty, member.select_role, member.image, member.detail,major_tb.major_title,major_tb.creationdate
+                                         FROM member INNER JOIN major_tb ON member.select_major=major_tb.id WHERE member.select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់' ORDER BY id DESC";
+                                        // $query_representative ="SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
+                                        // teacher_tb.lastname,teacher_tb.sex,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
+                                        // teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
+                                        // teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE teacher_tb.select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់' ORDER BY id DESC";
                                         $result_representative = $conn->query($query_representative);
                                         $cnt = 1;
                                         if($result_representative->num_rows>0){
@@ -133,7 +135,7 @@ if(isset($_GET['id'])){
                                             <td><?php echo $row_representative['sex']?></td>
                                             <td><?php echo $row_representative['major_title']?></td>
                                             <td><?php echo $row_representative['specialty']?></td>
-                                            <td><?php echo $row_representative['teacher_mail']?></td>
+                                            <td><?php echo $row_representative['email']?></td>
                                             <td><?php echo $row_representative['phone']?></td>
                                             <td>
                                                 <a href="view_representative.php?id=<?php echo $row_representative['id']?>"

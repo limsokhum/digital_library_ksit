@@ -50,27 +50,27 @@ if($email == false){
 
                             <img src="img/logo-login.png" alt="state" style="width: 24rem">
                             <?php 
-if(isset($_SESSION['info'])){
-    ?>
+                            if(isset($_SESSION['info'])){
+                                ?>
                             <div class="alert alert-success text-center" style="padding: 0.4rem 0.4rem">
                                 <?php echo $_SESSION['info']; ?>
                             </div>
                             <?php
-}
-?>
+                            }
+                            ?>
                             <?php
-if(count($errors) > 0){
-    ?>
+                        if(count($errors) > 0){
+                            ?>
                             <div class="alert alert-danger text-center">
                                 <?php
-        foreach($errors as $showerror){
-            echo $showerror;
-        }
-        ?>
+                                foreach($errors as $showerror){
+                                    echo $showerror;
+                                }
+                                ?>
                             </div>
                             <?php
-}
-?>
+                        }
+                        ?>
                             <form action="teacher-reset-codes.php" method="POST" autocomplete="off">
                                 <div class="form-group">
                                     <input class="form-control" type="number" name="otp" placeholder="Enter code"

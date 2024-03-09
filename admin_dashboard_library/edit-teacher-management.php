@@ -4,10 +4,9 @@ require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
-        
         $fetch_info = mysqli_fetch_assoc($run_Sql);
         $status = $fetch_info['status']; 
         $code = $fetch_info['code'];
@@ -16,7 +15,7 @@ if($email != false && $password != false){
                 header('Location: reset-code.php');
             }
         }else{
-            header('Location: admin-otp.php');
+            header('Location: login.php');
         }
     }
 }else{
@@ -40,7 +39,7 @@ if(isset($_GET['id'])){
             $imageExtension=strtolower(end($imageExtension)); $newImageName=uniqid() . '.' . $imageExtension;
             move_uploaded_file($tmpName, 'uploads/' . $newImageName); $filesArray[]=$newImageName; }
             $filesArray=json_encode($filesArray); 
-            $query="UPDATE  staff_tb SET firstname='$firstname',	lastname='$lastname',	email='$email',	phone='$phone',	select_role='$select_role',	image='$filesArray',	details='$detials' WHERE id= $setion_edit_teacher" ;
+            $query="UPDATE  member SET firstname='$firstname',	lastname='$lastname',	email='$email',	phone='$phone',	select_role='$select_role',	image='$filesArray',	detail='$detials' WHERE id= $setion_edit_teacher" ;
             $result_edit_teacher_management = $conn->query($query);
             // mysqli_query($conn, $query); 
             if($result_edit_teacher_management==true){
@@ -131,7 +130,7 @@ if(isset($_GET['id'])){
 
                                     <?php
                                     $setion_edit_teacher = $_GET['id'];
-                                    $select_edit_teacher = "SELECT * FROM staff_tb WHERE staff_tb.id = '$setion_edit_teacher'";
+                                    $select_edit_teacher = "SELECT * FROM member WHERE member.id = '$setion_edit_teacher'";
                                     $result_select_edit_teacher = $conn -> query($select_edit_teacher);
                                     if($result_select_edit_teacher -> num_rows > 0){
                                         while($row_select_edit_teahcer = $result_select_edit_teacher-> fetch_assoc()){

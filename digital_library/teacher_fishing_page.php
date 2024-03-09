@@ -68,10 +68,12 @@ include ('../config/conn_db.php');
                         <div class="container">
 
                             <?php
-                            $select_represiontative = "SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
-                            teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
-                            teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
-                            teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE (major_title = 'វិទ្យាសាស្រ្តជលផល') AND (select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់')";
+                             $select_represiontative ="SELECT member.id, member.member_id, member.firstname, member.lastname, member.email,  member.email, member.phone, member.select_major, member.specialty, member.select_role, member.image, member.detail,major_tb.major_title,major_tb.creationdate
+                             FROM member INNER JOIN major_tb ON member.select_major=major_tb.id  WHERE (major_title = 'វិទ្យាសាស្រ្តជលផល') AND (select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់')";
+                            // $select_represiontative = "SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
+                            // teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
+                            // teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
+                            // teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE (major_title = 'វិទ្យាសាស្រ្តជលផល') AND (select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់')";
                             $result_select_represiotative = $conn->query($select_represiontative);
                             if($result_select_represiotative->num_rows>0){
                                 while($row_select_represiontative = $result_select_represiotative->fetch_assoc()){
@@ -117,7 +119,7 @@ include ('../config/conn_db.php');
                                                                 <div class="col-sm-10">
                                                                     <span class="text-warning fw-bolder"> :*</span>
                                                                     <span
-                                                                        class="detail-staf mx-2"><?php echo $row_select_represiontative['teacher_id']?></span>
+                                                                        class="detail-staf mx-2"><?php echo $row_select_represiontative['member_id']?></span>
                                                                 </div>
                                                             </div>
 
@@ -130,7 +132,7 @@ include ('../config/conn_db.php');
                                                                 <div class="col-sm-10">
                                                                     <span class="text-warning fw-bolder"> :*</span>
                                                                     <span
-                                                                        class="detail-staf mx-2"><?php echo $row_select_represiontative['teacher_mail']?></span>
+                                                                        class="detail-staf mx-2"><?php echo $row_select_represiontative['email']?></span>
                                                                 </div>
                                                             </div>
 
@@ -169,10 +171,12 @@ include ('../config/conn_db.php');
                                         <div class="rowses"></div>
                                         <div class="control-profile my-2">
                                             <?php
-                                            $select_teacher_staff = "SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
-                                            teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
-                                            teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
-                                            teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE (major_title = 'វិទ្យាសាស្រ្តជលផល') AND (select_role='គ្រូបង្រៀន')";
+                                            $select_teacher_staff ="SELECT member.id, member.member_id, member.firstname, member.lastname, member.email,  member.email, member.phone, member.select_major, member.specialty, member.select_role, member.image, member.detail,major_tb.major_title,major_tb.creationdate
+                                            FROM member INNER JOIN major_tb ON member.select_major=major_tb.id  WHERE (major_title = 'វិទ្យាសាស្រ្តជលផល') AND (select_role='គ្រូបង្រៀន')";
+                                            // $select_teacher_staff = "SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
+                                            // teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
+                                            // teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
+                                            // teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE (major_title = 'វិទ្យាសាស្រ្តជលផល') AND (select_role='គ្រូបង្រៀន')";
                                             $result_teacher_staff = $conn->query($select_teacher_staff);
                                             if($result_teacher_staff->num_rows>0){
                                                 while($row_teacher_staff = $result_teacher_staff->fetch_assoc()){

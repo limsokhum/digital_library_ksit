@@ -4,7 +4,7 @@ require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE email = '$email'";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -58,7 +58,7 @@ if(isset($_GET['id'])){
         $teacher_status = "verified";
         $teacher_detials = $_POST['teacher_detials'];
         
-        $query_update_teacher = "UPDATE teacher_tb SET teacher_id='$teacher_id', firstname='$firstname', lastname='$lastname', teacher_mail='$teacher_email', phone='$phone', select_major='$select_major', specialty='$specialty', select_role='$select_role', teacher_password='$teacher_encpass', image='$filesArray', teacher_detials='$teacher_detials', teacher_code='$teacher_code', teacher_status='$teacher_status' WHERE id=$setion_edit_teacher";
+        $query_update_teacher = "UPDATE member SET member_id='$teacher_id', firstname='$firstname', lastname='$lastname', email='$teacher_email', phone='$phone', select_major='$select_major', specialty='$specialty', select_role='$select_role', password='$teacher_encpass', image='$filesArray', detail='$teacher_detials', code='$teacher_code', status='$teacher_status' WHERE id=$setion_edit_teacher";
         
          mysqli_query($conn, $query_update_teacher); 
          echo "
@@ -146,10 +146,12 @@ if(isset($_GET['id'])){
 
                                     <?php
                                     $setion_edit_teacher = $_GET['id'];
-                                    $select_edit_teacher = "SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
-                                    teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
-                                    teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
-                                    teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE teacher_tb.id = '$setion_edit_teacher'";
+                                    // $select_edit_teacher = "SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
+                                    // teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
+                                    // teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
+                                    // teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE teacher_tb.id = '$setion_edit_teacher'";
+                                                                $select_edit_teacher="SELECT member.id, member.member_id, member.firstname, member.lastname, member.sex,  member.email, member.phone, member.select_major, member.specialty, member.select_role, member.image, member.detail,major_tb.major_title
+                                                                FROM member INNER JOIN major_tb ON member.select_major=major_tb.id WHERE member.id = '$setion_edit_teacher'";
                                     $result_select_edit_teacher = $conn -> query($select_edit_teacher);
                                     if($result_select_edit_teacher -> num_rows > 0){
                                         while($row_select_edit_teahcer = $result_select_edit_teacher-> fetch_assoc()){
@@ -164,7 +166,7 @@ if(isset($_GET['id'])){
                                                 </label>
                                                 <input type=" number" name="teacher_id"
                                                     class=" form-control form-control"
-                                                    value="<?php echo $row_select_edit_teahcer['teacher_id']?>">
+                                                    value="<?php echo $row_select_edit_teahcer['member_id']?>">
                                             </div>
                                             <div class="col-sm-4">
                                                 <label class="label-control" for=""
@@ -196,7 +198,7 @@ if(isset($_GET['id'])){
                                                 </label>
                                                 <input type="email" name="teacher_email"
                                                     class=" form-control form-control"
-                                                    value="<?php echo $row_select_edit_teahcer['teacher_mail']?>">
+                                                    value="<?php echo $row_select_edit_teahcer['email']?>">
                                             </div>
                                             <div class="col-sm-4">
                                                 <label class="label-control" for=""
@@ -317,7 +319,7 @@ if(isset($_GET['id'])){
                                             </spatn></label>
                                         <textarea name="teacher_detials" id="" cols="30" rows="10"
                                             class="summernote form-control">
-                                        <?php echo $row_select_edit_teahcer['teacher_detials']?>
+                                        <?php echo $row_select_edit_teahcer['detail']?>
                                         </textarea>
                                     </div>
                                     <?php

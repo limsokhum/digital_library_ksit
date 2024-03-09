@@ -1,9 +1,10 @@
 <?php 
 require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
+$email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='អ្នកគ្រប់គ្រង') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -14,7 +15,7 @@ if($email != false && $password != false){
                 header('Location: reset-code.php');
             }
         }else{
-            header('Location: admin-otp.php');
+            header('Location: login.php');
         }
     }
 }else{
@@ -92,7 +93,7 @@ if($email != false && $password != false){
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Total Teacher</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?php echo $conn->query("SELECT * FROM teacher_tb")->num_rows;?>
+                                                <?php echo $conn->query("SELECT * FROM member WHERE select_role='គ្រូបង្រៀន'")->num_rows;?>
                                             </div>
                                         </div>
                                         <div class="col-auto">

@@ -72,13 +72,13 @@
                                 <?php
                                 if(isset($_GET['id'])){
                                     $staff_id = $_GET['id'];
-                                    $query_staff = "SELECT * FROM staff_tb WHERE select_role='នាយករង' && id=$staff_id";
+                                    $query_staff = "SELECT * FROM member WHERE select_role='នាយករង' && id=$staff_id";
                                     $result_query = $conn->query($query_staff);
                                     if($result_query->num_rows>0){
                                         while($row_staffs = $result_query->fetch_assoc()){
                                             $trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
                                                 unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
-                                                $desc = strtr(html_entity_decode($row_staffs['details']),$trans);
+                                                $desc = strtr(html_entity_decode($row_staffs['detail']),$trans);
                                                 $desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
                                             ?>
                                 <div class="container">

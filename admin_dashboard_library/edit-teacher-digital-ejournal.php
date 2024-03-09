@@ -3,22 +3,22 @@ require_once "Control-Change-Password-teacher.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM teacher_tb WHERE teacher_mail = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
-        $status = $fetch_info['teacher_status']; 
-        $code = $fetch_info['teacher_code'];
+        $status = $fetch_info['status']; 
+        $code = $fetch_info['code'];
         if($status == "verified"){
             if($code != 0){
-                header('Location: teacher-reset-codes.php');
+                header('Location: reset-code.php');
             }
         }else{
-            header('Location: admin-otp.php');
+            header('Location: login.php');
         }
     }
 }else{
-    header('Location: login-teacher.php');
+    header('Location: login.php');
 }
 
 if(isset($_GET['id'])){
@@ -199,14 +199,14 @@ if(isset($_GET['id'])){
     $teacher_status = "verified";
     
     if($password==NULL && $cpassword==NULL && $filesArray==NULL){
-        $update_pass = "UPDATE teacher_tb SET 	firstname ='$firstname', lastname ='$lastname', teacher_mail='$teacher_mail',teacher_code='$teacher_code',	teacher_status='$teacher_status' WHERE teacher_mail = '$email'";
+        $update_pass = "UPDATE member SET 	firstname ='$firstname', lastname ='$lastname', email='$teacher_mail',code='$teacher_code',	status='$teacher_status' WHERE email = '$email'";
     }elseif($password==NULL && $cpassword==NULL && $filesArray!==NULL){
         
-        $update_pass = "UPDATE teacher_tb SET firstname ='$firstname', lastname ='$lastname', teacher_mail='$teacher_mail', image='$filesArray',teacher_code='$teacher_code',	teacher_status='$teacher_status' WHERE teacher_mail = '$email'";
+        $update_pass = "UPDATE member SET firstname ='$firstname', lastname ='$lastname', email='$teacher_mail', image='$filesArray',code='$teacher_code',	status='$teacher_status' WHERE email = '$email'";
     }else{
         
             $encpass = password_hash($password, PASSWORD_BCRYPT);
-            $update_pass = "UPDATE teacher_tb SET firstname ='$firstname', lastname ='$lastname', teacher_mail='$teacher_mail', teacher_password = '$encpass',  image='$filesArray',teacher_code='$teacher_code',	teacher_status='$teacher_status'  WHERE teacher_mail = '$email'";
+            $update_pass = "UPDATE member SET firstname ='$firstname', lastname ='$lastname', email='$teacher_mail', password = '$encpass',  image='$filesArray',code='$teacher_code',	status='$teacher_status'  WHERE email = '$email'";
     }
     $result_editprofile =$conn ->query($update_pass);
     if($result_editprofile==true){
@@ -328,10 +328,12 @@ if(isset($_GET['id'])){
                         <div class="card-body p-0">
                             <div class="p-5">
                                 <?php
-                            $select_teacher = "SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
-                            teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
-                            teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
-                            teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE teacher_mail = '$email'";
+                            // $select_teacher = "SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
+                            // teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
+                            // teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
+                            // teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE teacher_mail = '$email'";
+                            $select_teacher="SELECT member.id, member.member_id, member.firstname, member.lastname, member.sex,  member.email, member.phone, member.select_major, member.specialty, member.select_role, member.image, member.detail,major_tb.major_title
+                            FROM member INNER JOIN major_tb ON member.select_major=major_tb.id WHERE email='$email'";
                             // WHERE teacher_mail='$teacher_email'
                             $result_select_teacher = $conn->query($select_teacher);
                             if($result_select_teacher->num_rows >0){
@@ -381,7 +383,7 @@ if(isset($_GET['id'])){
                                                 <!-- select_major -->
                                                 <input type="hidden" name="teacher_mail"
                                                     class="form-control form-control" id=""
-                                                    value="<?php echo $row_select_teacher['teacher_mail']?>">
+                                                    value="<?php echo $row_select_teacher['email']?>">
 
 
                                                 <input type="text" name="select_major"
@@ -545,7 +547,7 @@ if(isset($_GET['id'])){
     <!-- End of Page Wrapper -->
 
     <?php
-    $query_teacher_representative = "SELECT * FROM teacher_tb WHERE teacher_mail = '$email'";
+    $query_teacher_representative = "SELECT * FROM member WHERE email = '$email'";
     $result_teacher_representative = $conn->query($query_teacher_representative);
     if($result_teacher_representative->num_rows>0){
         while($row_teacher_representative = $result_teacher_representative->fetch_assoc()){
@@ -596,7 +598,7 @@ if(isset($_GET['id'])){
                                     </spatn>
                                 </label>
                                 <input type="email" name="teacher_mail" class="form-control" id=""
-                                    value="<?php echo $row_teacher_representative['teacher_mail']?>"
+                                    value="<?php echo $row_teacher_representative['email']?>"
                                     style="font-family: 'Noto Serif Khmer', serif;">
                             </div>
                             <div class="form-group my-2">

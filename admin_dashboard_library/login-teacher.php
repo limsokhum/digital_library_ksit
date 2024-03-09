@@ -43,18 +43,18 @@
 
                             <form method="POST" class="user mt-3">
                                 <?php
-if(count($errors) > 0){
-?>
+                            if(count($errors) > 0){
+                            ?>
                                 <div class="alert alert-danger text-center">
                                     <?php
-foreach($errors as $showerror){
-echo $showerror;
-}
-?>
+                            foreach($errors as $showerror){
+                            echo $showerror;
+                            }
+                            ?>
                                 </div>
                                 <?php
-}
-?>
+                            }
+                            ?>
                                 <div class="form-group">
                                     <input type="email" name="email" class="form-control form-control-user"
                                         id="exampleInputEmail" aria-describedby="emailHelp"

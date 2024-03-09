@@ -72,13 +72,13 @@
                                     ?>
                                 <div class="container">
                                     <?php
-                                    $select_representative ="SELECT * FROM teacher_tb WHERE 	select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់' && id=$teacher_representative";
+                                    $select_representative ="SELECT * FROM member WHERE 	select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់' && id=$teacher_representative";
                                     $result_representative = $conn->query($select_representative);
                                     if($result_representative->num_rows>0){
                                         while($row_representative = $result_representative->fetch_assoc()){
                                             $trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
                                                 unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
-                                                $desc = strtr(html_entity_decode($row_representative['teacher_detials']),$trans);
+                                                $desc = strtr(html_entity_decode($row_representative['detail']),$trans);
                                                 $desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
                                             ?>
                                     <div class="card-body">
@@ -130,7 +130,7 @@
                                                             <div class="col-sm-10">
                                                                 <span class="text-warning fw-bolder"> :*</span>
                                                                 <span
-                                                                    class="detail-staf mx-2"><?php echo $row_representative['teacher_mail']?></span>
+                                                                    class="detail-staf mx-2"><?php echo $row_representative['email']?></span>
                                                             </div>
                                                         </div>
 
@@ -181,10 +181,12 @@
                                         <div class="rowses"></div>
                                         <div class="control-profile my-2">
                                             <?php
-                                            $select_teacher="SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
-                                            teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
-                                            teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
-                                            teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE (major_title = 'បច្ចេកវិទ្យាមេកានិច') AND (select_role='គ្រូបង្រៀន')";
+                                             $select_teacher ="SELECT member.id, member.member_id, member.firstname, member.lastname, member.email,  member.email, member.phone, member.select_major, member.specialty, member.select_role, member.image, member.detail,major_tb.major_title,major_tb.creationdate
+                                             FROM member INNER JOIN major_tb ON member.select_major=major_tb.id  WHERE (major_title = 'បច្ចេកវិទ្យាមេកានិច') AND (select_role='គ្រូបង្រៀន')";
+                                            // $select_teacher="SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
+                                            // teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
+                                            // teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
+                                            // teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE (major_title = 'បច្ចេកវិទ្យាមេកានិច') AND (select_role='គ្រូបង្រៀន')";
                                             $result_teacher = $conn->query($select_teacher);
                                             if($result_teacher->num_rows>0){
                                                 while($row_teacher = $result_teacher->fetch_assoc()){

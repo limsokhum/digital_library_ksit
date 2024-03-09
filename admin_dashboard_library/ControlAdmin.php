@@ -9,12 +9,12 @@ $errors = array();
 if(isset($_POST['signup'])){
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $select_role = "អ្នកគ្រប់គ្រង";
     $sex = mysqli_real_escape_string($conn, $_POST['sex']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
     $totalFiles = count($_FILES['fileImg']['name']);
     $filesArray = array();
-  
     for($i = 0; $i < $totalFiles; $i++){
       $imageName = $_FILES["fileImg"]["name"][$i];
       $tmpName = $_FILES["fileImg"]["tmp_name"][$i];
@@ -32,7 +32,7 @@ if(isset($_POST['signup'])){
     if($password !== $cpassword){
         $errors['password'] = "Confirm password not matched!";
     }
-    $email_check = "SELECT * FROM admintable WHERE email = '$email'";
+    $email_check = "SELECT * FROM member WHERE email = '$email'";
     $res = mysqli_query($conn, $email_check);
     if(mysqli_num_rows($res) > 0){
         $errors['email'] = "Email that you have entered is already exist!";
@@ -41,8 +41,8 @@ if(isset($_POST['signup'])){
         $encpass = password_hash($password, PASSWORD_BCRYPT);
         $code = rand(999999, 111111);
         $status = "notverified";
-        $insert_data = "INSERT INTO admintable (name, email, sex, password, code, image, status)
-                        values('$name', '$email', '$sex', '$encpass', '$code', '$filesArray', '$status')";
+        $insert_data = "INSERT INTO member (name, email, sex, select_role, password, code, image, status)
+                        values('$name', '$email', '$sex', '$select_role', '$encpass', '$code', '$filesArray', '$status')";
         $data_check = mysqli_query($conn, $insert_data);
         if($data_check){
             $subject = "Email Verification Code";
@@ -68,7 +68,7 @@ if(isset($_POST['signup'])){
     if(isset($_POST['check'])){
         $_SESSION['info'] = "";
         $otp_code = mysqli_real_escape_string($conn, $_POST['otp']);
-        $check_code = "SELECT * FROM admintable WHERE code = $otp_code";
+        $check_code = "SELECT * FROM member WHERE code = $otp_code";
         $code_res = mysqli_query($conn, $check_code);
         if(mysqli_num_rows($code_res) > 0){
             $fetch_data = mysqli_fetch_assoc($code_res);
@@ -76,7 +76,7 @@ if(isset($_POST['signup'])){
             $email = $fetch_data['email'];
             $code = 0;
             $status = 'verified';
-            $update_otp = "UPDATE admintable SET code = $code, status = '$status' WHERE code = $fetch_code";
+            $update_otp = "UPDATE member SET code = $code, status = '$status' WHERE code = $fetch_code";
             $update_res = mysqli_query($conn, $update_otp);
             if($update_res){
                 $_SESSION['name'] = $name;
@@ -95,7 +95,7 @@ if(isset($_POST['signup'])){
     if(isset($_POST['login'])){
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
-        $check_email = "SELECT * FROM admintable WHERE email = '$email'";
+        $check_email = "SELECT * FROM member WHERE email = '$email'";
         $res = mysqli_query($conn, $check_email);
         if(mysqli_num_rows($res) > 0){
             $fetch = mysqli_fetch_assoc($res);
@@ -123,11 +123,11 @@ if(isset($_POST['signup'])){
     //if admin click continue button in forgot password form
     if(isset($_POST['check-email'])){
         $email = mysqli_real_escape_string($conn, $_POST['email']);
-        $check_email = "SELECT * FROM admintable WHERE email='$email'";
+        $check_email = "SELECT * FROM member WHERE email='$email'";
         $run_sql = mysqli_query($conn, $check_email);
         if(mysqli_num_rows($run_sql) > 0){
             $code = rand(999999, 111111);
-            $insert_code = "UPDATE admintable SET code = $code WHERE email = '$email'";
+            $insert_code = "UPDATE member SET code = $code WHERE email = '$email'";
             $run_query =  mysqli_query($conn, $insert_code);
             if($run_query){
                 $subject = "Password Reset Code";
@@ -154,7 +154,7 @@ if(isset($_POST['signup'])){
     if(isset($_POST['check-reset-otp'])){
         $_SESSION['info'] = "";
         $otp_code = mysqli_real_escape_string($conn, $_POST['otp']);
-        $check_code = "SELECT * FROM admintable WHERE code = $otp_code";
+        $check_code = "SELECT * FROM member WHERE code = $otp_code";
         $code_res = mysqli_query($conn, $check_code);
         if(mysqli_num_rows($code_res) > 0){
             $fetch_data = mysqli_fetch_assoc($code_res);
@@ -180,7 +180,7 @@ if(isset($_POST['signup'])){
             $code = 0;
             $email = $_SESSION['email']; //getting this email using session
             $encpass = password_hash($password, PASSWORD_BCRYPT);
-            $update_pass = "UPDATE admintable SET code = $code, password = '$encpass' WHERE email = '$email'";
+            $update_pass = "UPDATE member SET code = $code, password = '$encpass' WHERE email = '$email'";
             $run_query = mysqli_query($conn, $update_pass);
             if($run_query){
                 $info = "Your password changed. Now you can login with your new password.";
@@ -193,7 +193,7 @@ if(isset($_POST['signup'])){
     }
     
    //if login now button click
-    if(isset($_POST['login-now'])){
+    if(isset($_POST['login-now'])){   
         header('Location: login.php');
     }
 ?>

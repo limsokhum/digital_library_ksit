@@ -3,7 +3,7 @@ require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM admintable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE email = '$email'";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -169,7 +169,7 @@ if($email != false && $password != false){
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <?php
-            $select_admin = "SELECT * FROM admintable WHERE email='$email'";
+            $select_admin = "SELECT * FROM member WHERE email='$email'";
             $select_query = $conn->query($select_admin);
             if($select_query->num_rows>0){
                 while($row_select_admin = $select_query->fetch_assoc()){
