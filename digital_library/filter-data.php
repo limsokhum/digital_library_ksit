@@ -113,14 +113,18 @@ include('../config/conn_db.php');
                         <div id="myTable" class="card mb-2" style="width: 100%;">
                             <!-- start one input value -->
                             <?php
-                            if(isset($_GET['title']) && isset($_GET['name_auther']) && isset($_GET['digital_book']) && isset($_GET['creationdate']) && isset($_GET['keyword']))
+                            
+                            // if(isset($_GET['filter_deta']))
+                            if(isset($_GET['title']) AND isset($_GET['name_auther']) AND isset($_GET['digital_book']) AND isset($_GET['creationdate']) AND isset($_GET['keyword']))
                             {
                                 $title = $_GET['title'];
                                 $name_auther = $_GET['name_auther'];
                                 $digital_book = $_GET['digital_book'];
                                 $creationdate = $_GET['creationdate'];
                                 $keyword = $_GET['keyword'];
+                                // $query = "SELECT * FROM digitalbook_tb WHERE title='$title'";
                                 $query = "SELECT * FROM digitalbook_tb WHERE title='$title' && name_auther='$name_auther' && digital_book='$digital_book' && creationdate='$creationdate' && keyword='$keyword'";
+
                                 $query_run = mysqli_query($conn, $query);
                                 if(mysqli_num_rows($query_run) > 0){
                                 foreach($query_run as $items){ ?>
@@ -133,7 +137,7 @@ include('../config/conn_db.php');
                                 <div class="detail-news">
                                     <h6 class="research-title"><span class="defult-title">ប្រធានបទ </span>
                                         ៖
-                                        ​<?php echo $items['title']?></h6>
+                                        <?php echo $items['title']?></h6>
 
                                     <small class="research-title"><span class="defult-title">អ្នកស្រាវជ្រាវ </span>
                                         ៖

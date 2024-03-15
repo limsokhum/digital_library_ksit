@@ -17,7 +17,7 @@ if(isset($_POST['signup'])){
     $email_check = "SELECT * FROM member WHERE email = '$email'";
     $res = mysqli_query($conn, $email_check);
     if(mysqli_num_rows($res) > 0){
-        $errors['email'] = "អ៊ីមែលដែលអ្នកបានបញ្ចូលមានរួចហើយ!";
+        $errors['email'] = "អ៊ីមែលមានក្នុងប្រព័ន្ធរួចហើយ!";
     }
     if(count($errors) === 0){
         $encpass = password_hash($password, PASSWORD_BCRYPT);
@@ -77,7 +77,7 @@ if(isset($_POST['signup'])){
     if(isset($_POST['login'])){
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
-        $check_email = "SELECT * FROM member WHERE email = '$email'";
+        $check_email = "SELECT * FROM member WHERE (email = '$email' AND select_role='អ្នកប្រើប្រាស់')";
         $res = mysqli_query($conn, $check_email); 
         if(mysqli_num_rows($res) > 0){
             $fetch = mysqli_fetch_assoc($res);
@@ -96,10 +96,10 @@ if(isset($_POST['signup'])){
                     // header('location: index.php');
                 }
             }else{
-                $errors['email'] = "អ៊ីមែល ឬពាក្យសម្ងាត់មិនត្រឹមត្រូវ!";
+                $errors['email'] = "ពាក្យសម្ងាត់របស់អ្នកមិនត្រឹមត្រូវ!";
             }
         }else{
-            $errors['email'] = "មើលទៅអ្នកមិនទាន់ជាសមាជិក! ចុចលើតំណខាងក្រោមដើម្បីចុះឈ្មោះ។";
+            $errors['email'] = "អ្នកមិនទាន់ជាសមាជិក! ចុចលើ link ខាងក្រោមដើម្បីចុះឈ្មោះ។";
         }
     }
 

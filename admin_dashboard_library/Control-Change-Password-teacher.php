@@ -1,4 +1,5 @@
 <?php 
+
 session_start();
 // connect database
 require "../config/conn_db.php";
@@ -6,6 +7,16 @@ require "../config/conn_db.php";
 $email = "";
 $name = "";
 $errors = array();
+
+
+// Start Section PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require_once '../phpmailer/src/Exception.php';
+require_once '../phpmailer/src/PHPMailer.php';
+require_once '../phpmailer/src/SMTP.php';
+// End Section PHPMailer
+
 
 // Sign up user and check you have account
 // if(isset($_POST['signup'])){
@@ -87,7 +98,7 @@ $errors = array();
     if(isset($_POST['login'])){
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
-        $check_email = "SELECT * FROM member WHERE email = '$email'";
+        $check_email = "SELECT * FROM member WHERE ((email = '$email') AND (select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់'))";
         $res = mysqli_query($conn, $check_email);
         if(mysqli_num_rows($res) > 0){
             $fetch = mysqli_fetch_assoc($res);
@@ -100,15 +111,15 @@ $errors = array();
                   $_SESSION['password'] = $password;
                     header('location: index-teacher.php');
                 }else{
-                    $info = "It's look like you haven't still verify your email - $email";
+                    $info = "វាហាក់ដូចជាអ្នកមិនទាន់បានផ្ទៀងផ្ទាត់អ៊ីមែលរបស់អ្នកនៅឡើយ - $email";
                     $_SESSION['info'] = $info;
                     header('location: teacher-otp.php');
                 }
             }else{
-                $errors['email'] = "Incorrect email or password!";
+                $errors['email'] = "អ៊ីមែល ឬពាក្យសម្ងាត់មិនត្រឹមត្រូវ!";
             }
         }else{
-            $errors['email'] = "It's look like you're not yet a member! Click on the bottom link to signup.";
+            $errors['email'] = "អ្នកមិនជាសមាជិករបស់ប្រព័​ន្ធយើងឡើងយ! ";
         }
     }
 
@@ -122,23 +133,48 @@ $errors = array();
             $insert_code = "UPDATE member SET code = $code WHERE email = '$email'";
             $run_query =  mysqli_query($conn, $insert_code);
             if($run_query){
-                $subject = "Password Reset Code";
-                $message = "Your password reset code is $code";
-                $sender = "From: sokhumlim@gmail.com";
-                if(mail($email, $subject, $message, $sender)){
-                    $info = "We've sent a passwrod reset otp to your email - $email";
+                $mail = new PHPMailer(true);
+                $mail -> isSMTP();
+                $mail -> Host = 'smtp.gmail.com';
+                $mail -> SMTPAuth = true;
+                $mail -> Username = 'sokhumlim36@gmail.com';
+                $mail -> Password = 'btoymsrjwznwohor'; 
+                $mail -> SMTPSecure = 'ssl'; 
+                $mail -> Port = 465;
+                $mail -> setFrom('sokhunlim36@gmail.com'); 
+                $mail -> addAddress($email);
+                $mail -> isHTML(true); //
+                // $mail -> Subject = ""; 
+                $mail -> Body = "លេខកូដផ្ទៀងផ្ទាត់របស់អ្នកគឺ $code"; // Body
+                $function_send = $mail -> send();
+            
+                if($function_send==true){
+                   $info = "យើងបានផ្ញើលេខសម្ងាត់ឡើងវិញ otp ទៅកាន់អ៊ីមែលរបស់អ្នក។ - $email";
                     $_SESSION['info'] = $info;
                     $_SESSION['email'] = $email;
                     header('location: teacher-reset-codes.php');
                     exit();
                 }else{
-                    $errors['otp-error'] = "Failed while sending code!";
+                    $errors['otp-error'] = "បរាជ័យ​ពេល​ផ្ញើ​លេខ​កូដ!";
                 }
+                
+                // $subject = "លេខកូដកំណត់ពាក្យសម្ងាត់ឡើងវិញ";
+                // $message = "លេខកូដកំណត់ពាក្យសម្ងាត់របស់អ្នកឡើងវិញ $code";
+                // $sender = "From: sokhumlim@gmail.com";
+                // if(mail($email, $subject, $message, $sender)){
+                //     $info = "យើងបានផ្ញើ otp កំណត់ពាក្យសម្ងាត់ឡើងវិញទៅកាន់អ៊ីមែលរបស់អ្នក។ - $email";
+                //     $_SESSION['info'] = $info;
+                //     $_SESSION['email'] = $email;
+                //     header('location: teacher-reset-codes.php');
+                //     exit();
+                // }else{
+                //     $errors['otp-error'] = "បរាជ័យ​ពេល​ផ្ញើ​លេខ​កូដ!";
+                // }
             }else{
-                $errors['db-error'] = "Something went wrong!";
+                $errors['db-error'] = "មាន​អ្វីមួយ​មិន​ប្រក្រតី!";
             }
         }else{
-            $errors['email'] = "This email address does not exist!";
+            $errors['email'] = "អាសយដ្ឋានអ៊ីមែលនេះមិនមានទេ!";
         }
     }
 
@@ -152,12 +188,12 @@ $errors = array();
             $fetch_data = mysqli_fetch_assoc($code_res);
             $email = $fetch_data['teacher_mail'];
             $_SESSION['email'] = $email;
-            $info = "Please create a new password that you don't use on any other site.";
+            $info = "សូមបង្កើតពាក្យសម្ងាត់ថ្មីដែលអ្នកមិនប្រើនៅលើគេហទំព័រផ្សេងទៀតណាមួយឡើយ។";
             $_SESSION['info'] = $info;
             header('location: teacher-new-password.php');
             exit();
         }else{
-            $errors['otp-error'] = "You've entered incorrect code!";
+            $errors['otp-error'] = "អ្នក​បាន​បញ្ចូល​កូដ​មិន​ត្រឹមត្រូវ!";
         }
     }
 
@@ -167,7 +203,7 @@ $errors = array();
         $password = mysqli_real_escape_string($conn, $_POST['password']);
         $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
         if($password !== $cpassword){
-            $errors['password'] = "Confirm password not matched!";
+            $errors['password'] = "បញ្ជាក់ពាក្យសម្ងាត់មិនត្រូវគ្នា!";
         }else{
             $code = 0;
             $email = $_SESSION['email']; //getting this email using session
@@ -175,11 +211,11 @@ $errors = array();
             $update_pass = "UPDATE member SET code = $code, password = '$encpass' WHERE email = '$email'";
             $run_query = mysqli_query($conn, $update_pass);
             if($run_query){
-                $info = "Your password changed. Now you can login with your new password.";
+                $info = "ពាក្យសម្ងាត់របស់អ្នកបានផ្លាស់ប្តូរ។ ឥឡូវនេះអ្នកអាចចូលដោយប្រើពាក្យសម្ងាត់ថ្មីរបស់អ្នក។";
                 $_SESSION['info'] = $info;
                 header('Location: login-teacher.php');
             }else{
-                $errors['db-error'] = "Failed to change your password!";
+                $errors['db-error'] = "បរាជ័យក្នុងការផ្លាស់ប្តូរពាក្យសម្ងាត់របស់អ្នក!";
             }
         }
     }

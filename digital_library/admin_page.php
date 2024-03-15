@@ -66,7 +66,7 @@
 
                                 <div class="container">
                                     <?php
-                                    $select_staff ="SELECT * FROM staff_tb WHERE 	select_role='នាយក'";
+                                    $select_staff ="SELECT * FROM member WHERE 	select_role='នាយក'";
                                     $result_staff = $conn->query($select_staff);
                                     if($result_staff->num_rows>0){
                                         while($row_stff = $result_staff->fetch_assoc()){
@@ -158,7 +158,7 @@
                                         <div class="rowses"></div>
                                         <div class="control-profile my-2">
                                             <?php
-                                $select_staff_staff = "SELECT * FROM staff_tb WHERE select_role='នាយករង'";
+                                $select_staff_staff = "SELECT * FROM member  WHERE select_role='នាយករង'";
                                 $result_staff_staff = $conn->query($select_staff_staff);
                                 if($result_staff_staff->num_rows >0){
                                     while($row_staffs = $result_staff_staff->fetch_assoc()){

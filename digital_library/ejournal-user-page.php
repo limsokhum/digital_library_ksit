@@ -71,7 +71,7 @@ if($email != false && $password != false){
 
 
 <?php
-$query_user_prifile="SELECT * FROM usertable WHERE email = '$email'";
+$query_user_prifile="SELECT * FROM member WHERE ((select_role='អ្នកប្រើប្រាស់') AND (email = '$email'))";
 // WHERE email = '$email'
 $result_user_profile = $conn->query($query_user_prifile);
 if($result_user_profile ->num_rows>0){

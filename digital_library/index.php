@@ -54,7 +54,6 @@ include('../config/conn_db.php');
     <!-- Start All Section Start Content -->
     <div class="container">
 
-
         <!-- Start Slide Show -->
         <div class="card mt-2" style="width: 100%;">
             <div class="row container-header">
@@ -105,9 +104,11 @@ include('../config/conn_db.php');
                     <div class="form-reshearch mt-3">
                         <form action="filter-data.php" method="GET">
                             <div class="form-group">
-                                <input class="form-control research-input" type="text" name="title"
-                                    value="<?php if(isset($_GET['title'])){echo $_GET['title']; }else{echo "";} ?>"
-                                    id="" placeholder="ចំណងជើងអត្ថបទ...">
+                                <input class="form-control research-input" type="text" name="title" id=""
+                                    placeholder="ចំណងជើងអត្ថបទ...">
+                                <!-- <input class="form-control research-input" type="text" name="title"
+                                    value="<?php //if(isset($_GET['title'])){echo $_GET['title']; }else{echo "";} ?>"
+                                    id="" placeholder="ចំណងជើងអត្ថបទ..."> -->
                             </div>
                             <div class="row mt-2">
                                 <div class="col-sm-6">
@@ -154,7 +155,8 @@ include('../config/conn_db.php');
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group research-input">
-                                        <button type="submit" class="form-control btn-success">Filter Data</button>
+                                        <button type="submit" name="filter_deta" class="form-control btn-success">Filter
+                                            Data</button>
                                     </div>
                                 </div>
                             </div>

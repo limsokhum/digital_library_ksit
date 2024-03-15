@@ -120,7 +120,7 @@ if(isset($_GET['id'])){
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $select_teacher = "SELECT * FROM admintable";
+                                            $select_teacher = "SELECT * FROM member WHERE select_role='អ្នកគ្រប់គ្រង'";
                                             $result_select_teacher = $conn->query($select_teacher);
                                             $cnt = 1;
                                             if($result_select_teacher->num_rows>0){

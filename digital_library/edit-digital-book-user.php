@@ -211,7 +211,7 @@ if(isset($_GET['id'])){
 }
 ?>
 <?php
-$query_user_prifile="SELECT * FROM usertable WHERE email = '$email'";
+$query_user_prifile="SELECT * FROM member WHERE ((select_role='អ្នកប្រើប្រាស់') AND (email = '$email'))";
 // WHERE email = '$email'
 $result_user_profile = $conn->query($query_user_prifile);
 if($result_user_profile ->num_rows>0){
@@ -435,12 +435,12 @@ if(isset($_GET['id'])){
     <!-- Start All Section Start Content -->
     <div class="container">
 
-
-
         <!-- Start Type Research -->
         <div class="card my-2" style="width: 100%;">
             <div class="card-body">
-                <h4 class="type-research-title py-4">អ្នកអាចបញ្ចូលឯកសារឌីជីថលដូចជា៖ e-Book, e-Project, e-Journal
+                <h4 class="type-research-title py-4">អ្នកអាចបញ្ចូលឯកសារឌីជីថលដូចជា៖ e-Book,
+                    e-Project,
+                    e-Journal
                 </h4>
                 <!-- <div class="header-list-digital-user">
                     <div class="myarticle">
@@ -478,7 +478,8 @@ if(isset($_GET['id'])){
                                 </spatn>
                             </label>
                             <input type="text" name="title" class="form-control" id=""
-                                value="<?php echo $row_teacher_digital_ebook['title']?>">
+                                value="<?php echo $row_teacher_digital_ebook['title']?>"
+                                style="font-family: 'Noto Serif Khmer', serif;">
                         </div>
                         <div class="form-group">
                             <div class="row mb-3">
@@ -489,7 +490,8 @@ if(isset($_GET['id'])){
                                         </spatn>
                                     </label>
                                     <input type="text" name="name_auther" class="text-input form-control" id=""
-                                        value="<?php echo $row_teacher_digital_ebook['name_auther']?>">
+                                        value="<?php echo $row_teacher_digital_ebook['name_auther']?>"
+                                        style="font-family: 'Noto Serif Khmer', serif;">
                                 </div>
                                 <div class="col-sm-3">
                                     <label class="label-control my-1" for=""
@@ -543,7 +545,8 @@ if(isset($_GET['id'])){
                                     </spatn>
                                 </label>
                                 <input type="text" name="keyword" class="form-control form-control"
-                                    value="<?php echo $row_teacher_digital_ebook['keyword']?>">
+                                    value="<?php echo $row_teacher_digital_ebook['keyword']?>"
+                                    style="font-family: 'Noto Serif Khmer', serif;">
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-4">
@@ -595,13 +598,13 @@ if(isset($_GET['id'])){
                                 <!-- <textarea class="form-control" id="" cols="30" rows="10"></textarea> -->
                             </div>
                         </div>
-                        <button type="submit" name="submit" class="btn btn-primary mt-2"><i
-                                class="fa-solid fa-circle-check"></i>
-                            Add Digital Book
+                        <button type="submit" name="submit" class="btn btn-primary mt-2"
+                            style="font-family: 'Noto Serif Khmer', serif;"><i class="fa-solid fa-circle-check"></i>
+                            កែសម្រួល
                         </button>
-                        <a href="list-digital-book-user.php" name="back" class="btn btn-danger mt-2"><i
-                                class="fa-solid fa-circle-check"></i>
-                            Back
+                        <a href="list-digital-book-user.php" name="back" class="btn btn-danger mt-2"
+                            style="font-family: 'Noto Serif Khmer', serif;"><i class="fa-solid fa-backward"></i>
+                            ថយ
                         </a>
                     </form>
                     <?php

@@ -384,7 +384,10 @@ if($result_user_profile ->num_rows>0){
         <!-- Start Type Research -->
         <div class="card my-2" style="width: 100%;">
             <div class="card-body">
-                <h4 class="type-research-title py-4">ឯកសារឌីជីថលដែលអ្នកមានដូចជា៖ e-Book, e-Project, e-Journal
+                <h4 class="type-research-title py-4">ឯកសារឌីជីថលដែលអ្នកមានដូចជា៖
+                    e-Book,
+                    e-Project,
+                    e-Journal
                 </h4>
                 <div class="header-list-digital-user">
                     <div class="myarticle">

@@ -359,7 +359,7 @@ if($result_user_profile ->num_rows>0){
                                         <div class="rowses"></div>
                                         <div class="control-profile my-2">
                                             <?php
-                                             $select_represiontative ="SELECT member.id, member.member_id, member.firstname, member.lastname, member.email,  member.email, member.phone, member.select_major, member.specialty, member.select_role, member.image, member.detail,major_tb.major_title,major_tb.creationdate
+                                             $select_teacher_staff ="SELECT member.id, member.member_id, member.firstname, member.lastname, member.email,  member.email, member.phone, member.select_major, member.specialty, member.select_role, member.image, member.detail,major_tb.major_title,major_tb.creationdate
                                              FROM member INNER JOIN major_tb ON member.select_major=major_tb.id  WHERE (major_title = 'កុំព្យូទ័រធុរកិច្ច') AND (select_role='គ្រូបង្រៀន')";
                                             // $select_teacher_staff = "SELECT teacher_tb.id, teacher_tb.teacher_id,teacher_tb.firstname,
                                             // teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
