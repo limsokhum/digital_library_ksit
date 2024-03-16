@@ -22,10 +22,10 @@ if($email != false && $password != false){
 }
 
 if(isset($_GET['id'])){
-    $select_teacher_id = $_GET['id'];
-    $delete_teacher = "DELETE FROM member WHERE id=$select_teacher_id";
-    $result_delete_teacher = $conn->query($delete_teacher);
-    if($result_delete_teacher==TRUE){
+    $admin = $_GET['id'];
+    $delete_admin = "DELETE FROM member WHERE id=$admin";
+    $result_delete_admin = $conn->query($delete_admin);
+    if($result_delete_admin==TRUE){
         $_SESSION['status'] = "<Type Your success message here>";
     }
 }
@@ -34,7 +34,6 @@ if(isset($_GET['id'])){
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -101,7 +100,7 @@ if(isset($_GET['id'])){
                                          ?>
                                 <div class="alert alert-success alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                    <strong>You Delete Teacher Success!</strong> .You Can Fine on List Teacher
+                                    <strong>You delete admin success!</strong> .You can fin on list admin
                                 </div>
                                 <?php 
                                          unset($_SESSION['status']);
@@ -137,15 +136,12 @@ if(isset($_GET['id'])){
                                                 <?php endforeach; ?>
                                             </td>
                                             <td>
-                                                <a href="view-teacher-management.php?id=<?php echo $row['id']?>"
-                                                    class="btn btn-success btn-circle btn-sm">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </a>
+
                                                 <a href="edit-teacher-management.php?id=<?php echo $row['id']?>"
                                                     class="btn btn-primary btn-circle btn-sm">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
-                                                <a href="list_staff.php?id=<?php echo $row['id']?>"
+                                                <a href="list_admin.php?id=<?php echo $row['id']?>"
                                                     class="btn btn-danger btn-circle btn-sm">
                                                     <i class="fas fa-trash"></i>
                                                 </a>

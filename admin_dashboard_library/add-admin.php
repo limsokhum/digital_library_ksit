@@ -174,7 +174,7 @@ if($email != false && $password != false){
                                             </spatn>
                                         </label>
                                         <input type="file" class="btn btn-secondary" name="fileImg[]"
-                                            accept=".jpg, .jpeg, .png" required multiple>
+                                            accept=".jpg, .jpeg, .png" multiple>
                                     </div>
                                     <div class="form-group">
                                         <input class="form-control btn" type="submit" name="signup" value="Signup"

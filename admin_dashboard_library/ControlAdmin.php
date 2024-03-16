@@ -108,7 +108,7 @@ if(isset($_POST['signup'])){
             $fetch_code = $fetch_data['code'];
             $email = $fetch_data['email'];
             $code = 0;
-            $status = 'verified';
+            $status = "verified";
             $update_otp = "UPDATE member SET code = $code, status = '$status' WHERE code = $fetch_code";
             $update_res = mysqli_query($conn, $update_otp);
             if($update_res){
@@ -128,7 +128,7 @@ if(isset($_POST['signup'])){
     if(isset($_POST['login'])){
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
-        $check_email = "SELECT * FROM member WHERE (email = '$email') AND select_role='អ្នកគ្រប់គ្រង'";
+        $check_email = "SELECT * FROM member WHERE (email = '$email') AND (select_role='អ្នកគ្រប់គ្រង')";
         $res = mysqli_query($conn, $check_email);
         if(mysqli_num_rows($res) > 0){
             $fetch = mysqli_fetch_assoc($res);
@@ -237,9 +237,10 @@ if(isset($_POST['signup'])){
             $errors['password'] = "បញ្ជាក់ពាក្យសម្ងាត់មិនត្រូវគ្នា!";
         }else{
             $code = 0;
+            $status = 'verified';
             $email = $_SESSION['email']; //getting this email using session
             $encpass = password_hash($password, PASSWORD_BCRYPT);
-            $update_pass = "UPDATE member SET code = $code, password = '$encpass' WHERE email = '$email'";
+            $update_pass = "UPDATE member SET code = $code, status='$status', password = '$encpass' WHERE email = '$email'";
             $run_query = mysqli_query($conn, $update_pass);
             if($run_query){
                 $info = "ពាក្យសម្ងាត់របស់អ្នកបានផ្លាស់ប្តូរ។ ឥឡូវនេះ អ្នកអាចចូលដោយប្រើពាក្យសម្ងាត់ថ្មីរបស់អ្នក។";
