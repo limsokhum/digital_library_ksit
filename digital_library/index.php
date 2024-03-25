@@ -63,8 +63,8 @@ include('../config/conn_db.php');
                 <div class="col-sm-6">
                     <div class="card-body">
                         <p class="contanct-text">សិក្សាបានគ្រប់ពេលវេលា និងគ្រប់ទីកន្លែង</p>
-                        <h3 class="contanct-title">សូមស្វាគមន៍មកកាន់
-                            ប្រព័ន្ធគ្រប់គ្រងបណ្ណាល័យឌីជីថលវិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ</h3>
+                        <h4 class="contanct-title">សូមស្វាគមន៍មកកាន់
+                            "ប្រព័ន្ធគ្រប់គ្រងបណ្ណាល័យឌីជីថលវិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ"</h4>
                         <dl>
                             <dt>និស្សិត និងអ្នកស្រាវជ្រាវទូទៅ ៖</dt>
                             <dd class="mt-1">- អាចធ្វើការស្វែងរកឯកសារឌីជីថលដូចជា e-Book, e-Project, e-Journal ដោយអាច
@@ -104,11 +104,9 @@ include('../config/conn_db.php');
                     <div class="form-reshearch mt-3">
                         <form action="filter-data.php" method="GET">
                             <div class="form-group">
-                                <input class="form-control research-input" type="text" name="title" id=""
-                                    placeholder="ចំណងជើងអត្ថបទ...">
-                                <!-- <input class="form-control research-input" type="text" name="title"
-                                    value="<?php //if(isset($_GET['title'])){echo $_GET['title']; }else{echo "";} ?>"
-                                    id="" placeholder="ចំណងជើងអត្ថបទ..."> -->
+                                <input class="form-control research-input" type="text" name="title"
+                                    value="<?php if(isset($_GET['title'])){echo $_GET['title']; }else{echo "";} ?>"
+                                    id="" placeholder="ចំណងជើងអត្ថបទ..." required>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-sm-6">
@@ -122,7 +120,7 @@ include('../config/conn_db.php');
                                     <div class="form-group">
                                         <div class="">
                                             <select class="form-select research-input" name="digital_book"
-                                                aria-label="Default select example">
+                                                aria-label="Default select example" required>
                                                 <option selected>ប្រភេទអត្ថបទ</option>
                                                 <option value="e-book"
                                                     <?= isset($_GET['digital_book']) == true ? $_GET['digital_book'] == 'e-book':'' ?>>

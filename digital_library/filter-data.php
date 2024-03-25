@@ -64,8 +64,8 @@ include('../config/conn_db.php');
                 <div class="col-sm-6">
                     <div class="card-body">
                         <p class="contanct-text">សិក្សាបានគ្រប់ពេលវេលា និងគ្រប់ទីកន្លែង</p>
-                        <h3 class="contanct-title">សូមស្វាគមន៍មកកាន់
-                            ប្រព័ន្ធគ្រប់គ្រងបណ្ណាល័យឌីជីថលវិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ</h3>
+                        <h4 class="contanct-title">សូមស្វាគមន៍មកកាន់
+                            "ប្រព័ន្ធគ្រប់គ្រងបណ្ណាល័យឌីជីថលវិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ"</h4>
                         <dl>
                             <dt>និស្សិត និងអ្នកស្រាវជ្រាវទូទៅ ៖</dt>
                             <dd class="mt-1">- អាចធ្វើការស្វែងរកឯកសារឌីជីថលដូចជា e-Book, e-Project, e-Journal ដោយអាច
@@ -111,34 +111,32 @@ include('../config/conn_db.php');
                 <div class="container row my-4">
                     <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
                         <div id="myTable" class="card mb-2" style="width: 100%;">
-                            <!-- start one input value -->
-                            <?php
-                            
-                            // if(isset($_GET['filter_deta']))
-                            if(isset($_GET['title']) AND isset($_GET['name_auther']) AND isset($_GET['digital_book']) AND isset($_GET['creationdate']) AND isset($_GET['keyword']))
-                            {
-                                $title = $_GET['title'];
-                                $name_auther = $_GET['name_auther'];
-                                $digital_book = $_GET['digital_book'];
-                                $creationdate = $_GET['creationdate'];
-                                $keyword = $_GET['keyword'];
-                                // $query = "SELECT * FROM digitalbook_tb WHERE title='$title'";
-                                $query = "SELECT * FROM digitalbook_tb WHERE title='$title' && name_auther='$name_auther' && digital_book='$digital_book' && creationdate='$creationdate' && keyword='$keyword'";
 
-                                $query_run = mysqli_query($conn, $query);
-                                if(mysqli_num_rows($query_run) > 0){
-                                foreach($query_run as $items){ ?>
+                            <!-- Start if condetion -->
+                            <?php
+                            if((isset($_GET['title'])) AND (isset($_GET['name_auther'])) AND (isset($_GET['digital_book'])) AND (isset($_GET['creationdate'])) ){
+                                $title = $_GET['title'];
+                                $query_title = "SELECT * FROM digitalbook_tb WHERE (status=1) AND (CONCAT(title,name_auther,digital_book,creationdate) LIKE '%$title%') ";
+                                $query_run = mysqli_query($conn, $query_title);
+                                foreach($query_run as $items){?>
                             <div class="card-body news-announcements">
                                 <div class="img-news">
-                                    <?php foreach (json_decode($items["image_one"]) as $image) : ?>
+                                    <?php
+                                    foreach (json_decode($items["image_one"]) as $image) :
+                                        if($items['image_one']==null){
+                                            echo "Not Image";
+                                        }else{
+                                            ?>
                                     <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
-                                    <?php endforeach; ?>
+                                    <?php
+                                        }
+                                         endforeach;?>
+
                                 </div>
+
                                 <div class="detail-news">
                                     <h6 class="research-title"><span class="defult-title">ប្រធានបទ </span>
-                                        ៖
                                         <?php echo $items['title']?></h6>
-
                                     <small class="research-title"><span class="defult-title">អ្នកស្រាវជ្រាវ </span>
                                         ៖
                                         <?php echo $items['name_auther']?> <span class="defult-title">, ប្រភេទសៀវភៅ
@@ -147,34 +145,42 @@ include('../config/conn_db.php');
                                         </span> ៖
                                         <?php echo $items['date']?>
                                     </small>
-                                    <p class="research-text"><?php
-                    
-                                    $content=$items['abstract'];
-                                    $string= strip_tags($content);
-                                    if(strlen($string) >500):
-                                    $stringCut= substr($string,0,500);
-                                    $endPoint=strrpos($stringCut,' ');
-                                    $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
-                                    $string .= '...<a class="text-danger fw-bolder" href="digital-page.php?id=' . $items['id'] . '">អានបន្ថែម</a>';
-                                        endif;
-                                        echo $string;
-                                        ?></p>
+                                    <p class="research-text">
+                                        <?php
+                                        $content=$items['abstract'];
+                                        $string= strip_tags($content);
+                                        if(strlen($string) >500):
+                                        $stringCut= substr($string,0,500);
+                                        $endPoint=strrpos($stringCut,' ');
+                                        $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
+                                        $string .= '...<a class="text-danger fw-bolder" href="digital-page.php?id=' . $items['id'] . '">អានបន្ថែម</a>';
+                                            endif;
+                                            echo $string;
+                                            ?>
+                                    </p>
                                 </div>
-                            </div>
 
+                            </div>
                             <?php
-        
-    }
-    }else{
-                                    ?>
+                                                }
+                                         }else{
+                                            ?>
                             <div class="container text-center mt-4">
                                 <?php echo '<h5 style="font-family:\'Koulen\', sans-serif;">គ្មានទិន្នន័យ!</h5>'; ?>
                             </div>
                             <?php
-    
-    }
-}
+                                         }
+        
                             ?>
+                            <!-- Ent if condetion -->
+
+
+
+
+
+
+
+
 
                         </div>
 

@@ -4,7 +4,7 @@ require_once('controllerUserData.php');
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
-    $sql = "SELECT * FROM usertable WHERE email = '$email'";
+    $sql = "SELECT * FROM member WHERE ((select_role='អ្នកប្រើប្រាស់') AND (email = '$email'))";
     $run_Sql = mysqli_query($conn, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -82,8 +82,8 @@ if($email != false && $password != false){
                 <div class="col-sm-6">
                     <div class="card-body">
                         <p class="contanct-text">សិក្សាបានគ្រប់ពេលវេលា និងគ្រប់ទីកន្លែង</p>
-                        <h3 class="contanct-title">សូមស្វាគមន៍មកកាន់
-                            ប្រព័ន្ធគ្រប់គ្រងបណ្ណាល័យឌីជីថលវិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ</h3>
+                        <h4 class="contanct-title">
+                            សូមស្វាគមន៍មកកាន់ "ប្រព័ន្ធគ្រប់គ្រងបណ្ណាល័យឌីជីថលវិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ"</h4>
                         <dl>
                             <dt>និស្សិត និងអ្នកស្រាវជ្រាវទូទៅ ៖</dt>
                             <dd class="mt-1">- អាចធ្វើការស្វែងរកឯកសារឌីជីថលដូចជា e-Book, e-Project, e-Journal ដោយអាច
@@ -131,13 +131,9 @@ if($email != false && $password != false){
                         <div id="myTable" class="card mb-2" style="width: 100%;">
                             <!-- start one input value -->
                             <?php
-                            if(isset($_GET['title']) && isset($_GET['name_auther']) && isset($_GET['digital_book']) && isset($_GET['creationdate']) && isset($_GET['keyword'])) {
+                             if((isset($_GET['title'])) AND (isset($_GET['name_auther'])) AND (isset($_GET['digital_book'])) AND (isset($_GET['creationdate'])) ){
                                 $title = $_GET['title'];
-                                $name_auther = $_GET['name_auther'];
-                                $digital_book = $_GET['digital_book'];
-                                $creationdate = $_GET['creationdate'];
-                                $keyword = $_GET['keyword'];
-                                $query = "SELECT * FROM digitalbook_tb WHERE title='$title' && name_auther='$name_auther' && digital_book='$digital_book' && creationdate='$creationdate' && keyword='$keyword'";
+                                $query = "SELECT * FROM digitalbook_tb WHERE (status=1) AND (CONCAT(title,name_auther,digital_book,creationdate) LIKE '%$title%')";
                                 $query_run = mysqli_query($conn, $query);
                                 if(mysqli_num_rows($query_run) > 0){
                                 foreach($query_run as $items){ ?>
