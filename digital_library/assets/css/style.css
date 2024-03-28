@@ -228,6 +228,10 @@ dd {
 }
 
 .nav-bar ul li a:hover {
+  color: orange !important;
+}
+
+.nav-bar .active {
   color: orange;
 }
 

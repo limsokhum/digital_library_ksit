@@ -145,11 +145,11 @@ if(isset($_GET['id'])){
                                                 ?>
                                         <tr class="text-primary">
                                             <td><?php echo $cnt?></td>
-                                            <td width="396px">
+                                            <td>
                                                 <?php echo $row_select_digital_ebook_notification['title']?></td>
                                             <td><?php echo $row_select_digital_ebook_notification['select_major']?></td>
                                             <td><?php echo $row_select_digital_ebook_notification['name_auther']?></td>
-                                            <td width="300px"><a class=""
+                                            <td><a class=""
                                                     href="e-books.php?file_id_view=<?php echo $row_select_digital_ebook_notification['id'] ?>"
                                                     target="_blank"><?php echo $row_select_digital_ebook_notification['name']?></a>
                                             </td>

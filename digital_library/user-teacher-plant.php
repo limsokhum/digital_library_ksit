@@ -423,6 +423,15 @@ if($result_user_profile ->num_rows>0){
 
     <!-- Ent Bottom Footer Copyright -->
     <script>
+    const currentLocation = location.href;
+    const menuItem = document.querySelectorAll('.nav-link');
+    const menuLength = menuItem.length;
+
+    for (let i = 0; i < menuLength; i++) {
+        if (menuItem[i].href === currentLocation) {
+            menuItem[i].classList.add("active");
+        }
+    }
     // Get the button
     let mybutton = document.getElementById("myBtn");
 

@@ -136,7 +136,6 @@ if(isset($_GET['id'])){
                                                 <?php endforeach; ?>
                                             </td>
                                             <td>
-
                                                 <a href="edit-teacher-management.php?id=<?php echo $row['id']?>"
                                                     class="btn btn-primary btn-circle btn-sm">
                                                     <i class="fa-solid fa-pen-to-square"></i>
