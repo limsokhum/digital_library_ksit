@@ -1,4 +1,6 @@
 /* ********* Start Research Papers ********* */
+
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,600;1,600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bayon&family=Koulen&family=Noto+Serif+Khmer:wght@400;500;600;700&family=REM:wght@200;300;400&family=Roboto:ital,wght@0,400;0,500;1,500&display=swap');
 
 *,
@@ -70,7 +72,7 @@
 
 /* view page staff */
 .list-staf {
-  font-family: 'Bayon', sans-serif;
+  font-family: "Kantumruy Pro", sans-serif;
 }
 
 .detail-staf {
@@ -166,6 +168,7 @@
 
 .contanct-text {
   font-family: 'Noto Serif Khmer', serif;
+  /* font-family: "Kantumruy Pro", sans-serif; */
   font-weight: bolder;
 }
 
@@ -221,18 +224,19 @@ dd {
 }
 
 .nav-bar ul li a {
-  font-family: 'Bayon', sans-serif;
+  /* font-family: 'Bayon', sans-serif; */
+  font-family: "Kantumruy Pro", sans-serif;
   font-weight: 400px;
   color: #fff;
   transition: 0.5s;
 }
 
 .nav-bar ul li a:hover {
-  color: orange !important;
+  color: #FFA500 !important;
 }
 
 .nav-bar .active {
-  color: orange;
+  color: #FFA500;
 }
 
 .search {
@@ -293,7 +297,8 @@ dd {
   width: 14rem;
   text-align: center;
   color: orange;
-  font-family: 'Bayon', sans-serif;
+  /* font-family: 'Bayon', sans-serif; */
+  font-family: "Kantumruy Pro", sans-serif;
   font-size: 1.2rem;
   padding: 0.5rem 1rem;
   background: #336666;
@@ -343,14 +348,9 @@ dd {
   box-shadow: 0px 0.1px 1px 1px grey;
 }
 
-
-
 .news-announcementses .detail-newseses {
   width: 100%;
 }
-
-
-
 
 .news-announcementses .detail-newseses .research-title {
   font-family: "Hanuman", serif;
@@ -518,7 +518,7 @@ dd {
 }
 
 .major-title {
-  font-family: 'Bayon', sans-serif;
+  font-family: "Kantumruy Pro", sans-serif;
   color: orange;
   text-decoration: underline;
 }
@@ -636,7 +636,9 @@ dd {
 }
 
 .staff-title {
-  font-family: 'Bayon', sans-serif;
+  font-family: "Kantumruy Pro", sans-serif;
+  /* font-family: 'Bayon', sans-serif; */
+  font-size: 1.2rem;
   color: orange;
 }
 
@@ -652,8 +654,8 @@ dd {
 }
 
 .bg-profile {
-  width: 12rem;
-  height: 12rem;
+  width: 10rem;
+  height: 10rem;
   border-radius: 50%;
   margin: 1px auto;
   background-color: grey;
@@ -695,7 +697,6 @@ dd {
   display: block;
   /* border-bottom: 1px solid #336666; */
 }
-
 
 .detail-department .detail-news {
   width: 100%;

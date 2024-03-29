@@ -101,10 +101,10 @@ include ('../config/conn_db.php');
                                                     <ul class="list-group list-group-flush">
                                                         <li class="list-group-item">
                                                             <div class="row">
-                                                                <div class="col-sm-2">
+                                                                <div class="col-sm-3">
                                                                     <span class="list-staf fw-bolder">ឈ្មោះ</span>
                                                                 </div>
-                                                                <div class="col-sm-10">
+                                                                <div class="col-sm-9">
                                                                     <span class="text-warning fw-bolder"> :*</span>
                                                                     <span
                                                                         class="detail-staf mx-2"><?php echo $row_select_represiontative['firstname']?>
@@ -114,10 +114,10 @@ include ('../config/conn_db.php');
                                                         </li>
                                                         <li class="list-group-item">
                                                             <div class="row">
-                                                                <div class="col-sm-2">
+                                                                <div class="col-sm-3">
                                                                     <span class="list-staf fw-bolder">អត្ថលេខ</span>
                                                                 </div>
-                                                                <div class="col-sm-10">
+                                                                <div class="col-sm-9">
                                                                     <span class="text-warning fw-bolder"> :*</span>
                                                                     <span
                                                                         class="detail-staf mx-2"><?php echo $row_select_represiontative['member_id']?></span>
@@ -127,10 +127,10 @@ include ('../config/conn_db.php');
                                                         </li>
                                                         <li class="list-group-item">
                                                             <div class="row">
-                                                                <div class="col-sm-2">
+                                                                <div class="col-sm-3">
                                                                     <span class="list-staf fw-bolder">អ៊ីម៊ែល</span>
                                                                 </div>
-                                                                <div class="col-sm-10">
+                                                                <div class="col-sm-9">
                                                                     <span class="text-warning fw-bolder"> :*</span>
                                                                     <span
                                                                         class="detail-staf mx-2"><?php echo $row_select_represiontative['email']?></span>
@@ -140,10 +140,10 @@ include ('../config/conn_db.php');
                                                         </li>
                                                         <li class="list-group-item">
                                                             <div class="row">
-                                                                <div class="col-sm-2">
+                                                                <div class="col-sm-3">
                                                                     <span class="list-staf fw-bolder">ទូរស័ព្ទ</span>
                                                                 </div>
-                                                                <div class="col-sm-10">
+                                                                <div class="col-sm-9">
                                                                     <span class="text-warning fw-bolder"> :*</span>
                                                                     <span
                                                                         class="detail-staf mx-2"><?php echo $row_select_represiontative['phone']?></span>

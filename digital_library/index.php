@@ -30,7 +30,8 @@ include('../config/conn_db.php');
     <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@100;300;400;700;900&display=swap"
         rel="stylesheet">
 
-    <!-- Default Font Awesome -->
+
+    <!-- <-- Default Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 
     <!-- Custom Search Button Function -->
@@ -67,7 +68,7 @@ include('../config/conn_db.php');
                             "ប្រព័ន្ធគ្រប់គ្រងបណ្ណាល័យឌីជីថលវិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ"</h4>
                         <dl>
                             <dt>និស្សិត និងអ្នកស្រាវជ្រាវទូទៅ ៖</dt>
-                            <dd class="mt-1">- អាចធ្វើការស្វែងរកឯកសារឌីជីថលដូចជា e-Book, e-Project, e-Journal ដោយអាច
+                            <dd class="mt-1">- អាចធ្វើការស្វែងរកឯកសារឌីជីថលដូចជា E-Book, E-Project, E-Journal ដោយអាច
                                 filter តាម metadata មួយចំនួនដូចជា ឆ្នាំបោះពុម្ភ ឈ្មោះអ្នកនិពន្ធ ចំណងជើង ប្រភេទអត្ថបទ
                                 និងពាក្យគន្លឹះបាន។</dd>
                             <dd>- អាចទាញយកឯកសារ។</dd>
@@ -123,14 +124,15 @@ include('../config/conn_db.php');
                                                 aria-label="Default select example" required>
                                                 <option selected>ប្រភេទអត្ថបទ</option>
                                                 <option value="e-book"
-                                                    <?= isset($_GET['digital_book']) == true ? $_GET['digital_book'] == 'e-book':'' ?>>
-                                                    e-Book</option>
-                                                <option value="e-project"
+                                                    <?= isset($_GET['digital_book']) == true ? $_GET['digital_book'] == 'e-book':'' ?>
+                                                    font-family: 'Bayon' , sans-serif;>
+                                                    E-Book</option>
+                                                <option value=" e-project"
                                                     <?= isset($_GET['digital_book']) == true ? $_GET['digital_book'] == 'e-project':'' ?>>
-                                                    e-Project</option>
+                                                    E-Project</option>
                                                 <option value="e-journal"
                                                     <?= isset($_GET['digital_book']) == true ? $_GET['digital_book'] == 'e-journal':'' ?>>
-                                                    e-Journal</option>
+                                                    E-Journal</option>
                                             </select>
                                         </div>
                                     </div>

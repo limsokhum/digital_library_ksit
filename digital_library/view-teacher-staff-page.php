@@ -67,8 +67,6 @@
 
                             <div class="card my-2" style="width: 100%; border-color: orange;">
 
-
-
                                 <?php
                                 if(isset($_GET['id'])){
                                     $staff_id = $_GET['id'];
@@ -101,10 +99,10 @@
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item">
                                                         <div class="row">
-                                                            <div class="col-sm-2">
+                                                            <div class="col-sm-3">
                                                                 <span class="list-staf fw-bolder">ឈ្មោះ</span>
                                                             </div>
-                                                            <div class="col-sm-10">
+                                                            <div class="col-sm-9">
                                                                 <span class="text-warning fw-bolder"> :*</span>
                                                                 <span
                                                                     class="detail-staf mx-2"><?php echo $row_staffs['firstname']. $row_staffs['lastname']?></span>
@@ -113,10 +111,10 @@
                                                     </li>
                                                     <li class="list-group-item">
                                                         <div class="row">
-                                                            <div class="col-sm-2">
+                                                            <div class="col-sm-3">
                                                                 <span class="list-staf fw-bolder">ភេទ</span>
                                                             </div>
-                                                            <div class="col-sm-10">
+                                                            <div class="col-sm-9">
                                                                 <span class="text-warning fw-bolder"> :*</span>
                                                                 <span class="detail-staf mx-2">ប្រុស</span>
                                                             </div>
@@ -125,10 +123,10 @@
                                                     </li>
                                                     <li class="list-group-item">
                                                         <div class="row">
-                                                            <div class="col-sm-2">
+                                                            <div class="col-sm-3">
                                                                 <span class="list-staf fw-bolder">អ៊ីម៊ែល</span>
                                                             </div>
-                                                            <div class="col-sm-10">
+                                                            <div class="col-sm-9">
                                                                 <span class="text-warning fw-bolder"> :*</span>
                                                                 <span
                                                                     class="detail-staf mx-2"><?php echo $row_staffs['email']?></span>
@@ -138,10 +136,10 @@
                                                     </li>
                                                     <li class="list-group-item">
                                                         <div class="row">
-                                                            <div class="col-sm-2">
+                                                            <div class="col-sm-3">
                                                                 <span class="list-staf fw-bolder">ទូរស័ព្ទ</span>
                                                             </div>
-                                                            <div class="col-sm-10">
+                                                            <div class="col-sm-9">
                                                                 <span class="text-warning fw-bolder"> :*</span>
                                                                 <span
                                                                     class="detail-staf mx-2"><?php echo $row_staffs['phone']?></span>

@@ -56,7 +56,7 @@ if($email != false && $password != false){
                 $edit_code = 0;
                 $edit_encpass = password_hash($edit_password, PASSWORD_BCRYPT);
                 $edit_status = "verified";
-                $edit_update_pass = "UPDATE admintable SET name = '$edit_name', email='$edit_email', password = '$edit_encpass', code='$edit_code', image='$filesArray', status='$edit_status'  WHERE (email='$email' && id = $edit_profile_admin) ";
+                $edit_update_pass = "UPDATE member SET name = '$edit_name', email='$edit_email', password = '$edit_encpass', code='$edit_code', image='$filesArray', status='$edit_status'  WHERE (email='$email' && id = $edit_profile_admin) ";
                 $edit_run_query = mysqli_query($conn, $edit_update_pass);
                 if($edit_run_query){
                     echo

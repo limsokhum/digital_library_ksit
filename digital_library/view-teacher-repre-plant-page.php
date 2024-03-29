@@ -100,10 +100,10 @@
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item">
                                                         <div class="row">
-                                                            <div class="col-sm-2">
+                                                            <div class="col-sm-3">
                                                                 <span class="list-staf fw-bolder">ឈ្មោះ</span>
                                                             </div>
-                                                            <div class="col-sm-10">
+                                                            <div class="col-sm-9">
                                                                 <span class="text-warning fw-bolder"> :*</span>
                                                                 <span
                                                                     class="detail-staf mx-2"><?php echo $row_representative['firstname']. $row_representative['lastname']?></span>
@@ -112,10 +112,10 @@
                                                     </li>
                                                     <li class="list-group-item">
                                                         <div class="row">
-                                                            <div class="col-sm-2">
+                                                            <div class="col-sm-3">
                                                                 <span class="list-staf fw-bolder">ភេទ</span>
                                                             </div>
-                                                            <div class="col-sm-10">
+                                                            <div class="col-sm-9">
                                                                 <span class="text-warning fw-bolder"> :*</span>
                                                                 <span class="detail-staf mx-2">ប្រុស</span>
                                                             </div>
@@ -124,10 +124,10 @@
                                                     </li>
                                                     <li class="list-group-item">
                                                         <div class="row">
-                                                            <div class="col-sm-2">
+                                                            <div class="col-sm-3">
                                                                 <span class="list-staf fw-bolder">អ៊ីម៊ែល</span>
                                                             </div>
-                                                            <div class="col-sm-10">
+                                                            <div class="col-sm-9">
                                                                 <span class="text-warning fw-bolder"> :*</span>
                                                                 <span
                                                                     class="detail-staf mx-2"><?php echo $row_representative['teacher_mail']?></span>
@@ -137,10 +137,10 @@
                                                     </li>
                                                     <li class="list-group-item">
                                                         <div class="row">
-                                                            <div class="col-sm-2">
+                                                            <div class="col-sm-3">
                                                                 <span class="list-staf fw-bolder">ទូរស័ព្ទ</span>
                                                             </div>
-                                                            <div class="col-sm-10">
+                                                            <div class="col-sm-9">
                                                                 <span class="text-warning fw-bolder"> :*</span>
                                                                 <span
                                                                     class="detail-staf mx-2"><?php echo $row_representative['phone']?></span>
@@ -154,7 +154,6 @@
                                             <div class="title-about-staf my-3">
                                                 <span class="list-staf fw-bolder">អំពីរនាយក៖</span>
                                             </div>
-
                                             <div class="descript">
                                                 <?php echo $desc;?>
                                             </div>
@@ -168,9 +167,6 @@
                                 <?php
                                 }
                                 ?>
-
-
-
 
                             </div>
                             <div class="card my-2" style="width: 100%; border-color: orange;">
