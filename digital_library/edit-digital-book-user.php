@@ -363,6 +363,8 @@ if($result_user_profile ->num_rows>0){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
     <!-- Default Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 
@@ -438,9 +440,9 @@ if(isset($_GET['id'])){
         <!-- Start Type Research -->
         <div class="card my-2" style="width: 100%;">
             <div class="card-body">
-                <h4 class="type-research-title py-4">អ្នកអាចបញ្ចូលឯកសារឌីជីថលដូចជា៖ e-Book,
-                    e-Project,
-                    e-Journal
+                <h4 class="type-research-title py-4">អ្នកអាចបញ្ចូលឯកសារឌីជីថលដូចជា៖ E-Book,
+                    E-Project,
+                    E-Journal
                 </h4>
                 <!-- <div class="header-list-digital-user">
                     <div class="myarticle">
@@ -471,7 +473,7 @@ if(isset($_GET['id'])){
                         while($row_user_add_digital = $result_user_add_digital->fetch_assoc()){
                             ?>
                     <form action="" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label class="label-control mb-1" for="" style="font-family:'Koulen', sans-serif;">ប្រធានបទ
                                 Digital Book
                                 <spatn class=" text-danger">:*
@@ -481,7 +483,7 @@ if(isset($_GET['id'])){
                                 value="<?php echo $row_teacher_digital_ebook['title']?>"
                                 style="font-family: 'Noto Serif Khmer', serif;">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group  mt-2">
                             <div class="row mb-3">
                                 <div class="col-sm-5">
                                     <label class="label-control my-1" for=""
@@ -513,14 +515,14 @@ if(isset($_GET['id'])){
                                     </label>
                                     <div class="radio-control">
                                         <input type="radio" name="digital_book" class="" id="" value="e-book" checked>
-                                        <label for="">e-Book, </label>
+                                        <label for="">E-Book, </label>
 
                                         <input type="radio" name="digital_book" class="" id="" aria-describedby=""
                                             value="e-project">
-                                        <label for="">e-Project, </label>
+                                        <label for="">E-Project, </label>
                                         <input type="radio" name="digital_book" class="" id="" aria-describedby=""
                                             value="e-journal">
-                                        <label for="">e-Journal</label>
+                                        <label for="">E-Journal</label>
                                     </div>
 
                                 </div>

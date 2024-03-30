@@ -267,7 +267,7 @@ if($result_user_profile ->num_rows>0){
                                         while($row_stff = $result_staff->fetch_assoc()){
                                             $trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
                                                 unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
-                                                $desc = strtr(html_entity_decode($row_stff['details']),$trans);
+                                                $desc = strtr(html_entity_decode($row_stff['detail']),$trans);
                                                 $desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
                                             ?>
                                     <div class="card-body">

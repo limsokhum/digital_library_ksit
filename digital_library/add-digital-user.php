@@ -405,7 +405,7 @@ if($result_user_profile ->num_rows>0){
         <!-- Start Type Research -->
         <div class="card my-2" style="width: 100%;">
             <div class="card-body">
-                <h4 class="type-research-title py-4">អ្នកអាចបញ្ចូលឯកសារឌីជីថលដូចជា៖ e-Book, e-Project, e-Journal
+                <h4 class="type-research-title py-4">អ្នកអាចបញ្ចូលឯកសារឌីជីថលដូចជា៖ E-Book, E-Project, E-Journal
                 </h4>
                 <!-- <div class="header-list-digital-user">
                     <div class="myarticle">
@@ -476,14 +476,14 @@ if($result_user_profile ->num_rows>0){
                                     </label>
                                     <div class="radio-control">
                                         <input type="radio" name="digital_book" class="" id="" value="e-book">
-                                        <label for="">e-Book, </label>
+                                        <label for="">E-Book, </label>
 
                                         <input type="radio" name="digital_book" class="" id="" aria-describedby=""
                                             value="e-project">
-                                        <label for="">e-Project, </label>
+                                        <label for="">E-Project, </label>
                                         <input type="radio" name="digital_book" class="" id="" aria-describedby=""
                                             value="e-journal">
-                                        <label for="">e-Journal</label>
+                                        <label for="">E-Journal</label>
                                     </div>
 
                                 </div>
