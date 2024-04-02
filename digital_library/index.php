@@ -2,6 +2,8 @@
 include('../config/conn_db.php');
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,6 +43,7 @@ include('../config/conn_db.php');
 </head>
 
 <body style="background-color: #dedede;">
+
     <!-- Scroll to Top -->
     <div onclick="topFunction()" id="myBtn"><i class="fa-solid fa-circle-chevron-up"
             style="color: orange; font-size: 1.4rem;"></i></div>
@@ -51,6 +54,8 @@ include('../config/conn_db.php');
     <!-- Start Navigation Bar -->
     <?php include('includes/navbar.php');?>
     <!-- Ent Navigation Bar -->
+
+
 
     <!-- Start All Section Start Content -->
     <div class="container">
@@ -215,7 +220,9 @@ include('../config/conn_db.php');
                             <div class="card-body news-announcements">
                                 <div class="img-news">
                                     <?php foreach (json_decode($row["image_one"]) as $image) : ?>
+
                                     <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
+
                                     <?php endforeach; ?>
                                 </div>
                                 <div class="detail-news">

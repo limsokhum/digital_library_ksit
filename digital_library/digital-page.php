@@ -48,6 +48,7 @@ include('../config/conn_db.php');
 </head>
 
 <body style="background-color: #dedede;">
+
     <!-- Scroll to Top -->
     <div onclick="topFunction()" id="myBtn"><i class="fa-solid fa-circle-chevron-up"
             style="color: orange; font-size: 1.4rem;"></i></div>
@@ -87,6 +88,31 @@ include('../config/conn_db.php');
                 <div class="rows"></div>
             </div>
 
+            <!-- Start view image -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #dedede;">
+
+                            <button type="button" class="btn-close bg-light" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body d-flex align-items-center justify-content-center"
+                            style="background-color: #dedede;">
+                            <?php foreach (json_decode($row_digital["image_one"]) as $image) : ?>
+                            <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                            <?php endforeach; ?>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End view imag -->
+
+
+
             <div class="card" style="width: 100%;">
 
                 <div class="container row my-4">
@@ -95,7 +121,8 @@ include('../config/conn_db.php');
                             <div class="card-body detail-department">
                                 <div class="img-cover">
                                     <?php foreach (json_decode($row_digital["image_one"]) as $image) : ?>
-                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
+                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <?php endforeach; ?>
                                 </div>
                                 <div class="detail-news my-3">
@@ -123,12 +150,11 @@ include('../config/conn_db.php');
                                     <div class="d-flex">
                                         <div class="button-download my-3">
                                             <a href="view-file.php?id=<?php echo $row_digital['id']?>" target="_blank"
-                                                class="btn btn-success"><i class="fa-solid fa-eye"></i> View</a>
+                                                class="btn btn-success"><i class="fa-solid fa-eye"></i> មើល</a>
                                         </div>
                                         <div class="button-download my-3 mx-3">
                                             <a href="download-file.php?id=<?php echo $row_digital['id']?>"
-                                                class="btn btn-success"><i class="fa-solid fa-download"></i> Download
-                                                Now</a>
+                                                class="btn btn-success"><i class="fa-solid fa-download"></i> ទាញយក</a>
                                         </div>
                                     </div>
 

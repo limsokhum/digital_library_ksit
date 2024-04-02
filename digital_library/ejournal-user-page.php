@@ -140,39 +140,7 @@ if($result_user_profile ->num_rows>0){
                             <input type="password" name="cpassword" class="form-control form-control">
                         </div>
                     </div>
-                    <div class="form-group my-2">
-                        <label class="label-control" for=""
-                            style="font-family:'Koulen', sans-serif;">តើអ្នកចង់ប្ដូគ្រូជំនួយការឬ ?
 
-                        </label>
-                        <div class="form-check d-flex">
-                            <input onclick="onclickShowAdvisor()" class="form-check-input" type="radio" name=""
-                                value="">
-                            <label class="form-check-label mx-1" style="font-family:Khmer OS System;"> ប្ដូគ្រូជំនួយការ
-                            </label>
-                        </div>
-                    </div>
-                    <div id="advisor" class="hidden-advisor">
-                        <div class="form-group">
-                            <select name="advisor" class="form-control" style="font-family: 'Noto Serif Khmer', serif;">
-                                <option selected>ជ្រើសរើសគ្រូជំនួយការ</option>
-                                <?php
-                                                $advisor_tb = "SELECT * FROM member WHERE select_role='បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់'";
-                                                $result_advisor = $conn -> query($advisor_tb);
-                                                if($result_advisor->num_rows > 0){
-                                                    while($row = $result_advisor -> fetch_assoc()){
-                                                        ?>
-                                <option class="text primary form-control" value="<?php echo ($row['teacher_mail'])?>">
-                                    <?php echo $row['firstname']. $row['lastname']?>
-                                </option>
-                                <?php
-                                                }
-                                                }
-                                                ?>
-                            </select>
-                        </div>
-
-                    </div>
                     <div class="row mb-3">
                         <div class="col-sm-12">
                             <label class="label-control my-1" for="" style="font-family:'Koulen', sans-serif;">រូប
