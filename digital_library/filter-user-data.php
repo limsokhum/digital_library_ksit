@@ -163,7 +163,7 @@ if($email != false && $password != false){
                                     $stringCut= substr($string,0,500);
                                     $endPoint=strrpos($stringCut,' ');
                                     $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
-                                    $string .= '...<a class="text-danger fw-bolder" href="digital-page.php?id=' . $items['id'] . '">អានបន្ថែម</a>';
+                                    $string .= '...<a class="text-danger fw-bolder" href="digital-page-user.php?id=' . $items['id'] . '">អានបន្ថែម</a>';
                                     endif;
                                     echo $string;
                                     

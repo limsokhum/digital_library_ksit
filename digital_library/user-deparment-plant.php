@@ -339,7 +339,7 @@ if($result_user_profile ->num_rows>0){
                     $stringCut= substr($string,0,600);
                     $endPoint=strrpos($stringCut,' ');
                     $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
-                    $string.='...<a class="text-danger fw-bolder" href="user-digital-page.php?id=' . $row['id'] . '">អានបន្ថែម</a>';
+                    $string.='...<a class="text-danger fw-bolder" href="digital-page-user.php?id=' . $row['id'] . '">អានបន្ថែម</a>';
 
                     endif;
                     echo $string;

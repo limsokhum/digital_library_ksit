@@ -22,172 +22,6 @@ if($email != false && $password != false){
     header('Location: index.php');
 }
 ?>
-<?php
- if(isset($_POST['edit_profile'])){
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-    $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
-    
-    $totalFiles = count($_FILES['fileImg']['name']);
-    $filesArray = array();
-
-    for($i = 0; $i < $totalFiles; $i++){
-    $imageName = $_FILES["fileImg"]["name"][$i];
-    $tmpName = $_FILES["fileImg"]["tmp_name"][$i];
-
-    $imageExtension = explode('.', $imageName);
-    $imageExtension = strtolower(end($imageExtension));
-
-    $newImageName = uniqid() . '.' . $imageExtension;
-
-    move_uploaded_file($tmpName, '../admin_dashboard_library/uploads/' . $newImageName);
-    $filesArray[] = $newImageName;
-    }
-
-    $filesArray = json_encode($filesArray);
-    
-    $code = 0;
-    
-    $status = "verified";
-    
-    if($password==NULL && $cpassword==NULL && $filesArray==NULL){
-        $update_pass = "UPDATE member SET name ='$name', email='$email',code='$code',status='$status' WHERE email = '$email'";
-    }elseif($password==NULL && $cpassword==NULL && $filesArray==NULL ){
-        $update_pass = "UPDATE member SET name ='$name', email='$email', code='$code',status='$status' WHERE email = '$email'";
-    }elseif($password==NULL && $cpassword==NULL && $filesArray!==NULL){
-        $update_pass = "UPDATE member SET name ='$name', email='$email',image='$filesArray',code='$code',status='$status' WHERE email = '$email'";
-    }else{
-            $encpass = password_hash($password, PASSWORD_BCRYPT);
-            $update_pass = "UPDATE member SET name ='$name', email='$email', password = '$encpass',  image='$filesArray',code='$code', status='$status' WHERE email = '$email'";
-    }
-    $result_editprofile =$conn ->query($update_pass);
-    if($result_editprofile==true){
-        $_SESSION['status'] = "<Type Your success message here>";
-    }
-}
-?>
-
-
-
-<?php
-$query_user_prifile="SELECT * FROM member WHERE email = '$email'";
-// WHERE email = '$email'
-$result_user_profile = $conn->query($query_user_prifile);
-if($result_user_profile ->num_rows>0){
-    while($row_user_profile = $result_user_profile->fetch_assoc()){
-        ?>
-<!-- Start Modal Bootstrap 5 -->
-<div class="modal fade" id="exampleModal" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <form action="" method="post" enctype="multipart/form-data">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"
-                        style="font-family:'Koulen', sans-serif; color: #336666;">
-                        Chang Profile</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <label class="label-control mb-1" for="" style="font-family:'Koulen', sans-serif;">ឈ្មោះ
-                            <spatn class=" text-danger">:*
-                            </spatn>
-                        </label>
-                        <input type="text" name="name" class="form-control" id=""
-                            value="<?php echo $row_user_profile['name']?>"
-                            style="font-family: 'Noto Serif Khmer', serif;">
-                    </div>
-                    <div class="form-group my-2">
-                        <label class="label-control mb-1" for="" style="font-family:'Koulen', sans-serif;">អ៊ីម៉ែល
-                            <spatn class=" text-danger">:*
-                            </spatn>
-                        </label>
-                        <input type="text" name="email" class="form-control" id=""
-                            value="<?php echo $row_user_profile['email']?>"
-                            style="font-family: 'Noto Serif Khmer', serif;">
-                    </div>
-                    <div class="form-group my-2">
-                        <label class="label-control" for=""
-                            style="font-family:'Koulen', sans-serif;">តើអ្នកចង់ប្ដូលេខសម្ងាត់ឬ ?
-
-                        </label>
-                        <div class="form-check d-flex">
-                            <input onclick="onclickShow()" class="form-check-input" type="radio" name="select_role"
-                                value="">
-                            <label class="form-check-label mx-1" style="font-family:Khmer OS System;"> ប្ដូលេខសម្ងាត់
-                            </label>
-
-                        </div>
-                    </div>
-                    <div id="passwords" class="hidden-changpassword">
-                        <div class="form-group">
-                            <label class="label-control my-1" for=""
-                                style="font-family:'Koulen', sans-serif;">លេខសម្ងាត់
-                                <spatn class=" text-danger">:*
-                                </spatn>
-                            </label>
-                            <input type="password" name="password" class="text-input form-control" id="">
-
-                        </div>
-                        <div class="form-group my-2">
-                            <label class="label-control" for="" style="font-family:'Koulen', sans-serif;">បញ្ជាក់
-                                <spatn class=" text-danger">:*
-                                </spatn>
-                            </label>
-                            <input type="password" name="cpassword" class="form-control form-control">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-sm-12">
-                            <label class="label-control my-1" for="" style="font-family:'Koulen', sans-serif;">រូប
-                                profile
-                                <spatn class=" text-danger">:*
-                                </spatn>
-                            </label>
-                            <div class="file-input">
-                                <input type="file" class="btn btn-secondary text-input" name="fileImg[]"
-                                    accept=".jpg, .jpeg, .png" multiple>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="view-profile">
-
-                        <?php
-                        if($row_user_profile['image']==NULL){
-                            ?>
-                        <img class="w-100" src="assets/images/user-profile.png" alt="">
-                        <?php
-                        }else{
-                            foreach (json_decode($row_user_profile["image"]) as $image) : ?>
-                        <img class="w-100" src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
-                        <?php endforeach; 
-                        }
-                         ?>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        style="font-family:' Koulen', sans-serif;">Close</button>
-
-                    <button type="submit" name="edit_profile" class="btn text-light"
-                        style=" background-color: #336666; font-family:'Koulen', sans-serif;">Save
-                        changes</button>
-                </div>
-        </div>
-
-        </form>
-    </div>
-</div>
-<!-- Ent Modal Bootstrap 5 -->
-<?php
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -212,11 +46,6 @@ if($result_user_profile ->num_rows>0){
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@100;300;400;700;900&display=swap"
-        rel="stylesheet">
-
     <!-- Default Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 
@@ -240,6 +69,7 @@ if($result_user_profile ->num_rows>0){
 </head>
 
 <body style="background-color: #dedede;">
+
     <!-- Scroll to Top -->
     <div onclick="topFunction()" id="myBtn"><i class="fa-solid fa-circle-chevron-up"
             style="color: orange; font-size: 1.4rem;"></i></div>
@@ -271,13 +101,45 @@ if($result_user_profile ->num_rows>0){
 
             <div class="title d-flex">
                 <div class="computer">
-                    <h5><?php echo $row_digital['select_major']?>/<span
-                            style="color: white;"><?php echo $row_digital['digital_book']?></span>
+                    <h5><?php echo $row_digital['select_major']?>/<span style="color: white;">
+                            <?php if($row_digital['digital_book']=='e-book'){
+                                echo "E-Book";
+                            }elseif($row_digital['digital_book']=='e-journal'){
+                                echo "E-Journal";
+                            }elseif($row_digital['digital_book']=='e-project'){
+                                echo "E-Project";
+                            }
+                                ?></span>
                     </h5>
 
                 </div>
                 <div class="rows"></div>
             </div>
+
+            <!-- Start view image -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #dedede;">
+
+                            <button type="button" class="btn-close bg-light" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body d-flex align-items-center justify-content-center"
+                            style="background-color: #dedede;">
+                            <?php foreach (json_decode($row_digital["image_one"]) as $image) : ?>
+                            <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                            <?php endforeach; ?>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End view imag -->
+
+
 
             <div class="card" style="width: 100%;">
 
@@ -287,7 +149,8 @@ if($result_user_profile ->num_rows>0){
                             <div class="card-body detail-department">
                                 <div class="img-cover">
                                     <?php foreach (json_decode($row_digital["image_one"]) as $image) : ?>
-                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
+                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <?php endforeach; ?>
                                 </div>
                                 <div class="detail-news my-3">
@@ -315,12 +178,11 @@ if($result_user_profile ->num_rows>0){
                                     <div class="d-flex">
                                         <div class="button-download my-3">
                                             <a href="view-file.php?id=<?php echo $row_digital['id']?>" target="_blank"
-                                                class="btn btn-success"><i class="fa-solid fa-eye"></i> View</a>
+                                                class="btn btn-success"><i class="fa-solid fa-eye"></i> មើល</a>
                                         </div>
                                         <div class="button-download my-3 mx-3">
                                             <a href="download-file.php?id=<?php echo $row_digital['id']?>"
-                                                class="btn btn-success"><i class="fa-solid fa-download"></i> Download
-                                                Now</a>
+                                                class="btn btn-success"><i class="fa-solid fa-download"></i> ទាញយក</a>
                                         </div>
                                     </div>
 
@@ -396,9 +258,6 @@ if($result_user_profile ->num_rows>0){
         </div>
         <!-- Ent Content Computer -->
 
-
-
-
     </div>
     <!-- Ent All Section Start Content -->
     <?php
@@ -451,16 +310,6 @@ if($result_user_profile ->num_rows>0){
         document.documentElement.scrollTop = 0;
     }
     </script>
-    <script>
-    function onclickShow() {
-        document.getElementById('passwords').style.display = "block";
-    }
-
-    function onclickRemove() {
-        document.getElementById('passwords').style.display = "none";
-    }
-    </script>
-
     <!-- Script Js Default Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js">
     </script>

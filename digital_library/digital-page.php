@@ -44,7 +44,7 @@ include('../config/conn_db.php');
     });
     </script>
 
-    <title>digital Page</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 </head>
 
 <body style="background-color: #dedede;">
