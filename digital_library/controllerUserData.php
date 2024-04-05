@@ -5,6 +5,14 @@ $email = "";
 $name = "";
 $errors = array();
 
+// Start Section PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require_once '../phpmailer/src/Exception.php';
+require_once '../phpmailer/src/PHPMailer.php';
+require_once '../phpmailer/src/SMTP.php';
+// End Section PHPMailer
+
 if(isset($_POST['signup'])){
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
@@ -26,12 +34,25 @@ if(isset($_POST['signup'])){
         $insert_data = "INSERT INTO member (name, email, select_role , password, code, status)
                         values('$name', '$email', '$select_role', '$encpass', '$code', '$status')";
         $data_check = mysqli_query($conn, $insert_data);
+        
         if($data_check){
-            $subject = "លេខកូដផ្ទៀងផ្ទាត់អ៊ីមែល";
-            $message = "លេខកូដផ្ទៀងផ្ទាត់របស់អ្នកគឺ $code";
-            $sender = "From: sokhumlim@gmail.com";
-            if(mail($email, $subject, $message, $sender)){
-                $info = "យើងបានផ្ញើលេខកូដផ្ទៀងផ្ទាត់ទៅអ៊ីមែលរបស់អ្នក។ - $email";
+            $mail = new PHPMailer(true);
+            $mail -> isSMTP();
+            $mail -> Host = 'smtp.gmail.com';
+            $mail -> SMTPAuth = true;
+            $mail -> Username = 'sokhunlim36@gmail.com';
+            $mail -> Password = 'btoymsrjwznwohor'; 
+            $mail -> SMTPSecure = 'ssl';
+            $mail -> Port = 465;
+            $mail -> setFrom('sokhunlim36@gmail.com'); 
+            $mail -> addAddress($email);
+            $mail -> isHTML(true); 
+            
+            $mail -> Body = "លេខកូដផ្ទៀងផ្ទាត់របស់អ្នកគឺ $code";
+            $function_send = $mail -> send();
+        
+            if($function_send==true){
+               $info = "យើងបានផ្ញើលេខកូដផ្ទៀងផ្ទាត់ទៅអ៊ីមែលរបស់អ្នក។ - $email";
                 $_SESSION['info'] = $info;
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
@@ -43,11 +64,32 @@ if(isset($_POST['signup'])){
         }else{
             $errors['db-error'] = "បរាជ័យពេលបញ្ចូលទិន្នន័យទៅក្នុងមូលដ្ឋានទិន្នន័យ!";
         }
+        
+        // if($data_check){
+        //     $subject = "លេខកូដផ្ទៀងផ្ទាត់អ៊ីមែល";
+        //     $message = "លេខកូដផ្ទៀងផ្ទាត់របស់អ្នកគឺ $code";
+        //     $sender = "From: sokhumlim@gmail.com";
+        //     if(mail($email, $subject, $message, $sender)){
+        //         $info = "យើងបានផ្ញើលេខកូដផ្ទៀងផ្ទាត់ទៅអ៊ីមែលរបស់អ្នក។ - $email";
+        //         $_SESSION['info'] = $info;
+        //         $_SESSION['email'] = $email;
+        //         $_SESSION['password'] = $password;
+        //         header('location: user-otp.php');
+        //         exit();
+        //     }else{
+        //         $errors['otp-error'] = "បរាជ័យ​ពេល​ផ្ញើ​លេខ​កូដ!";
+        //     }
+        // }else{
+        //     $errors['db-error'] = "បរាជ័យពេលបញ្ចូលទិន្នន័យទៅក្នុងមូលដ្ឋានទិន្នន័យ!";
+        // }
+        
     }
 
 }
+
+
     //if user click verification code submit button
-    if(isset($_POST['check'])){
+if(isset($_POST['check'])){
         $_SESSION['info'] = "";
         $otp_code = mysqli_real_escape_string($conn, $_POST['otp']);
         $check_code = "SELECT * FROM member WHERE code = $otp_code";
@@ -112,12 +154,24 @@ if(isset($_POST['signup'])){
             $code = rand(999999, 111111);
             $insert_code = "UPDATE member SET code = $code WHERE email = '$email'";
             $run_query =  mysqli_query($conn, $insert_code);
+            
             if($run_query){
-                $subject = "លេខកូដកំណត់ពាក្យសម្ងាត់ឡើងវិញ";
-                $message = "លេខកូដកំណត់ពាក្យសម្ងាត់របស់អ្នកឡើងវិញ $code";
-                $sender = "From: sokhumlim@gmail.com.com";
-                if(mail($email, $subject, $message, $sender)){
-                    $info = "យើងបានផ្ញើលេខសម្ងាត់ឡើងវិញ otp ទៅកាន់អ៊ីមែលរបស់អ្នក។ - $email";
+                $mail = new PHPMailer(true);
+                $mail -> isSMTP();
+                $mail -> Host = 'smtp.gmail.com';
+                $mail -> SMTPAuth = true;
+                $mail -> Username = 'sokhunlim36@gmail.com';
+                $mail -> Password = 'btoymsrjwznwohor'; 
+                $mail -> SMTPSecure = 'ssl';
+                $mail -> Port = 465;
+                $mail -> setFrom('sokhunlim36@gmail.com'); 
+                $mail -> addAddress($email);
+                $mail -> isHTML(true); 
+                $mail -> Body = "លេខកូដផ្ទៀងផ្ទាត់របស់អ្នកគឺ $code"; 
+                $function_send = $mail -> send();
+            
+                if($function_send==true){
+                   $info = "យើងបានផ្ញើលេខសម្ងាត់ឡើងវិញ otp ទៅកាន់អ៊ីមែលរបស់អ្នក។ - $email";
                     $_SESSION['info'] = $info;
                     $_SESSION['email'] = $email;
                     header('location: reset-code.php');
@@ -126,8 +180,27 @@ if(isset($_POST['signup'])){
                     $errors['otp-error'] = "បរាជ័យ​ពេល​ផ្ញើ​លេខ​កូដ!";
                 }
             }else{
-                $errors['db-error'] = "Something went wrong!";
+                $errors['db-error'] = "មាន​អ្វីមួយ​មិន​ប្រក្រតី!";
             }
+
+            
+            // if($run_query){
+            //     $subject = "លេខកូដកំណត់ពាក្យសម្ងាត់ឡើងវិញ";
+            //     $message = "លេខកូដកំណត់ពាក្យសម្ងាត់របស់អ្នកឡើងវិញ $code";
+            //     $sender = "From: sokhumlim@gmail.com.com";
+            //     if(mail($email, $subject, $message, $sender)){
+            //         $info = "យើងបានផ្ញើលេខសម្ងាត់ឡើងវិញ otp ទៅកាន់អ៊ីមែលរបស់អ្នក។ - $email";
+            //         $_SESSION['info'] = $info;
+            //         $_SESSION['email'] = $email;
+            //         header('location: reset-code.php');
+            //         exit();
+            //     }else{
+            //         $errors['otp-error'] = "បរាជ័យ​ពេល​ផ្ញើ​លេខ​កូដ!";
+            //     }
+            // }else{
+            //     $errors['db-error'] = "Something went wrong!";
+            // }
+            
         }else{
             $errors['email'] = "អាសយដ្ឋានអ៊ីមែលនេះមិនមានទេ!";
         }
@@ -161,7 +234,7 @@ if(isset($_POST['signup'])){
             $errors['password'] = "បញ្ជាក់ពាក្យសម្ងាត់មិនត្រូវគ្នា!";
         }else{
             $code = 0;
-            $email = $_SESSION['email']; //getting this email using session
+            $email = $_SESSION['email'];
             $encpass = password_hash($password, PASSWORD_BCRYPT);
             $update_pass = "UPDATE member SET code = $code, password = '$encpass' WHERE email = '$email'";
             $run_query = mysqli_query($conn, $update_pass);

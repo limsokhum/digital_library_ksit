@@ -67,7 +67,7 @@ if(isset($_GET['id'])){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Edit Teacher Management</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 
     <!-- Google Font Koulen -->
     <link href="https://fonts.googleapis.com/css2?family=Koulen&display=swap" rel="stylesheet">

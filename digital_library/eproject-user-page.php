@@ -253,7 +253,7 @@ if($result_user_profile ->num_rows>0){
         align-items: center;
     }
     </style>
-    <title>E-Project Page</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 </head>
 
 <body style="background-color: #dedede;">

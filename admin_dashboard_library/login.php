@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>admin Login</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 
     <!-- Link Favicon -->
     <link rel="shortcut icon" href="img/logo-around.png" type="image/x-icon">

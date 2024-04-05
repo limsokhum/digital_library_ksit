@@ -378,7 +378,7 @@ if($result_user_profile ->num_rows>0){
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <!-- Ent Summernote -->
 
-    <title>List Digital Book For Users</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
     <style>
     .upload-files {
         display: flex;

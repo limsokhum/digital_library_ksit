@@ -33,7 +33,7 @@ if($email != false && $password != false){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>teacher view digital e-journal</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

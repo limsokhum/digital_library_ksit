@@ -33,7 +33,7 @@ if($email != false && $password != false){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin add Admin management</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 
     <!-- Google Font Koulen -->
     <link href="https://fonts.googleapis.com/css2?family=Koulen&display=swap" rel="stylesheet">

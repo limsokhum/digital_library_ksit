@@ -56,7 +56,7 @@ if($email != false && $password != false){
     <!-- Custom Search Button Function -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <title>Filter Metadata</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 </head>
 
 <body style="background-color: #dedede;">

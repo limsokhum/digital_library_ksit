@@ -80,8 +80,15 @@ include('../config/conn_db.php');
 
             <div class="title d-flex">
                 <div class="computer">
-                    <h5><?php echo $row_digital['select_major']?>/<span
-                            style="color: white;"><?php echo $row_digital['digital_book']?></span>
+                    <h5><?php echo $row_digital['select_major']?>/<span style="color: white;">
+                            <?php if($row_digital['digital_book']=='e-book'){
+                                echo "E-Book";
+                            }elseif($row_digital['digital_book']=='e-journal'){
+                                echo "E-Journal";
+                            }elseif($row_digital['digital_book']=='e-project'){
+                                echo "E-Project";
+                            }
+                                ?></span>
                     </h5>
 
                 </div>

@@ -80,7 +80,7 @@ if($email != false && $password != false){
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
-    <title>Teacher Dashboard</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 
     <!-- Link Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"

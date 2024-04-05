@@ -10,7 +10,7 @@ if($_SESSION['info'] == false){
 
 <head>
     <meta charset="UTF-8">
-    <title>Login Form</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Link Favicon -->
     <link rel="shortcut icon" href="img/logo-around.png" type="image/x-icon">

@@ -35,7 +35,7 @@ require_once "ControlTeacher.php";
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>admin add teacher</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 
     <!-- Google Font Koulen -->
     <link href="https://fonts.googleapis.com/css2?family=Koulen&display=swap" rel="stylesheet">
@@ -60,6 +60,11 @@ require_once "ControlTeacher.php";
 
     <!-- Custom Text Editor -->
     <link rel="stylesheet" href="vendor/summernote/summernote-bs4.css">
+    <style>
+    #teacher_passwords {
+        display: none;
+    }
+    </style>
 </head>
 
 <body id="page-top">
@@ -256,11 +261,11 @@ require_once "ControlTeacher.php";
                                                     <input onclick="onclickShow()" class="form-check-input" type="radio"
                                                         name="select_role" value="បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់">
                                                     <label class="form-check-label"
-                                                        style="font-family:Khmer OS System;">បុគ្គលិកដំណាងដេប៉ាតឺម៉ង់
+                                                        style="font-family:Khmer OS System;">ដំណាងដេប៉ាតឺម៉ង់
                                                     </label>,
                                                     <div class="form-check mx-4">
-                                                        <input onclick="onclickRemove()" class="form-check-input"
-                                                            type="radio" id="" name="select_role" value="គ្រូបង្រៀន">
+                                                        <input class="form-check-input" type="radio" id=""
+                                                            name="select_role" value="គ្រូបង្រៀន" checked>
                                                         <label class="form-check-label"
                                                             style="font-family:Khmer OS System;">គ្រូបង្រៀន</label>,
                                                     </div>
@@ -301,7 +306,7 @@ require_once "ControlTeacher.php";
                                                 </label>
                                                 <div class="image">
                                                     <input type="file" class="btn btn-secondary" name="fileImg[]"
-                                                        accept=".jpg, .jpeg, .png" required multiple>
+                                                        accept=".jpg, .jpeg, .png" multiple>
                                                 </div>
 
                                             </div>
@@ -396,10 +401,6 @@ require_once "ControlTeacher.php";
     <script>
     function onclickShow() {
         document.getElementById('teacher_passwords').style.display = "block";
-    }
-
-    function onclickRemove() {
-        document.getElementById('teacher_passwords').style.display = "none";
     }
     </script>
 </body>

@@ -157,7 +157,7 @@ if (isset($_GET['file_id_view'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>List Teacher e-Books</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

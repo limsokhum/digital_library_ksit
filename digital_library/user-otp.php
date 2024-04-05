@@ -10,7 +10,7 @@ if($email == false){
 
 <head>
     <meta charset="UTF-8">
-    <title>Code Verification</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
     <!-- Icon Favicon -->
     <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">

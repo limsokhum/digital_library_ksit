@@ -34,7 +34,7 @@ for($i = 0; $i < $totalFiles; $i++){ $imageName=$_FILES["fileImg"]["name"][$i];
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>admin edit department</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

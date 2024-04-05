@@ -68,7 +68,7 @@
         width: 100%;
     }
     </style>
-    <title>E-Book Page</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 </head>
 
 <body style="background-color: #dedede;">

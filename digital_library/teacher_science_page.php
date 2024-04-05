@@ -30,7 +30,7 @@ include ('../config/conn_db.php');
     <!-- Default Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 
-    <title>View Admin Page</title>
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
 </head>
 
 <body style="background-color: #dedede;">
