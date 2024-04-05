@@ -81,6 +81,30 @@
                                                 $desc = strtr(html_entity_decode($row_stff['detail']),$trans);
                                                 $desc=str_replace(array("<li>","</li>"), array("",", "), $desc);
                                             ?>
+                                    <!-- Start view image -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="background-color: #dedede;">
+
+                                                    <button type="button" class="btn-close bg-light"
+                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body d-flex align-items-center justify-content-center"
+                                                    style="background-color: #dedede;">
+                                                    <?php foreach (json_decode($row_stff["image"]) as $image) : ?>
+                                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>"
+                                                        style="width: 100%;">
+                                                    <?php endforeach; ?>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End view imag -->
+
+
                                     <div class="card-body">
                                         <h5 class="staff-title">នាយក</h5>
                                         <div class="rowses"></div>
@@ -89,7 +113,8 @@
                                                 <div class="bg-profile">
                                                     <?php
                                                         foreach (json_decode($row_stff["image"]) as $image) : ?>
-                                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
+                                                    <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>"
+                                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                     <?php endforeach; ?>
                                                 </div>
                                                 <!-- <div class="staff-name text-center mt-2">

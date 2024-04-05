@@ -224,7 +224,7 @@ if($result_user_profile ->num_rows>0){
     <!-- Custom Search Button Function -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <title>Digital library management system for Kampong spue Institute of Technology</title>
+    <title>Digital library managemen system for Kampong spue Institute of Technology</title>
 </head>
 
 <body style="background-color: #dedede;">
