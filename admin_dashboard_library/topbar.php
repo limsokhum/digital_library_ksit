@@ -14,7 +14,8 @@ if($email != false && $password != false){
                 header('Location: reset-code.php');
             }
         }else{
-            header('Location: admin-otp.php');
+            
+            // header('Location: admin_otp.php');  
         }
     }
 }else{

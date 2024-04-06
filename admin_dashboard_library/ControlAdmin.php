@@ -69,10 +69,11 @@ if(isset($_POST['signup'])){
                 $function_send = $mail -> send();
             
                 if($function_send==true){
-                   $info = "យើងបានផ្ញើលេខសម្ងាត់ឡើងវិញ otp ទៅកាន់អ៊ីមែលរបស់អ្នក។ - $email";
+                   $info = "យើងបានផ្ញើលេខកូដផ្ទៀងផ្ទាត់ទៅអ៊ីមែលរបស់អ្នក - $email";
                     $_SESSION['info'] = $info;
                     $_SESSION['email'] = $email;
-                    header('location: reset-code.php');
+                    $_SESSION['password'] = $password;
+                    header('location: admin_otp.php');
                     exit();
                 }else{
                     $errors['otp-error'] = "បរាជ័យ​ពេល​ផ្ញើ​លេខ​កូដ!";
@@ -162,6 +163,7 @@ if(isset($_POST['signup'])){
             $code = rand(999999, 111111);
             $insert_code = "UPDATE member SET code = $code WHERE email = '$email'";
             $run_query =  mysqli_query($conn, $insert_code);
+            
             if($run_query){
 
                 $mail = new PHPMailer(true);
@@ -204,6 +206,7 @@ if(isset($_POST['signup'])){
             }else{
                 $errors['db-error'] = "មាន​អ្វីមួយ​មិន​ប្រក្រតី!";
             }
+            
         }else{
             $errors['email'] = "អាសយដ្ឋានអ៊ីមែលនេះមិនមានទេ!";
         }
