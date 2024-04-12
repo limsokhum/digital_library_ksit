@@ -21,7 +21,7 @@ $teacher_email = $_SESSION['teacher_email'];
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 offset-md-4 form">
+            <div class="col-md-6 offset-md-3 form">
                 <form action="teacher_teacher_reset-code.php" method="POST" autocomplete="off">
                     <img class="logo-form" src="img/logo-login.png" alt="">
                     <?php 

@@ -16,7 +16,7 @@ require_once "ControlTeacher.php";
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 offset-md-4 form">
+            <div class="col-md-6 offset-md-3 form">
                 <form action="teach_teacher-forgot-password.php" method="POST" autocomplete="">
                     <img class="logo-form" src="img/logo-login.png" alt="">
                     <p class="text-center">បំពេញអ៊ីម៉ែលរបស់អ្នក</p>
