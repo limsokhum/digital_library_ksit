@@ -1,5 +1,4 @@
 <?php
-include_once "../config/conn_db.php";
 require_once "ControlAdmin.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
@@ -150,7 +149,7 @@ if(isset($_GET['id'])){
                                     // teacher_tb.lastname,teacher_tb.teacher_mail,teacher_tb.phone,teacher_tb.select_major,
                                     // teacher_tb.specialty,teacher_tb.select_role,teacher_tb.image,teacher_tb.teacher_detials,
                                     // teacher_tb.teacher_status,major_tb.major_title FROM teacher_tb INNER JOIN major_tb ON teacher_tb.select_major = major_tb.id WHERE teacher_tb.id = '$setion_edit_teacher'";
-                                                                $select_edit_teacher="SELECT member.id, member.member_id, member.firstname, member.lastname, member.sex,  member.email, member.phone, member.select_major, member.specialty, member.select_role, member.image, member.detail,major_tb.major_title
+                                    $select_edit_teacher="SELECT member.id, member.member_id, member.firstname, member.lastname, member.sex,  member.email, member.phone, member.select_major, member.specialty, member.select_role, member.image, member.detail,major_tb.major_title
                                                                 FROM member INNER JOIN major_tb ON member.select_major=major_tb.id WHERE member.id = '$setion_edit_teacher'";
                                     $result_select_edit_teacher = $conn -> query($select_edit_teacher);
                                     if($result_select_edit_teacher -> num_rows > 0){

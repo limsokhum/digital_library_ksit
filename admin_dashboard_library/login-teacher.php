@@ -75,7 +75,7 @@
                             </div>
                             <hr>
                             <div class="text-center">
-                                <a class="small text-dark" href="teacher-forgot-password.php">Representative
+                                <a class="small text-dark" href="teach_teacher-forgot-password.php">Representative
                                     Forgot
                                     Password?</a>
                             </div>

@@ -1,0 +1,50 @@
+<?php 
+session_start();
+require_once "ControlTeacher.php"; 
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Digital library management system for Kampong spue Institute of Technology</title>
+    <link rel="shortcut icon" href="img/logo-around.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4 form">
+                <form action="teach_teacher-forgot-password.php" method="POST" autocomplete="">
+                    <img class="logo-form" src="img/logo-login.png" alt="">
+                    <p class="text-center">បំពេញអ៊ីម៉ែលរបស់អ្នក</p>
+                    <?php
+                        if(count($teacher_errors) > 0){
+                            ?>
+                    <div class="alert alert-danger text-center">
+                        <?php 
+                                    foreach($teacher_errors as $teacher_error){
+                                        echo $teacher_error;
+                                    }
+                                ?>
+                    </div>
+                    <?php
+                        }
+                    ?>
+                    <div class="form-group">
+                        <input class="form-control" type="email" name="teacher_email" placeholder="បំពេញអ៊ីម៉ែល"
+                            required value="<?php echo $teacher_email ?>">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control button" type="submit" name="teacher_check-email" value="បន្ដទៀត">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -67,24 +67,23 @@ if(isset($_POST['teacher_signup'])){
         $teacher_data_check = mysqli_query($conn, $teacher_insert_data);
 
         if($teacher_data_check){
-            $teacher_email = new PHPMailer(true);
-            $teacher_email -> isSMTP();
-            $teacher_email -> Host = 'smtp.gmail.com';
-            $teacher_email -> SMTPAuth = true;
-            $teacher_email -> Username = 'sokhunlim36@gmail.com';
-            $teacher_email -> Password = 'btoymsrjwznwohor'; 
-            $teacher_email -> SMTPSecure = 'ssl'; 
-            $teacher_email -> Port = 465;
-            $teacher_email -> setFrom('sokhunlim36@gmail.com'); 
-            $teacher_email -> addAddress($teacher_email);
-            $teacher_email -> isHTML(true); 
-         
-            $teacher_email -> Body = "លេខកូដផ្ទៀងផ្ទាត់របស់អ្នកគឺ $teacher_code"; 
-            $function_send = $teacher_email -> send();
+            $mail = new PHPMailer(true);
+            $mail -> isSMTP();
+            $mail -> Host = 'smtp.gmail.com';
+            $mail -> SMTPAuth = true;
+            $mail -> Username = 'sokhunlim36@gmail.com';
+            $mail -> Password = 'btoymsrjwznwohor'; 
+            $mail -> SMTPSecure = 'ssl'; 
+            $mail -> Port = 465;
+            $mail -> setFrom('sokhunlim36@gmail.com'); 
+            $mail -> addAddress($teacher_email);
+            $mail -> isHTML(true); 
+            $mail -> Body = "លេខកូដផ្ទៀងផ្ទាត់របស់អ្នកគឺ $teacher_code";
+            $function_send = $mail -> send();
         
             if($function_send==true){
-                $info = "យើងបានផ្ញើលេខកូដផ្ទៀងផ្ទាត់ទៅអ៊ីមែលរបស់អ្នក។ - $teacher_email";
-                $_SESSION['teacher_info'] = $info;
+               $info = "យើងបានផ្ញើលេខកូដផ្ទៀងផ្ទាត់ទៅអ៊ីមែលរបស់អ្នក - $teacher_email";
+                $_SESSION['info'] = $info;
                 $_SESSION['teacher_email'] = $teacher_email;
                 $_SESSION['teacher_password'] = $teacher_password;
                 header('location: teacher-otp.php');
@@ -92,9 +91,10 @@ if(isset($_POST['teacher_signup'])){
             }else{
                 $errors['teacher_otp-error'] = "បរាជ័យ​ពេល​ផ្ញើ​លេខ​កូដ!";
             }
-        }else{
-            $errors['teacher_db-error'] = "បរាជ័យពេលបញ្ចូលទិន្នន័យទៅក្នុងមូលដ្ឋានទិន្នន័យ!";
-        }
+            
+    }else{
+        $errors['teacher_db-error'] = "បរាជ័យពេលបញ្ចូលទិន្នន័យទៅក្នុងមូលដ្ឋានទិន្នន័យ!";
+    }
 
         
         // if($teacher_data_check){
@@ -157,59 +157,38 @@ if(isset($_POST['teacher_signup'])){
             $teacher_insert_code = "UPDATE member SET code = $teacher_code WHERE email = '$teacher_email'";
             $teacher_run_query =  mysqli_query($conn, $teacher_insert_code);
 
-            
             if($teacher_run_query){
-                $teacher_email = new PHPMailer(true);
-                $teacher_email -> isSMTP();
-                $teacher_email -> Host = 'smtp.gmail.com';
-                $teacher_email -> SMTPAuth = true;
-                $teacher_email -> Username = 'sokhunlim36@gmail.com';
-                $teacher_email -> Password = 'btoymsrjwznwohor';  
-                $teacher_email -> SMTPSecure = 'ssl'; 
-                $teacher_email -> Port = 465;
-                $teacher_email -> setFrom('sokhunlim36@gmail.com'); 
-                $teacher_email -> addAddress($teacher_email);
-                $teacher_email -> isHTML(true); 
-                
-                $teacher_email -> Body = "លេខកូដផ្ទៀងផ្ទាត់របស់អ្នកគឺ $teacher_code"; 
-                $function_send = $teacher_email -> send();
+                $mail = new PHPMailer(true);
+                $mail -> isSMTP();
+                $mail -> Host = 'smtp.gmail.com';
+                $mail -> SMTPAuth = true;
+                $mail -> Username = 'sokhunlim36@gmail.com';
+                $mail -> Password = 'btoymsrjwznwohor'; 
+                $mail -> SMTPSecure = 'ssl'; 
+                $mail -> Port = 465;
+                $mail -> setFrom('sokhunlim36@gmail.com'); 
+                $mail -> addAddress($teacher_email);
+                $mail -> isHTML(true); 
+                $mail -> Body = "លេខកូដផ្ទៀងផ្ទាត់របស់អ្នកគឺ $teacher_code";
+                $function_send = $mail -> send();
             
                 if($function_send==true){
-                    $info = "យើងបានផ្ញើលេខសម្ងាត់ឡើងវិញ otp ទៅកាន់អ៊ីមែលរបស់អ្នក។ - $teacher_email";
+                   $info = "យើងបានផ្ញើលេខកូដផ្ទៀងផ្ទាត់ទៅអ៊ីមែលរបស់អ្នក - $teacher_email";
                     $_SESSION['teacher_info'] = $info;
                     $_SESSION['teacher_email'] = $teacher_email;
-                    header('location: teacher-otp.php');
+                    header('location: teacher_teacher_reset-code.php');
                     exit();
                 }else{
-                    $errors['teacher_otp-error'] = "បរាជ័យ​ពេល​ផ្ញើ​លេខ​កូដ!";
+                    $teacher_errors['teacher_otp-error'] = "បរាជ័យ​ពេល​ផ្ញើ​លេខ​កូដ!";
                 }
                 
-           
-            }else{
-                $errors['teacher_db-error'] = "មាន​អ្វីមួយ​មិន​ប្រក្រតី!";
-            }
-
-            
-            // if($teacher_run_query){
-            //     $subject = "លេខកូដកំណត់ពាក្យសម្ងាត់ឡើងវិញ";
-            //     $message = "លេខកូដកំណត់ពាក្យសម្ងាត់របស់អ្នកឡើងវិញ $teacher_code";
-            //     $sender = "From: sokhumlim@gmail.com.com";
-            //     if(mail($teacher_email, $subject, $message, $sender)){
-            //         $info = "យើងបានផ្ញើលេខសម្ងាត់ឡើងវិញ otp ទៅកាន់អ៊ីមែលរបស់អ្នក។ - $teacher_email";
-            //         $_SESSION['teacher_info'] = $info;
-            //         $_SESSION['teacher_email'] = $teacher_email;
-            //         header('location: teacher-otp.php');
-            //         exit();
-            //     }else{
-            //         $errors['teacher_otp-error'] = "បរាជ័យ​ពេល​ផ្ញើ​លេខ​កូដ!";
-            //     }
-            // }else{
-            //     $errors['teacher_db-error'] = "Something went wrong!";
-            // }
+        }else{
+            $errors['teacher_db-error'] = "បរាជ័យពេលបញ្ចូលទិន្នន័យទៅក្នុងមូលដ្ឋានទិន្នន័យ!";
+        }
 
             
         }else{
-            $errors['teacher_email'] = "អាសយដ្ឋានអ៊ីមែលនេះមិនមានទេ!";
+            $teacher_errors['teacher_email'] = "អាសយដ្ឋានអ៊ីមែលនេះមិនមានទេ!";
         }
     }
     
@@ -256,7 +235,7 @@ if(isset($_POST['teacher_signup'])){
             $_SESSION['teacher_email'] = $teacher_email;
             $teacher_info = "សូមបង្កើតពាក្យសម្ងាត់ថ្មីដែលអ្នកមិនប្រើនៅលើគេហទំព័រផ្សេងទៀតណាមួយឡើយ។";
             $_SESSION['teacher_info'] = $teacher_info;
-            header('location: edit-teacher.php');
+            header('location: teacher_teacher_new_password.php');
             exit();
         }else{
             $teacher_errors['teacher_otp-error'] = "អ្នក​បាន​បញ្ចូល​កូដ​មិន​ត្រឹមត្រូវ!";
@@ -280,7 +259,7 @@ if(isset($_POST['teacher_signup'])){
             if($teacher_run_query){
                 $teacher_info = "ពាក្យសម្ងាត់របស់អ្នកបានផ្លាស់ប្តូរ។ ឥឡូវនេះ អ្នកអាចចូលដោយប្រើពាក្យសម្ងាត់ថ្មីរបស់អ្នក។";
                 $_SESSION['teacher_info'] = $teacher_info;
-                header('Location: password-changed.php');
+                header('Location: teacher_teacher_password_changed.php');
             }else{
                 $teacher_errors['teacher_db-error'] = "បរាជ័យក្នុងការផ្លាស់ប្តូរពាក្យសម្ងាត់របស់អ្នក!";
             }
@@ -288,7 +267,7 @@ if(isset($_POST['teacher_signup'])){
     }
     
    //if login now button click
-    // if(isset($_POST['teacher_login-now'])){
-    //     header('Location: login.php');
-    // }
+    if(isset($_POST['teacher_login-now'])){
+        header('Location: login-teacher.php');
+    }
 ?>

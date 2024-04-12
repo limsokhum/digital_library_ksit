@@ -1,5 +1,6 @@
 <?php
 require_once "ControlAdmin.php";
+require_once "ControlTeacher.php";
 
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
@@ -22,7 +23,7 @@ if($email != false && $password != false){
     header('Location: login.php');
 }
 
-require_once "ControlTeacher.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

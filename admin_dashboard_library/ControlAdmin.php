@@ -52,8 +52,9 @@ if(isset($_POST['signup'])){
         $insert_data = "INSERT INTO member (name, email, sex, select_role, password, code, image, status)
                         values('$name', '$email', '$sex', '$select_role', '$encpass', '$code', '$filesArray', '$status')";
         $data_check = mysqli_query($conn, $insert_data);
+        
         if($data_check){
-            $mail = new PHPMailer(true);
+                $mail = new PHPMailer(true);
                 $mail -> isSMTP();
                 $mail -> Host = 'smtp.gmail.com';
                 $mail -> SMTPAuth = true;
@@ -95,6 +96,7 @@ if(isset($_POST['signup'])){
         }else{
             $errors['db-error'] = "បរាជ័យពេលបញ្ចូលទិន្នន័យទៅក្នុងមូលដ្ឋានទិន្នន័យ!";
         }
+        
     }
 
 }
