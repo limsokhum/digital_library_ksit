@@ -287,7 +287,7 @@ if(isset($_POST['submit'])){
                                                 </label>
                                                 <!-- select_major -->
                                                 <?php
-                                                $query_admin_select ="SELECT * FROM admintable";
+                                                $query_admin_select ="SELECT * FROM 	member";
                                                 $result_admin_select = $conn -> query($query_admin_select);
                                                 if($result_admin_select-> num_rows > 0){
                                                     while($row_admin_select = $result_admin_select->fetch_assoc()){

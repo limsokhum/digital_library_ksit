@@ -112,7 +112,7 @@ include('../config/conn_db.php');
                             <div class="form-group">
                                 <input class="form-control research-input" type="text" name="title"
                                     value="<?php if(isset($_GET['title'])){echo $_GET['title']; }else{echo "";} ?>"
-                                    id="" placeholder="ចំណងជើងអត្ថបទ..." required>
+                                    id="" placeholder="ចំណងជើងអត្ថបទ...">
                             </div>
                             <div class="row mt-2">
                                 <div class="col-sm-6">
@@ -126,7 +126,7 @@ include('../config/conn_db.php');
                                     <div class="form-group">
                                         <div class="">
                                             <select class="form-select research-input" name="digital_book"
-                                                aria-label="Default select example" required>
+                                                aria-label="Default select example">
                                                 <option selected>ប្រភេទអត្ថបទ</option>
                                                 <option value="e-book"
                                                     <?= isset($_GET['digital_book']) == true ? $_GET['digital_book'] == 'e-book':'' ?>
@@ -190,29 +190,26 @@ include('../config/conn_db.php');
                         <div id="myTable" class="card mb-2" style="width: 100%;">
 
                             <?php
+                            if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+                                $page_no = $_GET['page_no'];
+                            } else {
+                                $page_no = 1;
+                            }
 
+                                $total_records_per_page = 3;
+                                $offset = ($page_no-1) * $total_records_per_page;
+                                $previous_page = $page_no - 1;
+                                $next_page = $page_no + 1;
+                                $adjacents = "2";
 
-    if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-        $page_no = $_GET['page_no'];
-        } else {
-        $page_no = 1;
-        }
+                                $result_count = mysqli_query($conn,"SELECT COUNT(*) As total_records FROM
+                                `digitalbook_tb` WHERE status=1");
+                                $total_records = mysqli_fetch_array($result_count);
+                                $total_records = $total_records['total_records'];
+                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
+                                $second_last = $total_no_of_pages - 1; 
 
-        $total_records_per_page = 3;
-        $offset = ($page_no-1) * $total_records_per_page;
-
-        $previous_page = $page_no - 1;
-        $next_page = $page_no + 1;
-        $adjacents = "2";
-
-        $result_count = mysqli_query($conn,"SELECT COUNT(*) As total_records FROM
-        `digitalbook_tb` WHERE status=1");
-        $total_records = mysqli_fetch_array($result_count);
-        $total_records = $total_records['total_records'];
-        $total_no_of_pages = ceil($total_records / $total_records_per_page);
-        $second_last = $total_no_of_pages - 1; // total page minus 1
-
-        $result = mysqli_query($conn,"SELECT * FROM `digitalbook_tb` WHERE status=1 LIMIT $offset,
+                        $result = mysqli_query($conn,"SELECT * FROM `digitalbook_tb` WHERE status=1 LIMIT $offset,
         $total_records_per_page");
         while($row = mysqli_fetch_array($result)){
         ?>

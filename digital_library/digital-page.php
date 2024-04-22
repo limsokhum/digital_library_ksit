@@ -185,48 +185,55 @@ include('../config/conn_db.php');
                                     <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
                                     <?php endforeach; ?>
                                 </div>
+                                <?php
+                                    $select_digital_book = "SELECT * FROM digitalbook_tb WHERE status=1";
+                                    $query_digital_book = $conn->query($select_digital_book);
+                                    if($query_digital_book -> num_rows>0){
+                                        while($row_digital_book = $query_digital_book->fetch_assoc()){
+                                            ?>
                                 <div class="card-body  my-3 news-announcementses">
+
                                     <div class="detail-newseses">
-                                        <small class="research-title">1ពិធីចុះកិច្ចព្រមព្រៀងសហប្រតិបត្តិការលើវិស័យអប់រំ
-                                            រវាង
-                                            វិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ</small>
+                                        <h6 class="research-title"><span class="defult-title">ប្រធានបទ </span> ៖
+                                            <?php echo $row_digital_book['title']?></h6>
+
+                                        <!-- <small class="research-title"><span class="defult-title">អ្នកស្រាវជ្រាវ </span>
+                                            ៖
+                                            <?php echo $row_digital_book['name_auther']?> <span class="defult-title">,
+                                                ប្រភេទសៀវភៅ
+                                            </span> ៖
+                                            <?php echo $row_digital_book['digital_book']?> <span class="defult-title">,
+                                                បោះពុម្ភ
+                                            </span> ៖
+                                            <?php echo $row_digital_book['date']?>
+                                        </small> -->
                                         <div class="research-text">
-                                            <small class="research-text">វិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ, ថ្ងៃទី៤
-                                                ខែកុម្ភៈ
-                                                ឆ្នាំ២០២២ ៖ ពិធីចុះកិច្ចព្រមព្រៀងសហប្រតិបត្តិការលើវិស័យអប់រំ រវាង
+                                            <small class="research-text">
+                                                <p class="research-text"><?php
+                    
+                    $content=$row_digital_book['abstract'];
+                    $string= strip_tags($content);
+                    if(strlen($string) >600):
+                    $stringCut= substr($string,0,600);
+                    $endPoint=strrpos($stringCut,' ');
+                    $string= $endPoint?substr($stringCut,0,$endPoint): substr($stringCut,0);
+                    $string.='...<a class="text-danger fw-bolder" href="digital-page.php?id=' . $row_digital_book['id'] . '">អានបន្ថែម</a>';
+                    endif;
+                    echo $string;
+                    
+                    ?></p>
                                             </small>
                                         </div>
 
                                     </div>
-                                </div>
-                                <div class="card-body  my-3 news-announcementses">
-                                    <div class="detail-newseses">
-                                        <small class="research-title">1ពិធីចុះកិច្ចព្រមព្រៀងសហប្រតិបត្តិការលើវិស័យអប់រំ
-                                            រវាង
-                                            វិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ</small>
-                                        <div class="research-text">
-                                            <small class="research-text">វិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ, ថ្ងៃទី៤
-                                                ខែកុម្ភៈ
-                                                ឆ្នាំ២០២២ ៖ ពិធីចុះកិច្ចព្រមព្រៀងសហប្រតិបត្តិការលើវិស័យអប់រំ រវាង
-                                            </small>
-                                        </div>
 
-                                    </div>
-                                </div>
-                                <div class="card-body  my-3 news-announcementses">
-                                    <div class="detail-newseses">
-                                        <small class="research-title">1ពិធីចុះកិច្ចព្រមព្រៀងសហប្រតិបត្តិការលើវិស័យអប់រំ
-                                            រវាង
-                                            វិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ</small>
-                                        <div class="research-text">
-                                            <small class="research-text">វិទ្យាស្ថានបច្ចេកវិទ្យាកំពង់ស្ពឺ, ថ្ងៃទី៤
-                                                ខែកុម្ភៈ
-                                                ឆ្នាំ២០២២ ៖ ពិធីចុះកិច្ចព្រមព្រៀងសហប្រតិបត្តិការលើវិស័យអប់រំ រវាង
-                                            </small>
-                                        </div>
 
-                                    </div>
                                 </div>
+                                <?php
+                                    }
+                                    }
+                                    ?>
+
                             </div>
                         </div>
 

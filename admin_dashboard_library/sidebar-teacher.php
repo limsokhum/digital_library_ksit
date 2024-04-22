@@ -21,27 +21,28 @@
 
 
 
-     <!-- Heading -->
-     <div class="sidebar-heading">
-         Interface
-     </div>
+
 
      <!-- Nav Item - Pages Collapse Menu -->
      <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+         <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
              aria-controls="collapseTwo">
              <i class="fas fa-fw fa-folder"></i>
              <span>Researchers</span>
-         </a>
-         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-             <div class="bg-white py-2 collapse-inner rounded">
-                 <h6 class="collapse-header">e-Researchers:</h6>
+         </a> -->
+         <!-- <a class="nav-link collapsed" href="#">
+             <i class="fas fa-fw fa-folder"></i>
+             <span>Researchers</span>
+         </a> -->
+         <div id="collapseTwo" class="collapse d-block" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+             <div class="py-2 collapse-inner rounded" style="background-color: white;">
+                 <h6 class="collapse-header">e-researchers:</h6>
                  <a class="collapse-item" href="list-teacher-digital-ebook.php"><i class="fa-solid fa-minus mx-2"
-                         style="color: grey; font-size: 0.5rem;"></i>e-Books</a>
+                         style=" font-size: 0.5rem;"></i>e-Books</a>
                  <a class="collapse-item" href="list-teacher-digital-eproject.php"><i class="fa-solid fa-minus mx-2"
-                         style="color: grey; font-size: 0.5rem;"></i>e-Projects</a>
+                         style=" font-size: 0.5rem;"></i>e-Projects</a>
                  <a class="collapse-item" href="list-teacher-digital-ejournal.php"><i class="fa-solid fa-minus mx-2"
-                         style="color: grey; font-size: 0.5rem;"></i>e-Journals</a>
+                         style=" font-size: 0.5rem;"></i>e-Journals</a>
              </div>
          </div>
      </li>
@@ -71,12 +72,12 @@
      <hr class="sidebar-divider">
 
      <!-- Heading -->
-     <div class="sidebar-heading">
+     <!-- <div class="sidebar-heading">
          contage
-     </div>
+     </div> -->
 
      <!-- Nav Item - Pages Collapse Menu -->
-     <li class="nav-item">
+     <!-- <li class="nav-item">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
              aria-controls="collapsePages">
              <i class="fas fa-fw fa-list"></i>
@@ -89,7 +90,7 @@
                          style="color: grey; font-size: 0.5rem;"></i>Email</a>
              </div>
          </div>
-     </li>
+     </li> -->
 
      <!-- Divider -->
      <!-- <hr class="sidebar-divider d-none d-md-block"> -->

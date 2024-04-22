@@ -286,6 +286,19 @@
             menuItem[i].classList.add("active");
         }
     }
+
+
+    const de_currentLocation = location.href;
+    const de_menuItem = document.querySelectorAll('.de-link');
+    const de_menuItem = menuItem.length;
+
+    for (let i = 0; i < de_menuItem; i++) {
+        if (de_menuItem[i].href === de_currentLocation) {
+            de_menuItem[i].classList.add("active");
+        }
+    }
+
+
     // Get the button
     let mybutton = document.getElementById("myBtn");
 

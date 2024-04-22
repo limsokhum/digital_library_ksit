@@ -2,30 +2,30 @@
     <div class="card-body major-study">
         <h6 class="major-title">ជំនាញសិក្សា</h6>
         <ul>
-            <li class="d-flex align-items-center"><i class="fa-solid fa-angle-right fa-sm me-2"
+            <li class="d-flex  align-items-center de-link "><i class="fa-solid fa-angle-right fa-sm me-2"
                     style="color: #336666;"></i><a href="department_plance_page.php"
-                    class="text-decoration-none text-dark">ជំនាញវិទ្យាសាស្រ្តដំណាំ</a></li>
-            <li class="d-flex align-items-center"><i class="fa-solid fa-angle-right fa-sm me-2"
+                    class="text-decoration-none">ជំនាញវិទ្យាសាស្រ្តដំណាំ</a></li>
+            <li class="d-flex align-items-center de-link"><i class="fa-solid fa-angle-right fa-sm me-2"
                     style="color: #336666;"></i><a href="department_animal_page.php"
-                    class="text-decoration-none text-dark">ជំនាញវិទ្យាសាស្រ្តសត្វ</a></li>
-            <li class="d-flex align-items-center"><i class="fa-solid fa-angle-right fa-sm me-2"
+                    class="text-decoration-none">ជំនាញវិទ្យាសាស្រ្តសត្វ</a></li>
+            <li class="d-flex align-items-center de-link"><i class="fa-solid fa-angle-right fa-sm me-2"
                     style="color: #336666;"></i><a href="department_fisheries.php"
-                    class="text-decoration-none text-dark">ជំនាញវិទ្យាសាស្រ្តជលផល</a></li>
-            <li class="d-flex align-items-center"><i class="fa-solid fa-angle-right fa-sm me-2"
+                    class="text-decoration-none">ជំនាញវិទ្យាសាស្រ្តជលផល</a></li>
+            <li class="d-flex align-items-center de-link"><i class="fa-solid fa-angle-right fa-sm me-2"
                     style="color: #336666;"></i><a href="department_business_computer.php"
-                    class="text-decoration-none text-dark">ជំនាញកុំព្យូទ័រធុរកិច្ច</a></li>
-            <li class="d-flex align-items-center"><i class="fa-solid fa-angle-right fa-sm me-2"
+                    class="text-decoration-none ">ជំនាញកុំព្យូទ័រធុរកិច្ច</a></li>
+            <li class="d-flex align-items-center de-link"><i class="fa-solid fa-angle-right fa-sm me-2"
                     style="color: #336666;"></i><a href="department_computer_page.php"
-                    class="text-decoration-none text-dark">ជំនាញបច្ចេកវិទ្យាកុំព្យូទ័រ</a></li>
-            <li class="d-flex align-items-center"><i class="fa-solid fa-angle-right fa-sm me-2"
-                    style="color: #336666;"></i><a href=""
-                    class="text-decoration-none text-dark">ជំនាញបច្ចេកវិទ្យាមេកានិច</a></li>
-            <li class="d-flex align-items-center"><i class="fa-solid fa-angle-right fa-sm me-2"
+                    class="text-decoration-none ">ជំនាញបច្ចេកវិទ្យាកុំព្យូទ័រ</a></li>
+            <li class="d-flex align-items-center de-link"><i class="fa-solid fa-angle-right fa-sm me-2"
+                    style="color: #336666;"></i><a href="" class="text-decoration-none ">ជំនាញបច្ចេកវិទ្យាមេកានិច</a>
+            </li>
+            <li class="d-flex align-items-center de-link"><i class="fa-solid fa-angle-right fa-sm me-2"
                     style="color: #336666;"></i><a href="department_foot_page.php"
-                    class="text-decoration-none text-dark">ជំនាញបច្ចេកវិទ្យាអាហារ</a></li>
-            <li class="d-flex align-items-center"><i class="fa-solid fa-angle-right fa-sm me-2"
+                    class="text-decoration-none ">ជំនាញបច្ចេកវិទ្យាអាហារ</a></li>
+            <li class="d-flex align-items-center de-link"><i class="fa-solid fa-angle-right fa-sm me-2"
                     style="color: #336666;"></i><a href=""
-                    class="text-decoration-none text-dark">ផ្នែកអប់រំបច្ចេកទេសវិជ្ជាជីវៈកម្រិត៣
+                    class="text-decoration-none ">ផ្នែកអប់រំបច្ចេកទេសវិជ្ជាជីវៈកម្រិត៣
                     "បសុវប្បកម្ម"</a></li>
         </ul>
     </div>

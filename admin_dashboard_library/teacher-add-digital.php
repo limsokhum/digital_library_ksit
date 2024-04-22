@@ -332,7 +332,8 @@ if(isset($_POST['submit'])){
                                                     value="<?php echo $row_select_teacher['email']?>">
 
                                                 <input type="text" name="select_major" class="form-control form-control"
-                                                    id="" value="<?php echo $row_select_teacher['major_title']?>">
+                                                    id="" value="<?php echo $row_select_teacher['major_title']?>"
+                                                    readonly>
 
                                                 <!-- <select name="select_major" class="form-control"
                                                     aria-label="Default select">

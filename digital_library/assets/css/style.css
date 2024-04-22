@@ -20,6 +20,15 @@
   font-family: "Kantumruy Pro", sans-serif;
 }
 
+.major-study ul li a:hover {
+  color: #FFA500 !important;
+}
+
+.major-study .de_active {
+  color: #FFA500;
+}
+
+
 /* Start  Custom User Profile */
 
 .img-profile {

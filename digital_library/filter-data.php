@@ -96,6 +96,79 @@ include('../config/conn_db.php');
         </div>
         <!-- End slide Show -->
 
+        <!-- Start Filter Metadata -->
+        <div class="card mt-2" style="width: 100%;">
+            <div class="card-body">
+                <h4 class="type-research-title py-4">អាចធ្វើការស្វែងរកឯកសារឌីជីថលដូចជា៖ ចំណងជើង, ឈ្មោះអ្នកនិពន្ធ,
+                    ប្រភេទអត្ថបទ, ឆ្នាំបោះពុម្ភ
+                </h4>
+                <div class="content-reshearch">
+                    <div class="form-reshearch mt-3">
+                        <form action="filter-data.php" method="GET">
+                            <div class="form-group">
+                                <input class="form-control research-input" type="text" name="title"
+                                    value="<?php if(isset($_GET['title'])){echo $_GET['title']; }else{echo "";} ?>"
+                                    id="" placeholder="ចំណងជើងអត្ថបទ...">
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control research-input" type="text" name="name_auther"
+                                            value="<?php if(isset($_GET['name_auther'])){echo $_GET['name_auther']; }else{echo "";} ?>"
+                                            id="" placeholder="ឈ្មោះអ្នកនិពន្ធ...">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <div class="">
+                                            <select class="form-select research-input" name="digital_book"
+                                                aria-label="Default select example">
+                                                <option selected>ប្រភេទអត្ថបទ</option>
+                                                <option value="e-book"
+                                                    <?= isset($_GET['digital_book']) == true ? $_GET['digital_book'] == 'e-book':'' ?>
+                                                    font-family: 'Bayon' , sans-serif;>
+                                                    E-Book</option>
+                                                <option value=" e-project"
+                                                    <?= isset($_GET['digital_book']) == true ? $_GET['digital_book'] == 'e-project':'' ?>>
+                                                    E-Project</option>
+                                                <option value="e-journal"
+                                                    <?= isset($_GET['digital_book']) == true ? $_GET['digital_book'] == 'e-journal':'' ?>>
+                                                    E-Journal</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <input class="form-control research-input" type="date" name="creationdate"
+                                            value="<?php if(isset($_GET['creationdate'])){echo $_GET['creationdate']; }else{echo "";} ?>"
+                                            id="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control research-input" type="text" name="keyword" id=""
+                                            value="<?php if(isset($_GET['keyword'])){echo $_GET['keyword']; }else{echo "";} ?>"
+                                            placeholder="ពាក្យគន្លឹះ...">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group research-input">
+                                        <button type="submit" name="filter_deta" class="form-control btn-success">Filter
+                                            Data</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Ent Filter Metadata -->
+
         <!-- Start Content Computer -->
         <div class="section-computer my-2">
 
@@ -107,7 +180,6 @@ include('../config/conn_db.php');
             </div>
 
             <div class="card" style="width: 100%;">
-
                 <div class="container row my-4">
                     <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
                         <div id="myTable" class="card mb-2" style="width: 100%;">
@@ -130,7 +202,8 @@ include('../config/conn_db.php');
                                     <img src="../admin_dashboard_library/uploads/<?php echo $image; ?>">
                                     <?php
                                         }
-                                         endforeach;?>
+                                         endforeach;
+                                         ?>
 
                                 </div>
 
@@ -162,7 +235,7 @@ include('../config/conn_db.php');
 
                             </div>
                             <?php
-                                                }
+                                        }
                                          }else{
                                             ?>
                             <div class="container text-center mt-4">
